@@ -32,28 +32,44 @@ insert into library_management.book_info values
 	(9, 40009, 'Probabilistic robotics','대출불가',  4),
 	(10,40010, 'Pattern recognition and machine learning','대출불가',  2);
 
+-- 
+select * from library_management.book_info;
 -- 대출 반납.
-insert into library_management.`return` values
-	(12001, 20200807, yyyy-mm-dd HH:MM:SS, 1),
-	(12002, 20200807, yyyy-mm-dd HH:MM:SS, 2),
-	(12003, 20200807, yyyy-mm-dd HH:MM:SS, 3),
-	(12004, 20200807, yyyy-mm-dd HH:MM:SS, 4),
-	(12005, 20200807, yyyy-mm-dd HH:MM:SS, 5),
-	(12006, 20200408, yyyy-mm-dd HH:MM:SS, 6),
-	(12007, 20200308, yyyy-mm-dd HH:MM:SS, 7),
-	(12008, 20200109, yyyy-mm-dd HH:MM:SS, 8),
-	(12009, 20200120, yyyy-mm-dd HH:MM:SS, 9),
-	(12010, 2020710, yyyy-mm-dd HH:MM:SS, 10),
-	(12011, null, yyyy-mm-dd HH:MM:SS, 10);
+insert into library_management.returnor values
+	(12001, 20200807,2020815,20200815, 1),
+	(12002, 20200807,2020815, 20200815, 2),
+	(12003, 20200807,2020815, 20200815, 3),
+	(12004, 20200807,2020815, 20200815, 4),
+	(12005, 20200807,2020815, 20200815, 5),
+	(12006, 20200708,2020816, 20200715, 6),
+	(12007, 20200708,2020816, 20200715, 7),
+	(12008, 20200709,2020729, 20200716, 8),
+	(12009, 20200709,2020729, 20200716, 9),
+	(12010, 20200709,2020729, 20200716, 10),
+	(12011, null, null, null, 10);
 
+-- 
+select * from library_management.`return`;
 	
+--
+drop table `return`;
 -- 도서구분
 insert into library_management.book_kind values
 	(1,'수학'),
 	(2,'컴퓨터'),
 	(3,'전자'),
 	(4,'통계');
-	
+
+-- 북네임을 바꾼것
 alter table book_info change column bookName bookName varchar(50);
 
+-- bookOver 을 멀로 할꺼냐? int 타입이냐 date 타입이냐
+alter table `return` change column bookOver bookOver int;
+
+select * from library_management.`return`;
+
 desc book_info;
+
+select `return`, 
+
+select sysdate - to_date(20200716, 2020729);

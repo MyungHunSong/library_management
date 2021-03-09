@@ -40,17 +40,18 @@ ALTER TABLE `library_management`.`book_info`
 		);
 
 -- 대출/반납
-CREATE TABLE `library_management`.`return` (
-	`memberNo` INT      NOT NULL COMMENT '회원번호', -- 회원번호
-	`bookRent` DATE     NULL     COMMENT '도서대여일', -- 도서대여일
-	`bookOver` DATETIME NULL     COMMENT '도서연체일', -- 도서연체일
-	`rentNo`   INT      NULL     COMMENT '대여번호' -- 대여번호
+CREATE TABLE `library_management`.`returnor` (
+	`memberNo`   INT  NOT NULL COMMENT '회원번호', -- 회원번호
+	`bookRent`   DATE NULL     COMMENT '도서대여일', -- 도서대여일
+	`bookOver`   DATE NULL     COMMENT '도서연체일', -- 도서연체일
+	`bookReturn` DATE NULL     COMMENT '도서반납일', -- 도서반납일
+	`rentNo`     INT  NULL     COMMENT '대여번호' -- 대여번호
 )
 COMMENT '대출/반납';
 
 -- 대출/반납
-ALTER TABLE `library_management`.`return`
-	ADD CONSTRAINT `PK_return` -- 대출/반납 기본키
+ALTER TABLE `library_management`.`returnor`
+	ADD CONSTRAINT `PK_returnor` -- 대출/반납 기본키
 		PRIMARY KEY (
 			`memberNo` -- 회원번호
 		);
@@ -69,6 +70,21 @@ ALTER TABLE `library_management`.`book_kind`
 			`bookKind` -- 도서구분
 		);
 
+-- 대출 가능여부 
+CREATE TABLE `library_management`.`tryRent` (
+	`bookNo`  INT     NOT NULL COMMENT '대출도서', -- 대출도서
+	`canRent` char(2) NOT NULL COMMENT '대출가능', -- 대출가능
+	`notRent` CHAR(2) NULL     COMMENT '대출불가' -- 대출불가
+)
+COMMENT '대출 가능여부 ';
+
+-- 대출 가능여부 
+ALTER TABLE `library_management`.`tryRent`
+	ADD CONSTRAINT `PK_tryRent` -- 대출 가능여부  기본키
+		PRIMARY KEY (
+			`bookNo` -- 대출도서
+		);
+
 -- 도서정보
 ALTER TABLE `library_management`.`book_info`
 	ADD CONSTRAINT `FK_book_kind_TO_book_info` -- 도서구분  -> 도서정보
@@ -80,8 +96,8 @@ ALTER TABLE `library_management`.`book_info`
 		);
 
 -- 대출/반납
-ALTER TABLE `library_management`.`return`
-	ADD CONSTRAINT `FK_member_info_TO_return` -- 회원정보 -> 대출/반납
+ALTER TABLE `library_management`.`returnor`
+	ADD CONSTRAINT `FK_member_info_TO_returnor` -- 회원정보 -> 대출/반납
 		FOREIGN KEY (
 			`memberNo` -- 회원번호
 		)
@@ -90,8 +106,8 @@ ALTER TABLE `library_management`.`return`
 		);
 
 -- 대출/반납
-ALTER TABLE `library_management`.`return`
-	ADD CONSTRAINT `FK_book_info_TO_return` -- 도서정보 -> 대출/반납
+ALTER TABLE `library_management`.`returnor`
+	ADD CONSTRAINT `FK_book_info_TO_returnor` -- 도서정보 -> 대출/반납
 		FOREIGN KEY (
 			`rentNo` -- 대여번호
 		)

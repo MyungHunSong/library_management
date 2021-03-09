@@ -4,7 +4,7 @@
 		"mysql8-177ed0968ea-629f54eda635b641": {
 			"provider": "mysql",
 			"driver": "mysql8",
-			"name": "localhost",
+			"name": "localhost(root)",
 			"save-password": true,
 			"show-system-objects": true,
 			"read-only": false,
@@ -17,7 +17,7 @@
 				"auth-model": "native"
 			}
 		},
-		"mysql5-177f2557c2b-2d2ea78583ab9aa1": {
+		"mysql5-177f78d3d00-81be683434d6e1": {
 			"provider": "mysql",
 			"driver": "mysql5",
 			"name": "library_management",
