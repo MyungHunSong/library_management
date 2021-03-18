@@ -1,4 +1,4 @@
-package library_managemant;
+package library_managemant.Main.ui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -40,7 +40,7 @@ public class Library_Management_Maininfo extends JFrame implements ActionListene
 	}
 	private void initialize() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 532, 439);
+		setBounds(100, 100, 532, 434);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -123,13 +123,13 @@ public class Library_Management_Maininfo extends JFrame implements ActionListene
 		JPanel pBookInfo = new JPanel();
 		pBookInfo.setBorder(new TitledBorder(null, "\uD604\uC7AC \uB300\uC5EC\uC911\uC778 \uB3C4\uC11C\uBAA9\uB85D", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		contentPane.add(pBookInfo, BorderLayout.SOUTH);
-		pBookInfo.setLayout(new BorderLayout(0, 0));
+		pBookInfo.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JLabel lblBookNo = new JLabel("도서번호       도서제목       도서연체일       도서대여일       도서구분\t\t\t");
-		pBookInfo.add(lblBookNo, BorderLayout.NORTH);
+		pBookInfo.add(lblBookNo);
 		
 		JComboBox comboBox_2 = new JComboBox();
-		pBookInfo.add(comboBox_2, BorderLayout.CENTER);
+		pBookInfo.add(comboBox_2);
 	}
 
 	public void actionPerformed(ActionEvent arg0) {

@@ -10,6 +10,9 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import java.awt.FlowLayout;
 import javax.swing.border.TitledBorder;
+
+import library_managemant.Main.ui.Library_Management_Maininfo;
+
 import javax.swing.UIManager;
 import java.awt.Color;
 import java.awt.event.ActionListener;
