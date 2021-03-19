@@ -1,29 +1,25 @@
 package library_managemant.Main.ui;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 import library_managemant.RentReturn.Library_Managemant_Rent;
 import library_managemant.RentReturn.Library_Managemant_Return;
 
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
-import javax.swing.JTextArea;
-import javax.swing.JSpinner;
-import javax.swing.JList;
-import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
+@SuppressWarnings("serial")
 public class Library_Management_Maininfo extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
@@ -31,6 +27,7 @@ public class Library_Management_Maininfo extends JFrame implements ActionListene
 	private JButton btnReturn;
 	private JTextField tfMemberNo;
 	private JTextField tfBook;
+	private JTextField textField;
 
 	// 무엇을 어디서 활용할것이냐 가 중요 그곳코드만 건드려주면 댄다.
 
@@ -40,7 +37,7 @@ public class Library_Management_Maininfo extends JFrame implements ActionListene
 	}
 	private void initialize() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 532, 434);
+		setBounds(100, 100, 532, 601);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -128,8 +125,9 @@ public class Library_Management_Maininfo extends JFrame implements ActionListene
 		JLabel lblBookNo = new JLabel("도서번호       도서제목       도서연체일       도서대여일       도서구분\t\t\t");
 		pBookInfo.add(lblBookNo);
 		
-		JComboBox comboBox_2 = new JComboBox();
-		pBookInfo.add(comboBox_2);
+		textField = new JTextField();
+		pBookInfo.add(textField);
+		textField.setColumns(10);
 	}
 
 	public void actionPerformed(ActionEvent arg0) {

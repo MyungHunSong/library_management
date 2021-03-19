@@ -1,24 +1,22 @@
 package library_managemant.RentReturn;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.GridLayout;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import java.awt.FlowLayout;
-import javax.swing.border.TitledBorder;
-import javax.swing.SwingConstants;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
-import javax.swing.UIManager;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Rectangle;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
 
 public class Library_Managemant_Rent extends JFrame {
 
@@ -47,7 +45,7 @@ public class Library_Managemant_Rent extends JFrame {
 	private void initialize() {
 		setTitle("대여");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 614, 720);
+		setBounds(100, 100, 614, 670);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -85,6 +83,9 @@ public class Library_Managemant_Rent extends JFrame {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		pMain1Sub2.add(scrollPane, BorderLayout.EAST);
+		
+		JTextArea textArea = new JTextArea();
+		pMain1Sub2.add(textArea, BorderLayout.CENTER);
 		
 		JPanel pMain2 = new JPanel();
 		pMain2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uB300\uC5EC\uD68C\uC6D0\uC0C1\uC138\uC815\uBCF4", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -222,43 +223,31 @@ public class Library_Managemant_Rent extends JFrame {
 		JPanel pMain4 = new JPanel();
 		pMain4.setBorder(new TitledBorder(null, "\uB300\uC5EC\uB3C4\uC11C\uC0C1\uC138\uC815\uBCF4", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		contentPane.add(pMain4);
-		pMain4.setLayout(new GridLayout(0, 1, 0, 0));
-		
-		JPanel pMain4Sub1 = new JPanel();
-		FlowLayout fl_pMain4Sub1 = (FlowLayout) pMain4Sub1.getLayout();
-		fl_pMain4Sub1.setAlignment(FlowLayout.LEFT);
-		pMain4.add(pMain4Sub1);
+		pMain4.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JLabel lblBookName = new JLabel("도서제목:");
-		pMain4Sub1.add(lblBookName);
+		lblBookName.setHorizontalAlignment(SwingConstants.RIGHT);
+		pMain4.add(lblBookName);
 		
 		tfBookName = new JTextField();
-		pMain4Sub1.add(tfBookName);
-		tfBookName.setColumns(15);
-		
-		JPanel pMain4Sub2 = new JPanel();
-		FlowLayout fl_pMain4Sub2 = (FlowLayout) pMain4Sub2.getLayout();
-		fl_pMain4Sub2.setAlignment(FlowLayout.LEFT);
-		pMain4.add(pMain4Sub2);
+		pMain4.add(tfBookName);
+		tfBookName.setColumns(10);
 		
 		JLabel lblBookNo = new JLabel("도서번호:");
-		pMain4Sub2.add(lblBookNo);
+		lblBookNo.setHorizontalAlignment(SwingConstants.RIGHT);
+		pMain4.add(lblBookNo);
 		
 		tfBookNo = new JTextField();
-		pMain4Sub2.add(tfBookNo);
-		tfBookNo.setColumns(15);
-		
-		JPanel pMain4Sub3 = new JPanel();
-		FlowLayout fl_pMain4Sub3 = (FlowLayout) pMain4Sub3.getLayout();
-		fl_pMain4Sub3.setAlignment(FlowLayout.LEFT);
-		pMain4.add(pMain4Sub3);
+		pMain4.add(tfBookNo);
+		tfBookNo.setColumns(10);
 		
 		JLabel lblBookKind = new JLabel("도서구분:");
-		pMain4Sub3.add(lblBookKind);
+		lblBookKind.setHorizontalAlignment(SwingConstants.RIGHT);
+		pMain4.add(lblBookKind);
 		
 		tfBookKind = new JTextField();
-		pMain4Sub3.add(tfBookKind);
-		tfBookKind.setColumns(15);
+		pMain4.add(tfBookKind);
+		tfBookKind.setColumns(10);
 		
 		JPanel pMain5 = new JPanel();
 		contentPane.add(pMain5);
