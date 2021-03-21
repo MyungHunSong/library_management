@@ -19,11 +19,6 @@ insert into member_info values
 	
 	
 
-
-select * from member_info;
-
-select * from rent_return;
-
 -- 도서정보  => 1.대여번호 2.도서번호 3.도서제목 4.대출여부 5.도서 구분(수학 1, 컴퓨터 2, 전자 3, 통계 4)
 insert into book_info values
 	(1, 40001, 'the elements of statistical learning','대출가능', 1),
@@ -41,17 +36,17 @@ insert into book_info values
 select * from library_management.book_info;
 -- 대출 반납.
 insert into rent_return values
-	(12001, 20200807,2020815,null, 1),
-	(12002, 20200807,2020815, null, 2),
-	(12003, 20200807,2020815, null, 3),
-	(12004, 20200807,2020815, null, 4),
-	(12005, 20200807,2020815, null, 5),
-	(12006, 20200708,2020816, null, 6),
-	(12007, 20200708,2020816, null, 7),
-	(12008, 20200709,2020729, null, 8),
-	(12009, 20200709,2020729, null, 9),
-	(12010, 20200709,2020729, null, 10),
-	(12011, 20200706,2020726,null, null);
+	(12001,1, 20200807,2020810,null),
+	(12002,2, 20200807,2020810, null),
+	(12003,3, 20200807,2020810, null),
+	(12004,4, 20200807,2020811, null),
+	(12005,5, 20200807,2020811, null),
+	(12006,6, 20200708,2020711, null),
+	(12007,7, 20200708,2020711, null),
+	(12008,8, 20200709,2020713, null),
+	(12009,9, 20200709,2020714, null),
+	(12010,10, 20200709,2020729, null),
+	(12011,null, null, null ,null);
 	
 -- 
 select * from rent_return;
@@ -78,3 +73,6 @@ desc book_info;
 select `return`, 
 
 select sysdate - to_date(20200716, 2020729);
+
+                                                                                    
+

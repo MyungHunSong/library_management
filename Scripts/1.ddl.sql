@@ -5,7 +5,7 @@ CREATE TABLE library_management.member_info (
 	year     DATE        NULL     COMMENT '생년월일', -- 생년월일
 	homeNo   char(13)    NULL     COMMENT '전화번호', -- 전화번호
 	phoneNo  char(13)    NULL     COMMENT '휴대전화', -- 휴대전화
-	adress   varchar(45) NULL     COMMENT '주소' -- 주소
+	adress   varchar(20) NULL     COMMENT '주소' -- 주소
 )
 COMMENT '회원정보';
 
@@ -20,7 +20,7 @@ ALTER TABLE library_management.member_info
 CREATE TABLE library_management.book_info (
 	rentNo   INT         NOT NULL COMMENT '대여번호', -- 대여번호
 	bookNum  INT         NOT NULL COMMENT '도서번호', -- 도서번호
-	bookName VARCHAR(20) NULL     COMMENT '도서제목', -- 도서제목
+	bookName VARCHAR(45) NULL     COMMENT '도서제목', -- 도서제목
 	bookCan  CHAR(4)     NULL     COMMENT '대출여부', -- 대출여부
 	bookKind INT         NULL     COMMENT '도서구분' -- 도서구분
 )
@@ -35,18 +35,25 @@ ALTER TABLE library_management.book_info
 
 -- 대출/반납
 CREATE TABLE library_management.rent_return (
-	memberNo1  INT      NULL COMMENT '회원번호', -- 회원번호
-	rentNo1    INT      NULL COMMENT '대여번호', -- 대여번호
-	bookRent   DATETIME NULL COMMENT '도서대여일', -- 도서대여일
-	bookReturn DATETIME NULL COMMENT '도서반납일', -- 도서반납일
-	bookOver   INT      NULL COMMENT '도서연체일' -- 도서연체일
+	memberNo1  INT      NOT NULL COMMENT '회원번호', -- 회원번호
+	rentNo1    INT      NULL     COMMENT '대여번호', -- 대여번호
+	bookRent   DATETIME NULL     COMMENT '도서대여일', -- 도서대여일
+	bookReturn DATETIME NULL     COMMENT '도서반납일', -- 도서반납일
+	bookOver   INT      NULL     COMMENT '도서연체일' -- 도서연체일
 )
 COMMENT '대출/반납';
+
+-- 대출/반납
+ALTER TABLE library_management.rent_return
+	ADD CONSTRAINT PK_rent_return -- 대출/반납 기본키
+		PRIMARY KEY (
+			memberNo1 -- 회원번호
+		);
 
 -- 도서구분 
 CREATE TABLE library_management.book_kind (
 	bookKind  INT         NOT NULL COMMENT '도서구분', -- 도서구분
-	kindTitle varchar(45) NULL     COMMENT '도서종류제목' -- 도서종류제목
+	kindTitle varchar(20) NULL     COMMENT '도서종류제목' -- 도서종류제목
 )
 COMMENT '도서구분 ';
 
