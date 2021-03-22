@@ -1,9 +1,9 @@
 {
 	"folders": {},
 	"connections": {
-		"mysql8-177ed0968ea-629f54eda635b641": {
+		"mysql5-1785987e5f6-469588f568c958e1": {
 			"provider": "mysql",
-			"driver": "mysql8",
+			"driver": "mysql5",
 			"name": "localhost(root)",
 			"save-password": true,
 			"show-system-objects": true,
@@ -17,18 +17,18 @@
 				"auth-model": "native"
 			}
 		},
-		"mysql5-177f78d3d00-81be683434d6e1": {
+		"mysql5-1785990105d-120a07d9a031fd43": {
 			"provider": "mysql",
 			"driver": "mysql5",
-			"name": "library_management",
+			"name": "library_managemant",
 			"save-password": true,
 			"show-system-objects": true,
 			"read-only": false,
 			"configuration": {
 				"host": "localhost",
 				"port": "3306",
-				"database": "library_management",
-				"url": "jdbc:mysql://localhost:3306/library_management",
+				"database": "library_managemant",
+				"url": "jdbc:mysql://localhost:3306/library_managemant",
 				"home": "C:\\Program Files\\MySQL\\MySQL Server 5.7",
 				"type": "dev",
 				"auth-model": "native",

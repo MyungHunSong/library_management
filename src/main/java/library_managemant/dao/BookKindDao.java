@@ -2,11 +2,12 @@ package library_managemant.dao;
 
 import java.util.List;
 
+
 import library_managemant.dto.BookKind;
 
 public interface BookKindDao {
 	List<BookKind> selectBookKindByAll();
-	BookKind selectBookKindByNo(BookKind bkkind);
+	BookKind selectBookKindByNo(BookKind bookInfo);
 	
 	int insertBookKind(BookKind bkkind);
 	int updateBookKind(BookKind bkkind);

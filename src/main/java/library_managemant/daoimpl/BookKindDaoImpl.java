@@ -19,7 +19,7 @@ public class BookKindDaoImpl implements BookKindDao {
 		
 		return instance;
 	}
-
+	// ----- selectBookKindByAll -----
 	@Override
 	public List<BookKind> selectBookKindByAll() {
 		String sql = "select bookKind,kindTitle from book_kind";
@@ -48,17 +48,35 @@ public class BookKindDaoImpl implements BookKindDao {
 	private BookKind getBookKind(ResultSet rs) throws SQLException {
 		int bookKind = rs.getInt("bookKind");
 		String bookTitle = rs.getString("bookTitle");
-		return null;
+		return new BookKind(bookKind, bookTitle);
 	}
 	
 	
 	
-
+	// ----- selectBookKindByNo -----
 	@Override
-	public BookKind selectBookKindByNo(BookKind bkkind) {
+	public BookKind selectBookKindByNo(BookKind bookkind) {
+		String  sql = "select kindTitle from book_kind where bookKind = ?";
 		
+		try(Connection con = JdbcCon.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)){
+				
+				pstmt.setInt(1, bookkind.getBookKind());
+				
+				try(ResultSet rs = pstmt.executeQuery()){
+					if(rs.next()) {
+						return getBookKind(rs);
+					}
+				}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
 		return null;
 	}
+	
+	
+	
 
 
 	@Override

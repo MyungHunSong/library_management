@@ -53,11 +53,21 @@ select name
 select bookNum, bookName, bookCan, bookkind
 	from book_info;
 
--- 4 연체일자
-select datediff('2017-03-01', '2017-03-28') as "연체일자";
 
-	from rent_return
-	group by bookOver;
+
+
+-- 4 연체일자
+select bookto_days(now()) - to_days('20210315') then > 3; 
+	from rent_return;
+
+select date_format(now(), '%H:%i:%s'); 
+
+select * from rent_return;
+
+
+
+ 
+	
 	
 
 

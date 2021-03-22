@@ -21,38 +21,43 @@ insert into member_info values
 
 -- 도서정보  => 1.대여번호 2.도서번호 3.도서제목 4.대출여부 5.도서 구분(수학 1, 컴퓨터 2, 전자 3, 통계 4)
 insert into book_info values
-	(1, 40001, 'the elements of statistical learning','대출가능', 1),
-	(2, 40002, 'Computer vision : a modern approach','대출가능',  2),
-	(3, 40003, 'MATLAB for engineers','대출가능',  3),
-	(4, 40004, 'CUDA by example','대출가능',  1),
-	(5, 40005, 'An introduction to 3D computer vision','대출가능',  2),
-	(6, 40006, 'Numerical methods','대출불가',  1),
-	(7, 40007, 'Image-based modeling','대출불가',  2),
-	(8, 40008, 'Machine learning','대출불가',  2),
-	(9, 40009, 'Probabilistic robotics','대출불가',  4),
-	(10,40010, 'Pattern recognition and machine learning','대출불가',  2);
+	(1, 40001, 'the elements of statistical learning','대출불가', 1),
+	(2, 40002, 'Computer vision : a modern approach','대출불가',  2),
+	(3, 40003, 'MATLAB for engineers','대출불가',  3),
+	(4, 40004, 'CUDA by example','대출불가',  1),
+	(5, 40005, 'An introduction to 3D computer vision','대출불가',  2),
+	(6, 40006, 'Numerical methods','대출가능',  1),
+	(7, 40007, 'Image-based modeling','대출가능',  2),
+	(8, 40008, 'Machine learning','대출가능',  2),
+	(9, 40009, 'Probabilistic robotics','대출가능',  4),
+	(10,40010, 'Pattern recognition and machine learning','대출가능',  2);
 	
 -- 
+drop table book_info;
+
 select * from library_management.book_info;
 -- 대출 반납.
 insert into rent_return values
-	(12001,1, 20200807,2020810,null),
-	(12002,2, 20200807,2020810, null),
-	(12003,3, 20200807,2020810, null),
-	(12004,4, 20200807,2020811, null),
-	(12005,5, 20200807,2020811, null),
-	(12006,6, 20200708,2020711, null),
-	(12007,7, 20200708,2020711, null),
-	(12008,8, 20200709,2020713, null),
-	(12009,9, 20200709,2020714, null),
-	(12010,10, 20200709,2020729, null),
+	(12001,1,20210322,20210325,null),
+	(12002,2,20210322,20210325, null),
+	(12003,3,20210322,20210325, null),
+	(12004,4,20210322,20210325, null),
+	(12005,5,20210322,20210325, null),
+	(12006,null, null,null, null),
+	(12007,null, null,null, null),
+	(12008,null, null,null, null),
+	(12009,null, null,null, null),
+	(12010,null, null,null, null),
 	(12011,null, null, null ,null);
 	
--- 
+
+-- 검색
 select * from rent_return;
+-- 삭제 
+drop table rent_return;
 	
 --
-drop table `return`;
+
 -- 도서구분
 insert into book_kind values
 	(1,'수학'),
@@ -73,6 +78,14 @@ desc book_info;
 select `return`, 
 
 select sysdate - to_date(20200716, 2020729);
+
+--  권한 부여
+create user 'user_library_managemant'@'localhost' identified by 'rootroot';
+
+grant all on library_managemant.*  to 'user_library_managemant'@'localhost';
+
+
+
 
                                                                                     
 
