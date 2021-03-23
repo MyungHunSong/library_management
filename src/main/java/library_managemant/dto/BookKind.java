@@ -5,6 +5,14 @@ public class BookKind {
 	private String bookTitle;
 	
 	
+	
+	
+	public BookKind(int bookKind) {
+		
+		this.bookKind = bookKind;
+	}
+
+
 	public BookKind(int bookKind, String bookTitle) {
 		this.bookKind = bookKind;
 		this.bookTitle = bookTitle;
@@ -33,7 +41,7 @@ public class BookKind {
 
 	@Override
 	public String toString() {
-		return "BookKind [bookKind=" + bookKind + ", bookTitle=" + bookTitle + "]";
+		return "BookKind [책종류 번호=" + bookKind + ", 책종류 =" + bookTitle +"]";
 	}
 
 
