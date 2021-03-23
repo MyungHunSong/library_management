@@ -35,7 +35,7 @@ insert into book_info values
 -- 
 drop table book_info;
 
-select * from library_management.book_info;
+select * from book_info;
 -- 대출 반납.
 insert into rent_return values
 	(12001,1,20210322,20210325,null),
@@ -82,7 +82,7 @@ select sysdate - to_date(20200716, 2020729);
 --  권한 부여
 create user 'user_library_managemant'@'localhost' identified by 'rootroot';
 
-grant all on library_managemant.*  to 'user_library_managemant'@'localhost';
+grant all on library_managemant.*  to 'user_library_managemant'@'localhost' identified by 'rootroot';
 
 
 

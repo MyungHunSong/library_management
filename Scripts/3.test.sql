@@ -1,6 +1,6 @@
 select user(), database();
 
-use library_management;
+use library_managemant;
 
 select *
 	from member_info;
