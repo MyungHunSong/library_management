@@ -21,6 +21,8 @@ alter table book_info change column bookNum bookNum char(5);
 
 select bookNum from book_info;
 
+select memberNo, name, homeNo, phoneNo from member_info; 
+
 
 
 
@@ -66,8 +68,6 @@ select * from rent_return;
 
 
 
- 
-	
 	
 
 

@@ -18,6 +18,8 @@ import javax.swing.border.TitledBorder;
 
 import library_managemant.RentReturn.Library_Managemant_Rent;
 import library_managemant.RentReturn.Library_Managemant_Return;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 
 @SuppressWarnings("serial")
 public class Library_Management_Maininfo extends JFrame implements ActionListener {
@@ -37,7 +39,7 @@ public class Library_Management_Maininfo extends JFrame implements ActionListene
 	}
 	private void initialize() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 532, 601);
+		setBounds(550, 100, 532, 601);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -86,8 +88,11 @@ public class Library_Management_Maininfo extends JFrame implements ActionListene
 		JLabel lblFastFind2 = new JLabel("회원번호      이름      전화번호      휴대전화 ");
 		pMemberTitle.add(lblFastFind2, BorderLayout.NORTH);
 		
-		JComboBox comboBox = new JComboBox();
-		pMemberTitle.add(comboBox, BorderLayout.CENTER);
+		JTextArea textArea = new JTextArea();
+		pMemberTitle.add(textArea, BorderLayout.CENTER);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		pMemberTitle.add(scrollPane, BorderLayout.EAST);
 		
 		JPanel pBookSearch = new JPanel();
 		pInfoCenter.add(pBookSearch);
@@ -114,8 +119,11 @@ public class Library_Management_Maininfo extends JFrame implements ActionListene
 		JLabel lblFastFind4 = new JLabel("도서번호      도서제목      대출여부      도서구분 ");
 		pBookTitle.add(lblFastFind4, BorderLayout.NORTH);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		pBookTitle.add(comboBox_1, BorderLayout.CENTER);
+		JTextArea textArea_1 = new JTextArea();
+		pBookTitle.add(textArea_1, BorderLayout.CENTER);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		pBookTitle.add(scrollPane_1, BorderLayout.EAST);
 		
 		JPanel pBookInfo = new JPanel();
 		pBookInfo.setBorder(new TitledBorder(null, "\uD604\uC7AC \uB300\uC5EC\uC911\uC778 \uB3C4\uC11C\uBAA9\uB85D", TitledBorder.LEADING, TitledBorder.TOP, null, null));

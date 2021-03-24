@@ -18,3 +18,5 @@ update book_kind
 
 delete from book_kind where bookKind =5;
 
+
+

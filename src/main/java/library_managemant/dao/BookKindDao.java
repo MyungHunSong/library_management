@@ -7,6 +7,7 @@ import library_managemant.dto.BookKind;
 
 public interface BookKindDao {
 	List<BookKind> selectBookKindByAll();
+	
 	BookKind selectBookKindByNo(BookKind bookInfo);
 	
 	int insertBookKind(BookKind bkkind);
