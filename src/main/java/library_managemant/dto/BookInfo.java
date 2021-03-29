@@ -13,7 +13,7 @@ public class BookInfo {
 	
 	
 
-	public BookInfo(int bookNum, String bookName, library_managemant.dto.RentReturn rentReturn) {
+	public BookInfo(int bookNum, String bookName, RentReturn rentReturn) {
 		this.bookNum = bookNum;
 		this.bookName = bookName;
 		this.rentReturn = rentReturn;
@@ -99,13 +99,34 @@ public class BookInfo {
 	public void setBookKind(BookKind bookKind) {
 		this.bookKind = bookKind;
 	}
+	
+	
+
+
+	public RentReturn getRentReturn() {
+		return rentReturn;
+	}
+
+
+	public void setRentReturn(RentReturn rentReturn) {
+		this.rentReturn = rentReturn;
+	}
 
 
 	@Override
 	public String toString() {
-		return "BookInfo [rentNo=" + rentNo + ", bookNum=" + bookNum + ", bookName=" + bookName + ", bookCan=" + bookCan
-				+ ", bookKind=" + bookKind + "]";
+		return "BookInfo [대여 번호=" + rentNo + ", 도서 번호 =" + bookNum + ", 도서 제목=" + bookName + ", 대출 여부 =" + bookCan
+				+ ", 도서 구분 =" + bookKind +  "대여일 =" +rentReturn  + "]";
 	}
+	
+	public String toString1() {
+		return "도서번호: "+ bookNum +" 도서제목"+ bookName +" 대출여부:" + bookCan;
+	}
+	
+	public String toString2() {
+		return "도서번호 : "+bookNum+" 도서제목: "+bookName+" 도서연체일: "+rentReturn.getBookOver()+" 도서대여일: "+rentReturn.getBookRent();
+				
+	} 
 	
 	
 	

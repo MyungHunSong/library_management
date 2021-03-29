@@ -82,25 +82,27 @@ public class BookInfoDaoImpl implements BookInfoDao {
 		String bookCan = rs.getString("bookCan");
 		return new BookInfo(bookNum, bookName, bookCan);
 	}
+	
 
 	// ---- BookInfo ----
 	@Override
-	public List<BookInfo> selectBookByRent(RentReturn rentReturn) {
-		String sql = "select booknum" + "	  ,bookname" + "	  , bookRent" + "	  , bookOver"
-				+ "	from book_info b1 join rent_return r1 on b1.rentNo = r1.rentNo1";
+	public List<BookInfo> selectBookByRent() {
+		
+		String sql = "select bookNum" + ", bookName" + ", r1.bookRent"
+				+ ", r1.bookOver from book_info b1 join rent_return r1 on b1.rentNo =r1.rentNo1";
+		try (Connection con = JdbcCon.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
 
-		try (Connection con = JdbcCon.getConnection();) {
-			PreparedStatement pstmt = con.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery()) {
+			if (rs.next()) {
+				List<BookInfo> list = new ArrayList<>();
+				do {
+					list.add(getBookOver(rs));
+				} while (rs.next());
 
-			ResultSet rs = pstmt.executeQuery();
+				return list;
 
-			List<BookInfo> list = new ArrayList<>();
-
-			do {
-				list.add(getBookOver(rs));
-			} while (rs.next());
-
-			return list;
+			}
 		} catch (SQLException e) {
 
 			e.printStackTrace();

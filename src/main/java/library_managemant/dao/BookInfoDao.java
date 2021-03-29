@@ -8,7 +8,7 @@ import library_managemant.dto.RentReturn;
 public interface BookInfoDao {
 	List<BookInfo> selectBookInfoByAll();
 	List<BookInfo> selectBookInfoBy();
-	List<BookInfo> selectBookByRent(RentReturn rentReturn);
+	List<BookInfo> selectBookByRent();
 	
 	int insertBookInfo(BookInfo bookInfo);
 	int updateBookInfo(BookInfo bookInfo);

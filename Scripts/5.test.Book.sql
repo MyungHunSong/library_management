@@ -18,5 +18,5 @@ update book_kind
 
 delete from book_kind where bookKind =5;
 
-
+select bookNum, bookName, r1.bookRent, r1.bookOver from book_info b1 join rent_return r1 on b1.rentNo =r1.rentNo1;
 

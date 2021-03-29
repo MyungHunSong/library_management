@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import library_managemant.daoimpl.BookInfoDaoImpl;
 import library_managemant.dto.BookInfo;
-import library_managemant.dto.RentReturn;
+
 
 public class BookInfoDaoTest {
 	private static BookInfoDao bao = new BookInfoDaoImpl();
@@ -26,21 +26,35 @@ public class BookInfoDaoTest {
 	@Test
 	public void testSelectBookInfoBy() {
 		System.out.printf("%s()%n", "testSelectBookInfoBy()");
-		List<BookInfo> bookInfos = bao.selectBookInfoBy();
+		List<BookInfo> bookInfo = bao.selectBookInfoBy();
 		
-		Assert.assertNotNull(bookInfos);
-		System.out.println(bookInfos);
+		for(BookInfo b : bookInfo) {
+			Assert.assertNotNull(b);
+			System.out.println(b.toString1());
+		}
+		
+		
 	}
 
+	
 	@Test
 	public void testSelectBookRent() {
-		System.out.printf("%s()%n", "testSelectBookInfoBy()");
-		
-		
+		System.out.printf("%s()%n", "testSelectBookRent()");
 	
+		List<BookInfo> bookInfo = bao.selectBookByRent();
 		
+		
+		for(BookInfo b : bookInfo) {
+			b.toString2();
+			Assert.assertNotNull(b);
+			System.out.println(b.toString2());
+		}
+	
+				
 	}
 
+	
+	
 	//@Test
 	public void testInsertBookInfo() {
 		fail("Not yet implemented");

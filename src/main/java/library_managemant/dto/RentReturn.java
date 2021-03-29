@@ -12,9 +12,12 @@ public class RentReturn {
 	
 	
 	
+	
 	public RentReturn(int rentNo1) {
 		this.rentNo1 = rentNo1;
 	}
+	
+	
 
 	public RentReturn(Date bookRent, int bookOver) {
 		
@@ -76,6 +79,8 @@ public class RentReturn {
 		return "RentReturn [memberNo1=" + memberNo1 + ", rentNo1=" + rentNo1 + ", bookRent=" + bookRent
 				+ ", bookReturn=" + bookReturn + ", bookOver=" + bookOver + "]";
 	}
+
+	
 	
 	
 	
