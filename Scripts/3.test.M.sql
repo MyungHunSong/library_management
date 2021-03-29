@@ -70,7 +70,16 @@ select * from rent_return;
 -- sql 하는 친구
 select rentNo, bookNum, bookName, bookCan, bookKind from book_info;
 
-	
+
+-- 검색 조인
+select booknum
+	  ,bookname
+	  ,bk1.bookKind
+	  , bk1.kindTitle
+	  , bookRent
+	  , bookOver
+	from book_info b1 join rent_return r1 on b1.rentNo = r1.rentNo1
+	join book_kind bk1 on b1.bookKind = bk1.bookKind;
 
 
 

@@ -3,19 +3,26 @@ package library_managemant.dto;
 import java.util.Date;
 
 public class RentReturn {
-	private MemberInfo memberNo1;
-	private BookInfo rentNo1;
+	private int memberNo1;
+	private int rentNo1;
 	private Date bookRent;
 	private Date bookReturn;
 	private int bookOver;
 	
+	
+	
+	
+	public RentReturn(int rentNo1) {
+		this.rentNo1 = rentNo1;
+	}
+
 	public RentReturn(Date bookRent, int bookOver) {
 		
 		this.bookRent = bookRent;
 		this.bookOver = bookOver;
 	}
 
-	public RentReturn(MemberInfo memberNo1, BookInfo rentNo1, Date bookRent, Date bookReturn, int bookOver) {
+	public RentReturn(int memberNo1, int rentNo1, Date bookRent, Date bookReturn, int bookOver) {
 		super();
 		this.memberNo1 = memberNo1;
 		this.rentNo1 = rentNo1;
@@ -24,19 +31,19 @@ public class RentReturn {
 		this.bookOver = bookOver;
 	}
 
-	public MemberInfo getMemberNo1() {
+	public int getMemberNo1() {
 		return memberNo1;
 	}
 
-	public void setMemberNo1(MemberInfo memberNo1) {
+	public void setMemberNo1(int memberNo1) {
 		this.memberNo1 = memberNo1;
 	}
 
-	public BookInfo getRentNo1() {
+	public int getRentNo1() {
 		return rentNo1;
 	}
 
-	public void setRentNo1(BookInfo rentNo1) {
+	public void setRentNo1(int rentNo1) {
 		this.rentNo1 = rentNo1;
 	}
 

@@ -10,6 +10,7 @@ import java.util.List;
 import library_managemant.dao.BookInfoDao;
 import library_managemant.dto.BookInfo;
 import library_managemant.dto.BookKind;
+import library_managemant.dto.RentReturn;
 import library_managemant.libdb.JdbcCon;
 
 public class BookInfoDaoImpl implements BookInfoDao {
@@ -81,29 +82,54 @@ public class BookInfoDaoImpl implements BookInfoDao {
 		String bookCan = rs.getString("bookCan");
 		return new BookInfo(bookNum, bookName, bookCan);
 	}
-	
-	
-	
 
 	// ---- BookInfo ----
 	@Override
-	public List<BookInfo> selectBookRent() {
+	public List<BookInfo> selectBookByRent(RentReturn rentReturn) {
+		String sql = "select booknum" + "	  ,bookname" + "	  , bookRent" + "	  , bookOver"
+				+ "	from book_info b1 join rent_return r1 on b1.rentNo = r1.rentNo1";
 
+		try (Connection con = JdbcCon.getConnection();) {
+			PreparedStatement pstmt = con.prepareStatement(sql);
+
+			ResultSet rs = pstmt.executeQuery();
+
+			List<BookInfo> list = new ArrayList<>();
+
+			do {
+				list.add(getBookOver(rs));
+			} while (rs.next());
+
+			return list;
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
 		return null;
 	}
 
+	private BookInfo getBookOver(ResultSet rs) throws SQLException {
+		int bookNum = rs.getInt("bookNum");
+		String bookName = rs.getString("bookName");
+		RentReturn rentRetrun = new RentReturn(rs.getDate("bookRent"), rs.getInt("bookOver"));
+		return new BookInfo(bookNum, bookName, rentRetrun);
+	}
+
+	// insertBookInfo
 	@Override
 	public int insertBookInfo(BookInfo bookInfo) {
 
 		return 0;
 	}
 
+	// updateBookInfo
 	@Override
 	public int updateBookInfo(BookInfo bookInfo) {
 
 		return 0;
 	}
 
+	// deleteBookInfo
 	@Override
 	public int deleteBookInfo(BookInfo bookInfo) {
 

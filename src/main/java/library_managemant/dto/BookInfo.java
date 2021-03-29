@@ -11,11 +11,11 @@ public class BookInfo {
 	
 	
 	
-	public BookInfo(int bookNum, String bookName, BookKind bookKind, RentReturn rentReturn) {
-		super();
+	
+
+	public BookInfo(int bookNum, String bookName, library_managemant.dto.RentReturn rentReturn) {
 		this.bookNum = bookNum;
 		this.bookName = bookName;
-		this.bookKind = bookKind;
 		this.rentReturn = rentReturn;
 	}
 
@@ -37,8 +37,6 @@ public class BookInfo {
 		this.bookKind = bookKind;
 	}
 
-
-	
 
 	// 1. 도서 상세정보
 	public BookInfo(int rentNo, int bookNum, String bookName, String bookCan, BookKind bookKind) {
