@@ -6,7 +6,8 @@ import library_managemant.dto.BookInfo;
 
 public interface BookInfoDao {
 	List<BookInfo> selectBookInfoByAll();
-	BookInfo selectBookInfoByNo(BookInfo bookInfo);
+	List<BookInfo> selectBookInfoBy();
+	List<BookInfo> selectBookRent();
 	
 	int insertBookInfo(BookInfo bookInfo);
 	int updateBookInfo(BookInfo bookInfo);

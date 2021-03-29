@@ -67,6 +67,8 @@ select date_format(now(), '%H:%i:%s');
 select * from rent_return;
 
 
+-- sql 하는 친구
+select rentNo, bookNum, bookName, bookCan, bookKind from book_info;
 
 	
 

@@ -6,16 +6,28 @@ public class BookInfo {
 	private String bookName;
 	private String bookCan;
 	private BookKind bookKind;
-
+	private RentReturn rentReturn;
 	
-	// 1.도서번호 2.도서제목 3.대출여부
-	public BookInfo(int rentNo, int bookNum, String bookName) {
-		
-		this.rentNo = rentNo;
+	
+	
+	
+	public BookInfo(int bookNum, String bookName, BookKind bookKind, RentReturn rentReturn) {
+		super();
 		this.bookNum = bookNum;
 		this.bookName = bookName;
+		this.bookKind = bookKind;
+		this.rentReturn = rentReturn;
 	}
-	
+
+
+	// 1.도서번호 2.도서제목 3.대출여부
+	public BookInfo(int bookNum, String bookName, String bookCan) {
+		super();
+		this.bookNum = bookNum;
+		this.bookName = bookName;
+		this.bookCan = bookCan;
+	}
+
 	
 	// 1.도서번호 2.도서제목 3.도서구분
 	public BookInfo(int bookNum, String bookName, BookKind bookKind) {
@@ -26,13 +38,15 @@ public class BookInfo {
 	}
 
 
+	
+
 	// 1. 도서 상세정보
-	public BookInfo(int rentNo, int bookNum, String bookName, String bookCam, BookKind bookKind) {
+	public BookInfo(int rentNo, int bookNum, String bookName, String bookCan, BookKind bookKind) {
 		
 		this.rentNo = rentNo;
 		this.bookNum = bookNum;
 		this.bookName = bookName;
-		this.bookCan = bookCam;
+		this.bookCan = bookCan;
 		this.bookKind = bookKind;
 	}
 	
