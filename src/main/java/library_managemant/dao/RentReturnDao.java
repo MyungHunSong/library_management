@@ -8,7 +8,7 @@ public interface RentReturnDao {
 	List<RentReturn> selectRentReturnByAll();
 	RentReturn selectRentReturnByNo(RentReturn rentReturn);
 	
-	int insertRentReturn (RentReturn rentReturn);
-	int updateRentReturn (RentReturn rentReturn);
-	int deleteRentReturn (RentReturn rentReturn);
+//	int insertRentReturn (RentReturn rentReturn);
+//	int updateRentReturn (RentReturn rentReturn);
+//	int deleteRentReturn (RentReturn rentReturn);
 }

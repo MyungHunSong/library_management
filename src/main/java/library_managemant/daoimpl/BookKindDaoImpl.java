@@ -79,56 +79,56 @@ public class BookKindDaoImpl implements BookKindDao {
 	
 
 	// ----- insertBookKind -----
-	@Override
-	public int insertBookKind(BookKind bkkind) {
-		String sql = "insert into book_kind values (?, ?)";
-		try(Connection con = JdbcCon.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(sql)){
-			pstmt.setInt(1, bkkind.getBookKind());
-			pstmt.setString(2, bkkind.getBookTitle());
-			
-			return pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return 0;
-	}
-	
-	// ----- updateBookKind -----
-	@Override
-	public int updateBookKind(BookKind bkkind) {
-		String sql = "update book_kind " + 
-				"	set kindTitle = ?" + 
-				"	where bookKind = ?";
-		try(Connection con = JdbcCon.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(sql)){
-				pstmt.setString(1, bkkind.getBookTitle());
-				pstmt.setInt(2, bkkind.getBookKind());
-			
-				return pstmt.executeUpdate();
-	} catch (SQLException e) {
-		
-		e.printStackTrace();
-	}
-		return 0;
-}
-	
-	// ----- deleteBookKind -----
-	@Override
-	public int deleteBookKind(BookKind bkkind) {
-		String sql = "delete from book_kind where bookKind =?";
-		
-		try(Connection con = JdbcCon.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(sql)){
-			pstmt.setInt(1, bkkind.getBookKind());
-			
-			return pstmt.executeUpdate();
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
-		return 0;
-	}
+//	@Override
+//	public int insertBookKind(BookKind bkkind) {
+//		String sql = "insert into book_kind values (?, ?)";
+//		try(Connection con = JdbcCon.getConnection();
+//				PreparedStatement pstmt = con.prepareStatement(sql)){
+//			pstmt.setInt(1, bkkind.getBookKind());
+//			pstmt.setString(2, bkkind.getBookTitle());
+//			
+//			return pstmt.executeUpdate();
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		return 0;
+//	}
+//	
+//	// ----- updateBookKind -----
+//	@Override
+//	public int updateBookKind(BookKind bkkind) {
+//		String sql = "update book_kind " + 
+//				"	set kindTitle = ?" + 
+//				"	where bookKind = ?";
+//		try(Connection con = JdbcCon.getConnection();
+//				PreparedStatement pstmt = con.prepareStatement(sql)){
+//				pstmt.setString(1, bkkind.getBookTitle());
+//				pstmt.setInt(2, bkkind.getBookKind());
+//			
+//				return pstmt.executeUpdate();
+//	} catch (SQLException e) {
+//		
+//		e.printStackTrace();
+//	}
+//		return 0;
+//}
+//	
+//	// ----- deleteBookKind -----
+//	@Override
+//	public int deleteBookKind(BookKind bkkind) {
+//		String sql = "delete from book_kind where bookKind =?";
+//		
+//		try(Connection con = JdbcCon.getConnection();
+//				PreparedStatement pstmt = con.prepareStatement(sql)){
+//			pstmt.setInt(1, bkkind.getBookKind());
+//			
+//			return pstmt.executeUpdate();
+//		} catch (SQLException e) {
+//			
+//			e.printStackTrace();
+//		}
+//		return 0;
+//	}
 
 }

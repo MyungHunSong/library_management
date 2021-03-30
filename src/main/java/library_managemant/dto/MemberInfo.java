@@ -11,6 +11,13 @@ public class MemberInfo {
 	private String adress;
 	
 	
+	
+	
+	public MemberInfo(int memberNo) {
+		this.memberNo = memberNo;
+	}
+
+
 	public MemberInfo(int memberNo, String name, String homeNo, String phoneNo) {
 		super();
 		this.memberNo = memberNo;

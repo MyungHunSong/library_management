@@ -42,37 +42,37 @@ public class BookKindDaoTest {
 		
 	}
 
-	@Test
-	public void test2InsertBookKind() {
-		System.out.printf("%s() %n","test1InsertBookKind()");
-		
-		BookKind bookkind = new BookKind(5, "과학");
-		int res = dao.insertBookKind(bookkind);
-		Assert.assertEquals(1, res);
-		System.out.println(res);
-	}
-
-	@Test
-	public void test3UpdateBookKind() {
-		System.out.printf("%s() %n","testUpdateBookKind()");
-		
-		BookKind newBook= new BookKind(5,"수학");
-		int res = dao.updateBookKind(newBook);
-		Assert.assertEquals(1, res);
-		
-		System.out.println(res);
-	}	
-
-	@Test
-	public void test4DeleteBookKind() {
-		System.out.printf("%s() %n","testDeleteBookKind()");
-		
-		BookKind newBook =new BookKind(5);
-		int res = dao.deleteBookKind(newBook);
-		
-		Assert.assertEquals(1, res);
-		System.out.println(res);
-		
-	}
+//	@Test
+//	public void test2InsertBookKind() {
+//		System.out.printf("%s() %n","test1InsertBookKind()");
+//		
+//		BookKind bookkind = new BookKind(5, "과학");
+//		int res = dao.insertBookKind(bookkind);
+//		Assert.assertEquals(1, res);
+//		System.out.println(res);
+//	}
+//
+//	@Test
+//	public void test3UpdateBookKind() {
+//		System.out.printf("%s() %n","testUpdateBookKind()");
+//		
+//		BookKind newBook= new BookKind(5,"수학");
+//		int res = dao.updateBookKind(newBook);
+//		Assert.assertEquals(1, res);
+//		
+//		System.out.println(res);
+//	}	
+//
+//	@Test
+//	public void test4DeleteBookKind() {
+//		System.out.printf("%s() %n","testDeleteBookKind()");
+//		
+//		BookKind newBook =new BookKind(5);
+//		int res = dao.deleteBookKind(newBook);
+//		
+//		Assert.assertEquals(1, res);
+//		System.out.println(res);
+//		
+//	}
 
 }

@@ -14,6 +14,12 @@ import library_managemant.dto.RentReturn;
 import library_managemant.libdb.JdbcCon;
 
 public class BookInfoDaoImpl implements BookInfoDao {
+	
+	private static BookInfoDaoImpl instance = new BookInfoDaoImpl();
+	
+	public static BookInfoDaoImpl getInstance() {
+		return instance;
+	}
 
 	// ---- selectBookInfoByAll ----
 	@Override
@@ -23,8 +29,7 @@ public class BookInfoDaoImpl implements BookInfoDao {
 		try (Connection con = JdbcCon.getConnection();) {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 
-			ResultSet rs = pstmt.executeQuery();
-			{
+			ResultSet rs = pstmt.executeQuery();{
 				if (rs.next()) {
 					List<BookInfo> list = new ArrayList<>();
 
@@ -116,26 +121,28 @@ public class BookInfoDaoImpl implements BookInfoDao {
 		RentReturn rentRetrun = new RentReturn(rs.getDate("bookRent"), rs.getInt("bookOver"));
 		return new BookInfo(bookNum, bookName, rentRetrun);
 	}
-
-	// insertBookInfo
-	@Override
-	public int insertBookInfo(BookInfo bookInfo) {
-
-		return 0;
-	}
-
-	// updateBookInfo
-	@Override
-	public int updateBookInfo(BookInfo bookInfo) {
-
-		return 0;
-	}
-
-	// deleteBookInfo
-	@Override
-	public int deleteBookInfo(BookInfo bookInfo) {
-
-		return 0;
-	}
+	
+	
+	
+// 	insertBookInfo
+//	@Override
+//	public int insertBookInfo(BookInfo bookInfo) {
+//
+//		return 0;
+//	}
+//
+//	// updateBookInfo
+//	@Override
+//	public int updateBookInfo(BookInfo bookInfo) {
+//
+//		return 0;
+//	}
+//
+//	// deleteBookInfo
+//	@Override
+//	public int deleteBookInfo(BookInfo bookInfo) {
+//
+//		return 0;
+//	}
 
 }

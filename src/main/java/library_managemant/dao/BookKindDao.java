@@ -10,7 +10,7 @@ public interface BookKindDao {
 	
 	BookKind selectBookKindByNo(BookKind bookInfo);
 	
-	int insertBookKind(BookKind bkkind);
-	int updateBookKind(BookKind bkkind);
-	int deleteBookKind(BookKind bkkind);
+//	int insertBookKind(BookKind bkkind);
+//	int updateBookKind(BookKind bkkind);
+//	int deleteBookKind(BookKind bkkind);
 }
