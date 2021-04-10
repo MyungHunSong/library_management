@@ -32,8 +32,13 @@ public class MemberInfoDaoTest {
 		List<MemberInfo> list = dao.selectMemeberInfoList();
 		List<String> lists = list
 				.stream()
-				.map(e->e.getMemberNo()+ e.getName()+e.getHomeNo()+e.getPhoneNo())
+				.map(e->e.getMemberNo()+","+e.getName()+","+e.getHomeNo()+","+e.getPhoneNo())
 				.collect(Collectors.toCollection(ArrayList::new));
+		
+		
+		
+		
+		
 		
 		Assert.assertNotNull(lists + ",");
 		
