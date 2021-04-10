@@ -31,6 +31,13 @@ select memberNo, name, births, homeNo, phoneNo, adress from member_info;
 
 select memberNo, name, homeNo, phoneNo from member_info;
 
-select memberNo, name, homeNo, phoneNo from member_info where memberNo = ?;
+select memberNo, name, homeNo, phoneNo from member_info where memberNo like '%' or name like '김%%';
+
+
+select memberNo, name, homeNo, phoneNo from member_info where name like '김%%';
+select memberNo, name, homeNo, phoneNo from member_info where name like '김%%';
+
+
+
 
 

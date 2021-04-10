@@ -1,12 +1,12 @@
 package library_managemant.dao;
 
-import static org.junit.Assert.*;
-
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.Assert;
 import org.junit.Test;
-
 
 import library_managemant.daoimpl.MemberInfoDaoImpl;
 import library_managemant.dto.MemberInfo;
@@ -23,26 +23,32 @@ public class MemberInfoDaoTest {
 		
 		System.out.println(list);
 	}
+	
 
 	@Test
-	public void testSelectMemeberInfo() {
-		System.out.printf("%s()%n","testSelectMemeberInfo()");
+	public void testSelectMemeberInfoList() {
+		System.out.printf("%s()%n","testSelectMemeberInfoList()");
 		
-		List<MemberInfo> list = dao.selectMemeberInfo();
-		Assert.assertNotNull(list);
+		List<MemberInfo> list = dao.selectMemeberInfoList();
+		List<String> lists = list
+				.stream()
+				.map(e->e.getMemberNo()+ e.getName()+e.getHomeNo()+e.getPhoneNo())
+				.collect(Collectors.toCollection(ArrayList::new));
 		
-		System.out.println(list);
+		Assert.assertNotNull(lists + ",");
+		
+		System.out.println(lists);
 	}
 
 	@Test
 	public void testSelectMemberInfoByNo() {
 		System.out.printf("%s()%n","testSelectMemberInfoByNo()");
 		
-		MemberInfo memInfo = new MemberInfo(12001);
+		MemberInfo memInfo = new MemberInfo(12002,"김연수");
 		MemberInfo searchMem = dao.selectMemberInfoByNo(memInfo);
-		
-		Assert.assertNotNull(searchMem);
-		System.out.println(searchMem);
+		String mem = searchMem.toStr();
+		Assert.assertNotNull(mem);
+		System.out.println(mem);
 		
 	}
 

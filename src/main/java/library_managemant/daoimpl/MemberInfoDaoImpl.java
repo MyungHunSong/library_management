@@ -57,9 +57,9 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 		return new MemberInfo(memberNo, name, births, homeNo, phoneNo, adress);
 	}
 	
-	// 회원번호 이름 전화번호 휴대전화
+	// 2번에 모든정보를 출력(회원번호, 이름, 전화번호, 휴대전화)
 	@Override
-	public List<MemberInfo> selectMemeberInfo() {
+	public List<MemberInfo> selectMemeberInfoList() {
 		String sql = "select memberNo, name, homeNo, phoneNo from member_info";
 		
 		try(Connection con = JdbcCon.getConnection()){
@@ -81,8 +81,7 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 		}
 		return null;
 	}
-	
-	
+		
 	private MemberInfo getMemSearch(ResultSet rs) throws SQLException {
 		int memberNo = rs.getInt("memberNo");
 		String name = rs.getString("name");
@@ -91,17 +90,16 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 		return new MemberInfo(memberNo, name, homeNo, phoneNo);
 	}
 
-
-
-	// 회원 번호 조건으로 검색하는것
+	// 회원 번호 검색 하는것
 	@Override
 	public MemberInfo selectMemberInfoByNo(MemberInfo memberInfo) {
-		String sql ="select memberNo, name, homeNo, phoneNo from member_info where memberNo = ?";
+		String sql ="select memberNo, name, homeNo, phoneNo from member_info where memberNo like ? or name like ?";
 		
 		try(Connection con = JdbcCon.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)){
 			
 			pstmt.setInt(1, memberInfo.getMemberNo());
+			pstmt.setString(2, memberInfo.getName());
 			
 			try(ResultSet rs = pstmt.executeQuery()){
 				if(rs.next()) {
@@ -112,10 +110,5 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 		e.printStackTrace();
 	}
 		return null;
-
-	
-
-	
-
 	}
 }
