@@ -113,8 +113,8 @@ public class MemberInfo {
 		return String.format("MemberInfo [회원 번호=%s, 이름 =%s, 생년월일=%s, 전화번호=%s, 휴대전화=%s, 주소=%s]", memberNo,
 				name, births, homeNo, phoneNo, adress);
 	}
-
-	// 회원 번호 , 이름 아무거나 검색해도 일치하는 조건 나오게 하는 String
+	
+	
 	public String toStr() {
 		return String.format("회원번호 = %s, 이름 = %s 전화번호 = %s 휴대전화 = %s",memberNo,name,homeNo,phoneNo);
 	}

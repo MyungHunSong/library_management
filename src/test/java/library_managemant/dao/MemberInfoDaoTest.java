@@ -51,7 +51,7 @@ public class MemberInfoDaoTest {
 		
 		MemberInfo memInfo = new MemberInfo(12002,"김연수");
 		MemberInfo searchMem = dao.selectMemberInfoByNo(memInfo);
-		String mem = searchMem.toStr();
+		String mem = searchMem.toString();
 		Assert.assertNotNull(mem);
 		System.out.println(mem);
 		

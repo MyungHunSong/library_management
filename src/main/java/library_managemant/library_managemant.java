@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import library_managemant.ui.main.LibraryManagemantUiMain;
+import library_managemant.ui.main.LibraryManagemantMain;
 
 @SuppressWarnings("serial")
 public class library_managemant extends JFrame implements ActionListener {
@@ -58,7 +58,7 @@ public class library_managemant extends JFrame implements ActionListener {
 		}
 	}
 	protected void btnNewButtonActionPerformed(ActionEvent arg0) {
-		LibraryManagemantUiMain frame = new LibraryManagemantUiMain();
+		LibraryManagemantMain frame = new LibraryManagemantMain();
 		frame.setVisible(true);
 	}
 }

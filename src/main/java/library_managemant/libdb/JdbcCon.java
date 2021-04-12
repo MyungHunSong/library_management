@@ -21,7 +21,6 @@ public class JdbcCon {
 			con = DriverManager.getConnection(prop.getProperty("url"), prop);
 			
 		} catch (IOException e) {
-			
 			e.printStackTrace();
 		}catch(SQLException e) {
 			e.printStackTrace();

@@ -18,7 +18,6 @@ public class BookInfoDaoTest {
 	public void testSelectBookInfoByAll() {
 		System.out.printf("%s()%n","testSelectBookInfoByAll()");
 		List<BookInfo> bookInfo = bao.selectBookInfoByAll();
-		
 		Assert.assertNotNull(bookInfo);
 		System.out.println(bookInfo);
 	}
