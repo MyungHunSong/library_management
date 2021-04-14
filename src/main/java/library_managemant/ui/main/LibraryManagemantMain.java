@@ -12,27 +12,34 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
+import library_managemant.service.BookInfoService;
 import library_managemant.service.MemberService;
-import library_managemant.ui.content.LibraryMemberSearchPanel;
+import library_managemant.ui.content.MemberSearchPanel;
 import library_managemant.ui.list.MemberSearchTablePanel;
+import library_managemant.ui.list.BookInfoSearchTablePanel;
+import library_managemant.ui.content.BookInfoSearchPanel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 
 @SuppressWarnings("serial")
-public class LibraryManagemantMain extends JFrame {
+public class LibraryManagemantMain extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private JButton btnRent;
 	private JButton btnReturn;
 	private JPanel pMem;
 	private JPanel pBook;
-	private LibraryMemberSearchPanel pMemSearch;
-	private JPanel pBookSearch;
+	private MemberSearchPanel pMemSearch;
+	private BookInfoSearchPanel pBookSearch;
 	private MemberSearchTablePanel pMemInfo;
-	private JPanel pBookInfo;
+	private BookInfoSearchTablePanel pBookInfo;
 	private JPanel panel_1;
 	
-	private MemberService service;
+	private MemberService memService;
+	private BookInfoService bookService;
+	
 	private MemberSearchTablePanel mList;
 	
 	
@@ -54,9 +61,11 @@ public class LibraryManagemantMain extends JFrame {
 		panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 		
 		btnRent = new JButton("대출하기");
+		btnRent.addActionListener(this);
 		panel.add(btnRent);
 		
 		btnReturn = new JButton("반납하기");
+		btnReturn.addActionListener(this);
 		panel.add(btnReturn);
 		
 		JPanel pInfo = new JPanel();
@@ -67,7 +76,7 @@ public class LibraryManagemantMain extends JFrame {
 		pInfo.add(pMem);
 		pMem.setLayout(new BorderLayout(0, 0));
 		
-		pMemSearch = new LibraryMemberSearchPanel();
+		pMemSearch = new MemberSearchPanel();
 		pMem.add(pMemSearch, BorderLayout.NORTH);
 		pMemSearch.setLayout(new GridLayout(1, 0, 0, 0));
 		
@@ -79,12 +88,13 @@ public class LibraryManagemantMain extends JFrame {
 		pInfo.add(pBook);
 		pBook.setLayout(new BorderLayout(0, 0));
 		
-		pBookSearch = new JPanel();
+		pBookSearch = new BookInfoSearchPanel();
 		
 		
 		pBook.add(pBookSearch, BorderLayout.NORTH);
 		
-		pBookInfo = new JPanel();
+		pBookInfo = new BookInfoSearchTablePanel();
+		pBookInfo.loadData();
 		pBook.add(pBookInfo, BorderLayout.CENTER);
 		
 		JPanel panel_2 = new JPanel();
@@ -98,7 +108,7 @@ public class LibraryManagemantMain extends JFrame {
 	
 	// 목록 받아오기.
 	protected void setService() {
-		service = new MemberService();
+		//memService = new MemberService();
 	}
 	
 	//데이터 로드하는 기능
@@ -107,4 +117,22 @@ public class LibraryManagemantMain extends JFrame {
 //		mList.loadData();
 //	}
 	
+	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnReturn) {
+			btnReturnActionPerformed(arg0);
+		}
+		if (arg0.getSource() == btnRent) {
+			btnRentActionPerformed(arg0);
+		}
+	}
+	//대여하기.
+	protected void btnRentActionPerformed(ActionEvent arg0) {
+		BookRent frame = new BookRent();
+		frame.setVisible(true);
+	}
+	//반납하기.
+	protected void btnReturnActionPerformed(ActionEvent arg0) {
+		BookReturn frame = new BookReturn();
+		frame.setVisible(true);
+	}
 }

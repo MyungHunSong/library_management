@@ -13,6 +13,12 @@ public class BookInfo {
 	
 	
 
+	public BookInfo(int bookNum) {
+		super();
+		this.bookNum = bookNum;
+	}
+
+
 	public BookInfo(int bookNum, String bookName, RentReturn rentReturn) {
 		this.bookNum = bookNum;
 		this.bookName = bookName;

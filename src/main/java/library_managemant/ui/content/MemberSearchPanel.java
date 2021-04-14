@@ -17,7 +17,8 @@ import library_managemant.dto.MemberInfo;
 import library_managemant.service.MemberService;
 import library_managemant.ui.main.LibraryManagemantMain;
 
-public class LibraryMemberSearchPanel extends JPanel implements ActionListener {
+@SuppressWarnings("serial")
+public class MemberSearchPanel extends JPanel implements ActionListener {
 	private JTextField textField;
 	private JButton btnSearch;
 	
@@ -27,7 +28,7 @@ public class LibraryMemberSearchPanel extends JPanel implements ActionListener {
 	private LibraryManagemantMain libMan;
 	private MemberService service;
 	
-	public LibraryMemberSearchPanel() {
+	public MemberSearchPanel() {
 		initialize();
 		addDateCmb1();
 	}
@@ -70,7 +71,6 @@ public class LibraryMemberSearchPanel extends JPanel implements ActionListener {
 		
 		cmb1 = new JComboBox();
 		cmb1.setSelectedIndex(-1);
-		cmb1.setMaximumRowCount(12);
 		panel.add(cmb1 );
 		
 		textField = new JTextField();
