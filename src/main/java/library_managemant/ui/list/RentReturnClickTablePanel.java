@@ -1,139 +1,76 @@
 package library_managemant.ui.list;
 
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.RowSorter;
 import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 
 import library_managemant.dto.MemberInfo;
 import library_managemant.dto.RentReturn;
-
 import library_managemant.service.RentReturnService;
+import library_managemant.ui.exception.NotSelectedException;
 
 @SuppressWarnings("serial")
-public class RentReturnClickTablePanel extends JPanel {
-	private JTable table;
-	private RentReturn rentRe;
+public class RentReturnClickTablePanel extends AbstractCustomTablePanel<RentReturn>{
 	
-	private RentReturnService service;
+	private RentReturnService service = new RentReturnService();
+	private RentReturn rentReturn;
+	private MemberSearchTablePanel memTable = new MemberSearchTablePanel();
 	
-	private MemberSearchTablePanel mstp1;
-	private List<RentReturn> list;
-	
-	
-	public void selectRentInfobyMem(RentReturn rentReturn) {
-		service = new RentReturnService();
-		list=service.selectRentInfoByMem(rentReturn);
+	public RentReturn getRentReturn() {
+		return rentReturn;
 	}
 	
-	public void setMstp1(MemberSearchTablePanel mstp1) {
-		this.mstp1 = mstp1;
-	}
 	
 	public RentReturnClickTablePanel() {
-		initialize();
 	}
 	
-	public void loadData() {
-		list = new ArrayList<RentReturn>();
-	}
-	private void initialize() {
-		setLayout(new BorderLayout(0, 0));
-		
-		JScrollPane scrollPane = new JScrollPane();
-		add(scrollPane, BorderLayout.CENTER);
-		
-		table = new JTable();
-		table.setModel(getModel());
-		
-		scrollPane.setViewportView(table);
-	}
-	
-	class CustomTableModel extends DefaultTableModel{
-		public CustomTableModel(Object[][] data, Object[] columnNames) {
-			super(data, columnNames);
-		}
-	}
-	
-	private DefaultTableModel getModel() {
-		CustomTableModel model = new CustomTableModel(getData(), getColumnNames());
-		return model;
-	}
-	// --- 위쪽 컬럼 내용 로우 받아오는곳
-	private Object[][] getData() {
-		
-		return new Object[][] {null, null, null, null,null};
-	}
-	
-	public String[] getColumnNames() {
-		return new String[] {"회원번호","도서번호","도서제목","도서대여일","도서연체일"};
-	}
-	// ---- 이곳까지 ----
 	
 	
 	public void setService(RentReturnService service) {
+		
 		this.service = service;
-	}	
-	
-	public void setList() {
-		Object[][] data = new Object[list.size()][];
-		
-		for(int i=0; i<data.length; i++) {
-			data[i] = toArray(list.get(i));
-		}
-		
-		CustomTableModel model = new CustomTableModel(data, getColumnNames());
-		table.setModel(model);
-		
-		//컬럼 클릭 정렬
-		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model);
-		table.setRowSorter(sorter);
-		
-		setAlignAndWidth();
 	}
 
-	private void setAlignAndWidth() {
+	@Override
+	public RentReturn getItem() {
+		int row = table.getSelectedRow();
+		int memberNo = (int) table.getValueAt(row, 0);
 		
-		setTableAlign(SwingConstants.CENTER, 0,1,2);
-				
-		setTableCellWidth(100,250,100);
-		
-	}
-	
-	protected void setTableCellWidth(int...width) {
-		TableColumnModel tcm = table.getColumnModel();
-		
-		for(int i=0; i<width.length; i++) {
-			tcm.getColumn(i).setPreferredWidth(width[i]);
+		if(row == -1) {
+			throw new NotSelectedException();
 		}
+		return list.get(list.indexOf(new RentReturn(new MemberInfo(memberNo))));
 	}
 
-	protected void setTableAlign(int align, int...idx) {
-		TableColumnModel tcm =table.getColumnModel();
+	@Override
+	public void initList() { 
+	}
+	
+	public void loadRentInfo(RentReturn rentReturn) {
+		service = new RentReturnService();
+		list = service.selectRentInfoByMem(rentReturn);
+		setList();
+	}
+	
+	@Override
+	public String[] getColumnNames() {
 		
-		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
-		dtcr.setHorizontalAlignment(align);
-		for(int i=0; i<idx.length; i++) {
-			tcm.getColumn(i).setCellRenderer(dtcr);
-		}
+		return new String[]{"회원번호", "도서번호", "도서제목", "도서연체일", "도서대여일"};
 	}
 
-	
-	private Object[] toArray(RentReturn r) {
+	@Override
+	protected void setAlignAndWidth() {
+		setTableCellAlign(SwingConstants.CENTER, 1);
+		setTableCellAlign(SwingConstants.RIGHT, 0, 2);
+
+		setTableCellWidth(100, 100, 100);
 		
+	}
+
+	@Override
+	public Object[] toArray(RentReturn r) {
 		return new Object[] {r.getMemberNo1().getMemberNo()
 				,r.getRentNo1().getBookNum()
 				,r.getRentNo1().getBookName()
-				,r.getBookRent(),r.getBookOver()};
+				,r.getBookOver
+				(),r.getBookRent()};
 	}
 }

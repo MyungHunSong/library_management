@@ -1,7 +1,8 @@
 package library_managemant.ui.list;
 
 import java.awt.BorderLayout;
-import java.util.ArrayList;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -21,8 +22,6 @@ import library_managemant.dto.RentReturn;
 import library_managemant.service.MemberService;
 import library_managemant.service.RentReturnService;
 import library_managemant.ui.exception.NotSelectedException;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 @SuppressWarnings("serial")
 public class MemberSearchTablePanel extends JPanel implements MouseListener{
@@ -32,17 +31,22 @@ public class MemberSearchTablePanel extends JPanel implements MouseListener{
 	private JTable table;
 	private JScrollPane scrollPane;
 	
-	private List<RentReturn> lists = new ArrayList<RentReturn>();
 	private RentReturnService rService;
-	
 	private RentReturnClickTablePanel rentTable;
+	
+	
+	
 	private MemberService service;
 	
-	
-	public void selectRentInfoByMemNo(RentReturn rentReturn) {
-		lists = rService.selectRentInfoByMem(rentReturn);
+	public RentReturnClickTablePanel getRentT() {
+		return rentTable;
 	}
-	
+	public void setRentTable(RentReturnClickTablePanel rentTable) {
+		this.rentTable = rentTable;
+	}
+
+
+
 	// 서비스를 놓아주고 요서비스를 쓰기위한것.
 	public void setrService(RentReturnService rService) {
 		this.rService = rService;
@@ -51,7 +55,6 @@ public class MemberSearchTablePanel extends JPanel implements MouseListener{
 	//RentReturnClickTablePanel 생성후, table에 마우스 리스너를 달아주는것
 	public MemberSearchTablePanel() {
 		initialize();
-		rentTable = new RentReturnClickTablePanel();
 		table.addMouseListener(this);
 	}
 	
@@ -212,17 +215,16 @@ public class MemberSearchTablePanel extends JPanel implements MouseListener{
 	//마우스를 눌럿다 땟을때 나오게하는법
 	private void mousePressedThisTable(MouseEvent e) {
 		int idx = table.getSelectedRow();
-		// 리스트 위치가 아닌 0번째 값으로찾기
 		int memberNo = (int) table.getValueAt(idx, 0);
 		if(idx==-1) {
 			throw new NotSelectedException();
 		}
 			rService = new RentReturnService();
-			rentTable.selectRentInfobyMem(new RentReturn(new MemberInfo(memberNo)));
+			rentTable.loadRentInfo(new RentReturn(new MemberInfo(memberNo)));
 			if(rService != null) {
 				setVisible(true);
-				
 			}
 			rentTable.setList();
 	}
 }
+	

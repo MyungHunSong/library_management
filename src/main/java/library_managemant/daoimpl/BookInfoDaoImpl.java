@@ -10,7 +10,6 @@ import java.util.List;
 import library_managemant.dao.BookInfoDao;
 import library_managemant.dto.BookInfo;
 import library_managemant.dto.BookKind;
-import library_managemant.dto.RentReturn;
 import library_managemant.libdb.JdbcCon;
 
 public class BookInfoDaoImpl implements BookInfoDao {

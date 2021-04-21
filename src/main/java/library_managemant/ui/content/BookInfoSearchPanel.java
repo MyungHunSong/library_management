@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import javax.xml.soap.Text;
 
 import library_managemant.dto.BookInfo;
+import library_managemant.service.BookInfoService;
 import library_managemant.service.MemberService;
 import library_managemant.ui.list.BookInfoSearchTablePanel;
 
@@ -22,26 +23,21 @@ public class BookInfoSearchPanel extends JPanel implements ActionListener {
 	private JComboBox cmb1;
 	private JButton btnSearch;
 	
+	
+	
+	
+	private BookInfoSearchTablePanel bistp = new BookInfoSearchTablePanel();	
+	private BookInfoService service = new BookInfoService();
+	
 	private String[] bookInfo = {"도서번호"};
-	
-	
-	private BookInfoSearchTablePanel bistp;
-	
-	private MemberService service = new MemberService();
 	
 	public void setBistp(BookInfoSearchTablePanel bistp) {
 		this.bistp = bistp;
 	}
 	
-	
-	public BookInfoSearchTablePanel getBistp() {
-		return bistp;
-	}
 
 
 	public BookInfoSearchPanel() {
-		
-		
 		initialize();
 		bistp = new BookInfoSearchTablePanel();
 		addBookCmb1Search();
@@ -77,35 +73,32 @@ public class BookInfoSearchPanel extends JPanel implements ActionListener {
 		
 		return new BookInfo(bookNum);
 	}
-	
+	// 북인포 에 북넘만 넣기
 	public void setBookInfo(BookInfo bookInfo) {
 		tfSearch.setText(bookInfo.getBookNum()+"");
 	}
 	
+	// 텍스트 필드 초기화 기능
 	public void clearTf() {
 		tfSearch.setText("");
 	}
 	
 	
 	//검색 기능
-	public void actionPerformed(ActionEvent e) {
-		
-	try {
+	public void actionPerformed(ActionEvent e) {	
 		if (e.getSource() == btnSearch) {
 			btnNewButtonActionPerformed(e);
-			
 		}
-	}catch (NullPointerException e1) {
-		bistp.loadData();
-	}
-		
+	
 	}
 	protected void btnNewButtonActionPerformed(ActionEvent e) {
 		if(cmb1.getSelectedItem().equals("도서번호")) {
 			int bookInt = Integer.parseInt(tfSearch.getText());
 			BookInfo bookInfo = new BookInfo(bookInt);
-			System.out.println("BookInfo>>"+bookInfo);
+			System.out.println(bistp);
 			bistp.loadBookInfo(bookInfo);
+			System.out.println("BookInfo>>"+bookInfo);
+			
 			clearTf();
 			cmb1.setSelectedIndex(-1);
 		}else if(cmb1.getSelectedItem().equals(-1)||tfSearch.getText()==null){

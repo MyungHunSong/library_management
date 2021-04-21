@@ -12,13 +12,16 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.TitledBorder;
 
+import library_managemant.dto.RentReturn;
 import library_managemant.service.BookInfoService;
+import library_managemant.service.MemberService;
+import library_managemant.service.RentReturnService;
 import library_managemant.ui.content.BookInfoSearchPanel;
 import library_managemant.ui.content.MemberSearchPanel;
 import library_managemant.ui.list.BookInfoSearchTablePanel;
 import library_managemant.ui.list.MemberSearchTablePanel;
+import library_managemant.ui.list.RentReturnClickTablePanel;
 
 
 
@@ -33,20 +36,26 @@ public class LibraryManagemantMain extends JFrame implements ActionListener{
 	
 	private MemberSearchPanel pMemSearch;
 	private BookInfoSearchPanel pBookSearch;
-	private MemberSearchTablePanel pMemInfo;
+	private MemberSearchTablePanel pMemTable;
 	
-	
+	private MemberService memService = new MemberService();
 	private BookInfoService bookService = new BookInfoService();
-	private BookInfoSearchTablePanel pbookList;
-	private JPanel pRentBook;
+	
+	private RentReturn rentReturn;
+	private RentReturnService rentService = new RentReturnService();;
+	
+	private BookInfoSearchTablePanel pbookTable;
+	
+	private RentReturnClickTablePanel pRentTable;
 
 	public void setBookService(BookInfoService bookService) {
 		this.bookService = bookService;
 	}
 
 
-	public LibraryManagemantMain() {
+	public LibraryManagemantMain() { 
 		initialize();
+		
 	}
 	
 	private void initialize() {
@@ -80,13 +89,16 @@ public class LibraryManagemantMain extends JFrame implements ActionListener{
 		pMemSearch = new MemberSearchPanel();
 		pMem.add(pMemSearch, BorderLayout.NORTH);
 		pMemSearch.setLayout(new GridLayout(1, 0, 0, 0));
-		// 테이블
-		pMemInfo = new MemberSearchTablePanel();
-		pMemInfo.loadData();
-		pMem.add(pMemInfo, BorderLayout.CENTER);
+		
+		
+		//멤버 테이블
+		pMemTable = new MemberSearchTablePanel();
+		pMemTable.setService(memService);
+		pMemTable.loadData();
+		pMem.add(pMemTable, BorderLayout.CENTER);
 
 		// 셋 으로 넣어주는 방법.
-		pMemSearch.setMstp(pMemInfo);
+		pMemSearch.setMstp(pMemTable);
 		
 		pBook = new BookInfoSearchTablePanel();
 		pInfo.add(pBook);
@@ -94,29 +106,29 @@ public class LibraryManagemantMain extends JFrame implements ActionListener{
 		
 		pBookSearch = new BookInfoSearchPanel();
 		pBook.add(pBookSearch, BorderLayout.NORTH);
-		pBookSearch.setBistp(pbookList);
 		
 		
-		pbookList = new BookInfoSearchTablePanel();
-		pbookList.setService(bookService);
-		pbookList.loadData();
-		pBook.add(pbookList, BorderLayout.CENTER);
+		
+		pbookTable = new BookInfoSearchTablePanel();
+		pbookTable.setService(bookService);
+		pbookTable.loadData();
+		pBook.add(pbookTable, BorderLayout.CENTER);
+		
+		pBookSearch.setBistp(pbookTable);
 		
 		
-//		pBookList = new BookInfoSearchTablePanel();
-//		pBookList.loadData();
-//		pBook.add(pBookList, BorderLayout.CENTER);
+//		pRentTable = pMemTable.getRentT();
+//		pRentTable.setService(rentService);
+//		contentPane.add(pRentTable, BorderLayout.SOUTH);
 		
-		pRentBook = new JPanel();
-		pRentBook.setBorder(new TitledBorder(null, "\uD604\uC7AC \uB300\uC5EC\uC911\uC778 \uB3C4\uC11C\uBAA9\uB85D", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		contentPane.add(pRentBook, BorderLayout.SOUTH);
-		pRentBook.setLayout(new BorderLayout(0, 0));
+		pRentTable = new RentReturnClickTablePanel();
+		pMemTable.setRentTable(pRentTable);
+		pRentTable.setService(rentService);
+		
+		contentPane.add(pRentTable, BorderLayout.SOUTH);
 	}
 	
-	
-	
 
-	
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == btnReturn) {
 			btnReturnActionPerformed(arg0);
@@ -134,9 +146,5 @@ public class LibraryManagemantMain extends JFrame implements ActionListener{
 	protected void btnReturnActionPerformed(ActionEvent arg0) {
 		BookReturn frame = new BookReturn();
 		frame.setVisible(true);
-	}
-	
-			
-	
-	
+	}	
 }

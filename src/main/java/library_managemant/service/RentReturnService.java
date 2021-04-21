@@ -9,7 +9,6 @@ import library_managemant.dto.RentReturn;
 public class RentReturnService {
 	private RentReturnDao dao = RentReturnDaoImpl.getInstance();
 	
-	
 	public RentReturnService() {
 	}
 	
