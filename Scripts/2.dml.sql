@@ -35,7 +35,7 @@ insert into book_info values
 -- 
 drop table book_info;
 
-select * from book_info;
+select * from rent_return;
 -- 대출 반납.
 insert into rent_return values
 	(12001,1,20210322,20210325,null),

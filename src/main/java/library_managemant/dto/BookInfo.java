@@ -8,16 +8,20 @@ public class BookInfo {
 	private BookKind bookKind;
 	private RentReturn rentReturn;
 	
-	
-	
-	
-	
 
 	public BookInfo(int bookNum) {
-		super();
 		this.bookNum = bookNum;
 	}
+	
+	public BookInfo(String bookName) {
+		this.bookName = bookName;
+	}
+	
 
+	public BookInfo(int bookNum, String bookName) {
+		this.bookNum = bookNum;
+		this.bookName = bookName;
+	}
 
 	public BookInfo(int bookNum, String bookName, RentReturn rentReturn) {
 		this.bookNum = bookNum;

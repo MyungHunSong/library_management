@@ -1,8 +1,5 @@
 select user(), database();
 
-
-
-
 select bookKind,kindTitle from book_kind;
 
 select kindTitle from book_kind where bookKind = 1;
@@ -36,8 +33,5 @@ select memberNo, name, homeNo, phoneNo from member_info where memberNo like '%' 
 
 select memberNo, name, homeNo, phoneNo from member_info where name like '김%%';
 select memberNo, name, homeNo, phoneNo from member_info where name like '김%%';
-
-
-
 
 

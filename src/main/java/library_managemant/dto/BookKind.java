@@ -44,8 +44,4 @@ public class BookKind {
 		return "BookKind [책종류 번호=" + bookKind + ", 책종류 =" + bookTitle +"]";
 	}
 
-
-	
-	
-	
 }

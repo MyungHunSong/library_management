@@ -24,7 +24,7 @@ public class MemberService {
 	}
 	
 	// 원하는 조건으로 이름 검색하는법
-	public MemberInfo selectLikeMeminfo(MemberInfo memberInfo) {
+	public List<MemberInfo> selectLikeMeminfo(MemberInfo memberInfo) {
 		return memDao.selectMemberInfoByNo(memberInfo);
 	}
 }

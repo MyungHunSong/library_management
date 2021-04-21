@@ -15,8 +15,13 @@ public class BookInfoService {
 		return bookDao.selectBookInfoByAll();
 	}
 	
-	//도서번호, 도서제목, 대출여부
+	//도서번호, 도서제목, 대출여부 만 출력
 	public List<BookInfo> showBookInfoList(){
-		return bookDao.selectBookInfoBy();
+		return bookDao.selectBookThree();
 	}
+	
+	public List<BookInfo> selectBookInfoBy(BookInfo bookInfo){
+		return bookDao.selectBookInfoBy(bookInfo);
+	}
+	
 }

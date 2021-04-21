@@ -4,17 +4,16 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import library_managemant.dto.MemberInfo;
 import library_managemant.service.MemberService;
+import library_managemant.ui.list.MemberSearchTablePanel;
 import library_managemant.ui.main.LibraryManagemantMain;
 
 @SuppressWarnings("serial")
@@ -24,23 +23,28 @@ public class MemberSearchPanel extends JPanel implements ActionListener {
 	
 	private JComboBox cmb1;
 	private String[] memInfo = {"회원 번호","회원 이름"};
+
+	private MemberSearchTablePanel mstp; // 테이블 패널을 쓰기위해서 set 까지 해준모습이다.
 	
-	private LibraryManagemantMain libMan;
-	private MemberService service;
+	private MemberService service = new MemberService();
 	
+	public void setMstp(MemberSearchTablePanel mstp) {
+		this.mstp = mstp;
+	}
+
 	public MemberSearchPanel() {
 		initialize();
 		addDateCmb1();
+		cmb1.setSelectedIndex(-1);
 	}
 	
-	//콤보박스.
-	private void addDateCmb1(){
-		
+	private void addDateCmb1() {
 		for(String f : memInfo) {
 			cmb1.addItem(f);
 		}
 		
 	}
+	
 	
 	// 요 기능 사용
 	public MemberInfo getMemberInfo() {
@@ -58,6 +62,7 @@ public class MemberSearchPanel extends JPanel implements ActionListener {
 	}
 	
 	
+	
 	private void initialize() {
 		setLayout(new GridLayout(0, 1, 0, 0));
 		
@@ -70,7 +75,7 @@ public class MemberSearchPanel extends JPanel implements ActionListener {
 		panel.add(label);
 		
 		cmb1 = new JComboBox();
-		cmb1.setSelectedIndex(-1);
+		
 		panel.add(cmb1 );
 		
 		textField = new JTextField();
@@ -86,22 +91,32 @@ public class MemberSearchPanel extends JPanel implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == textField) {
-			textFieldActionPerformed(e);
-		}
-		if (e.getSource() == btnSearch) {
-			btnNewButtonActionPerformed(e);
-			if(cmb1.equals("회원번호")&& textField.equals("회원번호")) {
-				
+		try {
+			if (e.getSource() == btnSearch) {
+				btnSearchActionPerformed(e);
 			}
+		}catch (NullPointerException e1) {
+			mstp.loadData();
 		}
-	}
-	protected void btnNewButtonActionPerformed(ActionEvent e) {
-		JOptionPane.showMessageDialog(null, "cmb1");
+		
+		
 		
 	}
-	protected void textFieldActionPerformed(ActionEvent e) {
-		 
-		 
+
+	protected void btnSearchActionPerformed(ActionEvent e) {
+		if(cmb1.getSelectedItem().equals("회원 번호")){ // getSelectedItem:선택된 객체의 내용
+				int memInt = Integer.parseInt(textField.getText());
+				MemberInfo memInfo = new MemberInfo(memInt,"자르반시발련아");
+				mstp.loadData2(memInfo);
+				clearTf();
+				cmb1.setSelectedIndex(-1);
+		}else if(cmb1.getSelectedItem().equals("회원 이름")){
+				String memName = textField.getText();
+				MemberInfo memInfo = null;
+				memInfo = new MemberInfo(999999,memName);
+				mstp.loadData2(memInfo);
+				clearTf();
+		}
+		
 	}
 }

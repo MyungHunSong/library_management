@@ -21,36 +21,36 @@ public class BookInfoDaoTest {
 		Assert.assertNotNull(bookInfo);
 		System.out.println(bookInfo);
 	}
+	
 
 	@Test
 	public void testSelectBookInfoBy() {
 		System.out.printf("%s()%n", "testSelectBookInfoBy()");
-		List<BookInfo> bookInfo = bao.selectBookInfoBy();
-		
-		for(BookInfo b : bookInfo) {
-			Assert.assertNotNull(b);
+		BookInfo bookInfo = new BookInfo(40001);
+		List<BookInfo> books = bao.selectBookInfoBy(bookInfo);
+		Assert.assertNotNull(books);
+		for(BookInfo b : books) {
 			System.out.println(b.toString1());
 		}
-		
 		
 	}
 
 	
-	@Test
-	public void testSelectBookRent() {
-		System.out.printf("%s()%n", "testSelectBookRent()");
-	
-		List<BookInfo> bookInfo = bao.selectBookByRent();
-		
-		
-		for(BookInfo b : bookInfo) {
-			b.toString2();
-			Assert.assertNotNull(b);
-			System.out.println(b.toString2());
-		}
-	
-				
-	}
+//	@Test
+//	public void testSelectBookRent() {
+//		System.out.printf("%s()%n", "testSelectBookRent()");
+//	
+//		List<BookInfo> bookInfo = bao.selectBookByRent();
+//		
+//		
+//		for(BookInfo b : bookInfo) {
+//			b.toString2();
+//			Assert.assertNotNull(b);
+//			System.out.println(b.toString2());
+//		}
+//	
+//				
+//	}
 
 	
 	

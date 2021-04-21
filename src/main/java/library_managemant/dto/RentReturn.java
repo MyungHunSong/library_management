@@ -3,30 +3,34 @@ package library_managemant.dto;
 import java.util.Date;
 
 public class RentReturn {
-	private int memberNo1;
-	private int rentNo1;
+	private MemberInfo memberNo1;
+	private BookInfo rentNo1;
 	private Date bookRent;
 	private Date bookReturn;
 	private int bookOver;
 	
-	
-	
-	
-	
-	public RentReturn(int rentNo1) {
+
+	public RentReturn() {
+	}
+
+	public RentReturn(MemberInfo memberNo1, BookInfo rentNo1, Date bookRent, int bookOver) {
+		this.memberNo1 = memberNo1;
 		this.rentNo1 = rentNo1;
+		this.bookRent = bookRent;
+		this.bookOver = bookOver;
 	}
 	
-	
-
-	public RentReturn(Date bookRent, int bookOver) {
-		
+	public RentReturn(BookInfo rentNo1, Date bookRent, int bookOver) {
+		this.rentNo1 = rentNo1;
 		this.bookRent = bookRent;
 		this.bookOver = bookOver;
 	}
 
-	public RentReturn(int memberNo1, int rentNo1, Date bookRent, Date bookReturn, int bookOver) {
-		super();
+	public  RentReturn(MemberInfo memberNo1) {
+		this.memberNo1 = memberNo1;
+	}
+
+	public RentReturn(MemberInfo memberNo1, BookInfo rentNo1, Date bookRent, Date bookReturn, int bookOver) {
 		this.memberNo1 = memberNo1;
 		this.rentNo1 = rentNo1;
 		this.bookRent = bookRent;
@@ -34,19 +38,19 @@ public class RentReturn {
 		this.bookOver = bookOver;
 	}
 
-	public int getMemberNo1() {
+	public MemberInfo getMemberNo1() {
 		return memberNo1;
 	}
 
-	public void setMemberNo1(int memberNo1) {
+	public void setMemberNo1(MemberInfo memberNo1) {
 		this.memberNo1 = memberNo1;
 	}
 
-	public int getRentNo1() {
+	public BookInfo getRentNo1() {
 		return rentNo1;
 	}
 
-	public void setRentNo1(int rentNo1) {
+	public void setRentNo1(BookInfo rentNo1) {
 		this.rentNo1 = rentNo1;
 	}
 
@@ -76,16 +80,8 @@ public class RentReturn {
 
 	@Override
 	public String toString() {
-		return "RentReturn [memberNo1=" + memberNo1 + ", rentNo1=" + rentNo1 + ", bookRent=" + bookRent
-				+ ", bookReturn=" + bookReturn + ", bookOver=" + bookOver + "]";
+		return String.format("RentReturn [회원번호 = %s 도서번호=%s, 도서제목=%s, 도서연체일=%s, 도서대여일=%s]",
+				memberNo1.getMemberNo(),rentNo1.getBookNum(), rentNo1.getBookName(),getBookOver(),getBookRent());
 	}
-
-	
-	
-	
-	
-	
-	
-	
 	
 }

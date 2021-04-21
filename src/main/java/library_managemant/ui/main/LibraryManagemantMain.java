@@ -5,6 +5,8 @@ package library_managemant.ui.main;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,41 +15,40 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 import library_managemant.service.BookInfoService;
-import library_managemant.service.MemberService;
-import library_managemant.ui.content.MemberSearchPanel;
-import library_managemant.ui.list.MemberSearchTablePanel;
-import library_managemant.ui.list.BookInfoSearchTablePanel;
 import library_managemant.ui.content.BookInfoSearchPanel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import library_managemant.ui.content.MemberSearchPanel;
+import library_managemant.ui.list.BookInfoSearchTablePanel;
+import library_managemant.ui.list.MemberSearchTablePanel;
 
 
 
 @SuppressWarnings("serial")
-public class LibraryManagemantMain extends JFrame implements ActionListener {
+public class LibraryManagemantMain extends JFrame implements ActionListener{
 
 	private JPanel contentPane;
 	private JButton btnRent;
 	private JButton btnReturn;
 	private JPanel pMem;
-	private JPanel pBook;
+	private BookInfoSearchTablePanel pBook;
+	
 	private MemberSearchPanel pMemSearch;
 	private BookInfoSearchPanel pBookSearch;
 	private MemberSearchTablePanel pMemInfo;
-	private BookInfoSearchTablePanel pBookInfo;
-	private JPanel panel_1;
-	
-	private MemberService memService;
-	private BookInfoService bookService;
-	
-	private MemberSearchTablePanel mList;
 	
 	
+	private BookInfoService bookService = new BookInfoService();
+	private BookInfoSearchTablePanel pbookList;
+	private JPanel pRentBook;
+
+	public void setBookService(BookInfoService bookService) {
+		this.bookService = bookService;
+	}
+
+
 	public LibraryManagemantMain() {
 		initialize();
 	}
 	
-
 	private void initialize() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 616, 450);
@@ -79,43 +80,42 @@ public class LibraryManagemantMain extends JFrame implements ActionListener {
 		pMemSearch = new MemberSearchPanel();
 		pMem.add(pMemSearch, BorderLayout.NORTH);
 		pMemSearch.setLayout(new GridLayout(1, 0, 0, 0));
-		
+		// 테이블
 		pMemInfo = new MemberSearchTablePanel();
 		pMemInfo.loadData();
 		pMem.add(pMemInfo, BorderLayout.CENTER);
+
+		// 셋 으로 넣어주는 방법.
+		pMemSearch.setMstp(pMemInfo);
 		
-		pBook = new JPanel();
+		pBook = new BookInfoSearchTablePanel();
 		pInfo.add(pBook);
 		pBook.setLayout(new BorderLayout(0, 0));
 		
 		pBookSearch = new BookInfoSearchPanel();
-		
-		
 		pBook.add(pBookSearch, BorderLayout.NORTH);
+		pBookSearch.setBistp(pbookList);
 		
-		pBookInfo = new BookInfoSearchTablePanel();
-		pBookInfo.loadData();
-		pBook.add(pBookInfo, BorderLayout.CENTER);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new TitledBorder(null, "\uD604\uC7AC \uB300\uC5EC\uC911\uC778 \uB3C4\uC11C\uBAA9\uB85D", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		contentPane.add(panel_2, BorderLayout.SOUTH);
-		panel_2.setLayout(new BorderLayout(0, 0));
+		pbookList = new BookInfoSearchTablePanel();
+		pbookList.setService(bookService);
+		pbookList.loadData();
+		pBook.add(pbookList, BorderLayout.CENTER);
 		
-		panel_1 = new JPanel();
-		panel_2.add(panel_1, BorderLayout.CENTER);
+		
+//		pBookList = new BookInfoSearchTablePanel();
+//		pBookList.loadData();
+//		pBook.add(pBookList, BorderLayout.CENTER);
+		
+		pRentBook = new JPanel();
+		pRentBook.setBorder(new TitledBorder(null, "\uD604\uC7AC \uB300\uC5EC\uC911\uC778 \uB3C4\uC11C\uBAA9\uB85D", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		contentPane.add(pRentBook, BorderLayout.SOUTH);
+		pRentBook.setLayout(new BorderLayout(0, 0));
 	}
 	
-	// 목록 받아오기.
-	protected void setService() {
-		//memService = new MemberService();
-	}
 	
-	//데이터 로드하는 기능
-//	protected void tableLoadData() {
-//		mList.setService(service);
-//		mList.loadData();
-//	}
+	
+
 	
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == btnReturn) {
@@ -135,4 +135,8 @@ public class LibraryManagemantMain extends JFrame implements ActionListener {
 		BookReturn frame = new BookReturn();
 		frame.setVisible(true);
 	}
+	
+			
+	
+	
 }

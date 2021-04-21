@@ -14,9 +14,9 @@ import library_managemant.dto.RentReturn;
 import library_managemant.libdb.JdbcCon;
 
 public class BookInfoDaoImpl implements BookInfoDao {
-	
+
 	private static BookInfoDaoImpl instance = new BookInfoDaoImpl();
-	
+
 	public static BookInfoDaoImpl getInstance() {
 		return instance;
 	}
@@ -29,7 +29,8 @@ public class BookInfoDaoImpl implements BookInfoDao {
 		try (Connection con = JdbcCon.getConnection();) {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 
-			ResultSet rs = pstmt.executeQuery();{
+			ResultSet rs = pstmt.executeQuery();
+			{
 				if (rs.next()) {
 					List<BookInfo> list = new ArrayList<>();
 
@@ -57,24 +58,44 @@ public class BookInfoDaoImpl implements BookInfoDao {
 		return new BookInfo(rentNo, bookNum, bookName, bookCan, new BookKind(bookKind));
 	}
 
-	// ---- selectBookInfoBy ----
+	// 3개만 검색하는 기능
 	@Override
-	public List<BookInfo> selectBookInfoBy() {
+	public List<BookInfo> selectBookThree() {
 		String sql = "select bookNum, bookName, bookCan from book_info";
-		try (Connection con = JdbcCon.getConnection();) {
-			PreparedStatement pstmt = con.prepareStatement(sql);
+
+		try (Connection con = JdbcCon.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
 
 			ResultSet rs = pstmt.executeQuery();
-
-			if (rs.next()) {
-				List<BookInfo> list = new ArrayList<>();
-
-				do {
-					list.add(getBookBy(rs));
-				} while (rs.next());
-				return list;
+			{
+				if (rs.next()) {
+					List<BookInfo> list = new ArrayList<>();
+					do {
+						list.add(getBookBy(rs));
+					} while (rs.next());
+					return list;
+				}
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
+	// ---- selectBookInfoBy----
+	@Override
+	public List<BookInfo> selectBookInfoBy(BookInfo bookInfo) {
+		String sql = "select bookNum, bookName, bookCan from book_info where bookNum=?";
+		try (Connection con = JdbcCon.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
+			pstmt.setInt(1, bookInfo.getBookNum());
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					List<BookInfo> list = new ArrayList<>();
+					do {
+						list.add(getBookBy(rs));
+					} while (rs.next());
+					return list;
+				}
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -87,62 +108,5 @@ public class BookInfoDaoImpl implements BookInfoDao {
 		String bookCan = rs.getString("bookCan");
 		return new BookInfo(bookNum, bookName, bookCan);
 	}
-	
-
-	// ---- BookInfo ----
-	@Override
-	public List<BookInfo> selectBookByRent() {
-		
-		String sql = "select bookNum" + ", bookName" + ", r1.bookRent"
-				+ ", r1.bookOver from book_info b1 join rent_return r1 on b1.rentNo =r1.rentNo1";
-		try (Connection con = JdbcCon.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(sql);
-
-				ResultSet rs = pstmt.executeQuery()) {
-			if (rs.next()) {
-				List<BookInfo> list = new ArrayList<>();
-				do {
-					list.add(getBookOver(rs));
-				} while (rs.next());
-
-				return list;
-
-			}
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	private BookInfo getBookOver(ResultSet rs) throws SQLException {
-		int bookNum = rs.getInt("bookNum");
-		String bookName = rs.getString("bookName");
-		RentReturn rentRetrun = new RentReturn(rs.getDate("bookRent"), rs.getInt("bookOver"));
-		return new BookInfo(bookNum, bookName, rentRetrun);
-	}
-	
-	
-	
-// 	insertBookInfo
-//	@Override
-//	public int insertBookInfo(BookInfo bookInfo) {
-//
-//		return 0;
-//	}
-//
-//	// updateBookInfo
-//	@Override
-//	public int updateBookInfo(BookInfo bookInfo) {
-//
-//		return 0;
-//	}
-//
-//	// deleteBookInfo
-//	@Override
-//	public int deleteBookInfo(BookInfo bookInfo) {
-//
-//		return 0;
-//	}
 
 }
