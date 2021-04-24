@@ -17,6 +17,7 @@ public class BookInfoSearchTablePanel extends AbstractCustomTablePanel<BookInfo>
 	}
 	
 	
+	
 	// byNo 기능
 	public void loadBookInfo(BookInfo bookInfo) {
 		service = new BookInfoService();
@@ -60,9 +61,7 @@ public class BookInfoSearchTablePanel extends AbstractCustomTablePanel<BookInfo>
 		return new Object[] { b.getBookNum(), b.getBookName(), b.getBookCan() };
 	}
 
-	private void initialize() {
-		setLayout(new BorderLayout(0, 0));
-	}
+	
 
 	class CustomBookTableModel extends DefaultTableModel {
 		public CustomBookTableModel(Object[][] data, Object[] columnNames) {
@@ -73,12 +72,7 @@ public class BookInfoSearchTablePanel extends AbstractCustomTablePanel<BookInfo>
 	protected void setAlignAndWidth() {
 		setTableCellAlign(SwingConstants.CENTER, 1);
 		setTableCellAlign(SwingConstants.RIGHT, 0, 2);
-
 		setTableCellWidth(100, 250, 200);
 	}
-
-//	private Object[] getColumnNaems() {
-//		return new String[] {"도서번호","도서제목","대출여부"};
-//	}
 
 }

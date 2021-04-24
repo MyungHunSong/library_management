@@ -97,8 +97,7 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 	public List<MemberInfo> selectMemberInfoByNo(MemberInfo memInfo) {
 		String sql = "select memberNo, name, homeNo, phoneNo from member_info where memberNo like ? or name like ?";
 
-		try (Connection con = JdbcCon.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(sql);) {
+		try (Connection con = JdbcCon.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
 
 			pstmt.setInt(1, memInfo.getMemberNo());
 			pstmt.setString(2, memInfo.getName());
@@ -117,6 +116,42 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@Override
+	public MemberInfo selectMemberDetailByNo(int memInfo) {
+		String sql="select memberNo\r\n" + 
+				"	   ,name\r\n" + 
+				"	   ,births \r\n" + 
+				"	   ,homeNo\r\n" + 
+				"	   ,phoneNo\r\n" + 
+				"	   ,adress\r\n" + 
+				"from member_info\r\n" + 
+				"where memberNo = ?";
+		try(Connection con = JdbcCon.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)){
+			pstmt.setInt(1, memInfo);
+			
+			try(ResultSet rs = pstmt.executeQuery()){
+				if(rs.next()) {
+					return getMemDetail(rs);
+				}
+		
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	private MemberInfo getMemDetail(ResultSet rs) throws NumberFormatException, SQLException {
+		int memberNo = Integer.parseInt(rs.getString("memberNo"));
+		String name = rs.getString("name");
+		Date births = rs.getDate("births");
+		String homeNo = rs.getString("homeNo");
+		String phoneNo = rs.getString("phoneNo");
+		String adress =rs.getString("adress");
+		return new MemberInfo(memberNo, name, births, homeNo, phoneNo, adress);
 	}
 
 }

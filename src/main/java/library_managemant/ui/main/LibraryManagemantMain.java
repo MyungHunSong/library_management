@@ -1,7 +1,5 @@
 package library_managemant.ui.main;
 
-
-
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -23,8 +21,6 @@ import library_managemant.ui.list.BookInfoSearchTablePanel;
 import library_managemant.ui.list.MemberSearchTablePanel;
 import library_managemant.ui.list.RentReturnClickTablePanel;
 
-
-
 @SuppressWarnings("serial")
 public class LibraryManagemantMain extends JFrame implements ActionListener{
 
@@ -32,13 +28,14 @@ public class LibraryManagemantMain extends JFrame implements ActionListener{
 	private JButton btnRent;
 	private JButton btnReturn;
 	private JPanel pMem;
+	
 	private BookInfoSearchTablePanel pBook;
+	private BookInfoSearchPanel pBookSearch;
 	
 	private MemberSearchPanel pMemSearch;
-	private BookInfoSearchPanel pBookSearch;
 	private MemberSearchTablePanel pMemTable;
-	
 	private MemberService memService = new MemberService();
+	
 	private BookInfoService bookService = new BookInfoService();
 	
 	private RentReturn rentReturn;
@@ -47,6 +44,14 @@ public class LibraryManagemantMain extends JFrame implements ActionListener{
 	private BookInfoSearchTablePanel pbookTable;
 	
 	private RentReturnClickTablePanel pRentTable;
+	
+	
+	
+
+	public MemberSearchTablePanel getpMemTable() {
+		return pMemTable;
+	}
+
 
 	public void setBookService(BookInfoService bookService) {
 		this.bookService = bookService;
@@ -60,7 +65,7 @@ public class LibraryManagemantMain extends JFrame implements ActionListener{
 	
 	private void initialize() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 616, 450);
+		setBounds(100, 100, 1042, 508);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -90,7 +95,6 @@ public class LibraryManagemantMain extends JFrame implements ActionListener{
 		pMem.add(pMemSearch, BorderLayout.NORTH);
 		pMemSearch.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		
 		//멤버 테이블
 		pMemTable = new MemberSearchTablePanel();
 		pMemTable.setService(memService);
@@ -116,15 +120,9 @@ public class LibraryManagemantMain extends JFrame implements ActionListener{
 		
 		pBookSearch.setBistp(pbookTable);
 		
-		
-//		pRentTable = pMemTable.getRentT();
-//		pRentTable.setService(rentService);
-//		contentPane.add(pRentTable, BorderLayout.SOUTH);
-		
-		pRentTable = new RentReturnClickTablePanel();
-		pMemTable.setRentTable(pRentTable);
-		pRentTable.setService(rentService);
-		
+		pRentTable = new RentReturnClickTablePanel(); // 클릭 테이블을 생성해주고
+		pMemTable.setRentTable(pRentTable); // 멤버 테이블에 있는 리스트를 클릭해서 뛰우기 위해서 셋 rentTable 해주는것이다.(연결 완료)
+		pRentTable.setService(rentService); // 
 		contentPane.add(pRentTable, BorderLayout.SOUTH);
 	}
 	

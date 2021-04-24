@@ -1,41 +1,3 @@
-select user(), database();
-
-use library_managemant;
-
-desc rent_return;
-desc member_info;
-desc book_info;
-desc rent_return;
-
-select *
-	from member_info;
-
-alter table book_info change column bookNum bookNum int;
-
-desc rent_return;
-
-alter table rent_return change column memberNo1 memberNo1 int(11);
-
-alter table rent_return change column rentNo rentNo1 int(11);  
-
-alter table member_info change column member_info.year births date;
-drop table rent_return;
-
-
-alter table member_info change column memberNo memberNo char(5);
-
-desc book_info;
-alter table book_info change column bookNum bookNum char(5);
-
-select bookNum from book_info;
-
-select memberNo, name, homeNo, phoneNo from member_info; 
-
-
-
-alter table member_info change column memberNo memberNo int(8);
-
-
 
 -- 1.
 -- 회원 검색
@@ -131,7 +93,74 @@ select m.memberNo
 from rent_return r join member_info m on r.memberNo1 = m.memberNo
 join book_info b on b.rentNo =r.rentNo1;
 
-select memberNo1,rentNo1,bookRent,bookReturn,bookOver,memberNo,name,births,homeNo,phoneNo,adress,rentNo,bookNum,bookName,b.bookCan,b.bookKind,bk.bookKind,kindTitle
+select * from member_info;
+
+-- 회원 상세 출력
+select memberNo1,rentNo1,bookRent,bookReturn,bookOver,memberNo,name,births,homeNo,phoneNo,adress,rentNo,bookNum,bookName
 from rent_return r join member_info m on r.memberNo1 = m.memberNo
 join book_info b on b.rentNo =r.rentNo1
-join book_kind bk on b.bookKind = bk.bookKind;
+where b.bookCan ='대출가능';
+
+-- 대여회원 상세정보
+ 
+select memberNo
+	   ,name
+	   ,births 
+	   ,homeNo
+	   ,phoneNo
+	   ,adress
+from member_info
+where memberNo=12001;
+
+-- 날짜
+select date_format(births,'%Y-%m-%d') as a, date_format(now(), '%Y-%m-%d') as b, datediff(now(), births) from member_info;
+
+
+
+SELECT *
+FROM member_info
+WHERE YEAR(births) = YEAR(DATE_SUB(CURDATE(), INTERVAL -1 MONTH))
+AND MONTH(births) = MONTH(DATE_SUB(CURDATE(), INTERVAL -1 MONTH))
+
+
+
+select * from rent_return;
+ --  대출 중(불가)인것은 rentNo 가 1 
+ -- 대출 가능한것은 rentNo가 2
+
+
+update book_info set rentNo = 1 where bookNum = 40006; 
+
+select * from rent_return;
+select * from book_info;
+select * from member_info;
+
+
+
+-- rentreturn 인곳에 인원 추가하는 방법
+insert into rent_return(rentNo, memberNo, bookNum1, bookRent, bookReturn, bookOver) values (3, 12003, 40003, now(), null, 0);
+insert into rent_return(rentNo, memberNo, bookNum1, bookRent, bookReturn, bookOver) values (3, 12003, 40003, now(), null, 0);
+
+update book_info set bookCan = '대출불가' where bookNum = 40003;
+
+-- main 좌측 리스트
+select memberNo,name,homeNo,phoneNo from member_info;
+-- main 좌측 검색
+select memberNo,name,homeNo,phoneNo from member_info where memberNo like '%01%' or name like'%김%';
+
+select * from rent_return;
+
+-- rentReturn멤
+select r.memberNo, r.bookNum1, b.bookName, r.bookRent, r.bookOver 
+from rent_return r join member_info m on r.memberNo = m.memberNo
+join book_info b on r.bookNum1 =b.bookNum
+where m.memberNo = ifnull(null,0);
+
+insert into member_info values(0, '정보없음','00000000','000-000-0000','000-0000-0000','없음');
+
+
+
+
+
+
+

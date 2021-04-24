@@ -85,9 +85,13 @@ public class BookInfoSearchPanel extends JPanel implements ActionListener {
 	
 	
 	//검색 기능
-	public void actionPerformed(ActionEvent e) {	
+	public void actionPerformed(ActionEvent e) {
+		try {
 		if (e.getSource() == btnSearch) {
 			btnNewButtonActionPerformed(e);
+		}
+		}catch (NullPointerException n) {
+			bistp.loadData();
 		}
 	
 	}
@@ -100,9 +104,8 @@ public class BookInfoSearchPanel extends JPanel implements ActionListener {
 			System.out.println("BookInfo>>"+bookInfo);
 			
 			clearTf();
-			cmb1.setSelectedIndex(-1);
-		}else if(cmb1.getSelectedItem().equals(-1)||tfSearch.getText()==null){
-			bistp.loadData();
+			cmb1.setSelectedIndex(-1); //검색창이 -1 일때 안보이게 하는거.
 		}
+		
 	}
 }

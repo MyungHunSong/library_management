@@ -13,8 +13,8 @@ import javax.swing.SwingConstants;
 
 import library_managemant.dto.MemberInfo;
 import library_managemant.service.MemberService;
+import library_managemant.ui.list.MemberSearchRentTablePanel;
 import library_managemant.ui.list.MemberSearchTablePanel;
-import library_managemant.ui.main.LibraryManagemantMain;
 
 @SuppressWarnings("serial")
 public class MemberSearchPanel extends JPanel implements ActionListener {
@@ -41,11 +41,8 @@ public class MemberSearchPanel extends JPanel implements ActionListener {
 	private void addDateCmb1() {
 		for(String f : memInfo) {
 			cmb1.addItem(f);
-		}
-		
+		}	
 	}
-	
-	
 	// 요 기능 사용
 	public MemberInfo getMemberInfo() {
 		int memberNo = Integer.parseInt(textField.getText().trim());
@@ -60,7 +57,6 @@ public class MemberSearchPanel extends JPanel implements ActionListener {
 	public void clearTf() {
 		textField.setText("");
 	}
-	
 	
 	
 	private void initialize() {
@@ -97,16 +93,16 @@ public class MemberSearchPanel extends JPanel implements ActionListener {
 			}
 		}catch (NullPointerException e1) {
 			mstp.loadData();
+			e1.printStackTrace();
 		}
-		
-		
 		
 	}
 
 	protected void btnSearchActionPerformed(ActionEvent e) {
 		if(cmb1.getSelectedItem().equals("회원 번호")){ // getSelectedItem:선택된 객체의 내용
 				int memInt = Integer.parseInt(textField.getText());
-				MemberInfo memInfo = new MemberInfo(memInt,"자르반시발련아");
+				MemberInfo memInfo = new MemberInfo(memInt,"뭐하게");
+				System.out.println(mstp);
 				mstp.loadData2(memInfo);
 				clearTf();
 				cmb1.setSelectedIndex(-1);
@@ -116,7 +112,6 @@ public class MemberSearchPanel extends JPanel implements ActionListener {
 				memInfo = new MemberInfo(999999,memName);
 				mstp.loadData2(memInfo);
 				clearTf();
-		}
-		
+		}	
 	}
 }

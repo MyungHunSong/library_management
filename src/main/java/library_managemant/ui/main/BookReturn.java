@@ -1,23 +1,22 @@
 package library_managemant.ui.main;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import library_managemant.ui.Detail.BookInfoDetail;
+import library_managemant.ui.Detail.MemberInfoDetail;
 import library_managemant.ui.content.BookInfoSearchPanel;
 import library_managemant.ui.content.MemberSearchPanel;
 import library_managemant.ui.list.BookInfoSearchTablePanel;
 import library_managemant.ui.list.MemberSearchTablePanel;
 
-import java.awt.GridLayout;
-import javax.swing.JButton;
-import java.awt.FlowLayout;
-import library_managemant.ui.content.BookInfoDetail;
-import library_managemant.ui.content.MemberInfoDetail;
-
+@SuppressWarnings("serial")
 public class BookReturn extends JFrame {
 
 	private JPanel contentPane;

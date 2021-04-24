@@ -5,11 +5,14 @@ import java.util.Date;
 public class MemberInfo {
 	private int memberNo;
 	private String name;
+	
 	private Date births;
+	
 	private String homeNo;
 	private String phoneNo;
 	private String adress;
 	
+	// 시간을 표현하기중 하나.
 	
 	
 	
@@ -46,6 +49,22 @@ public class MemberInfo {
 		this.phoneNo = phoneNo;
 		this.adress = adress;
 	}
+
+	
+	
+
+	public Date getBirths() {
+		return births;
+	}
+
+
+
+
+	public void setBirths(Date births) {
+		this.births = births;
+	}
+
+
 
 
 	public int getMemberNo() {
@@ -110,7 +129,7 @@ public class MemberInfo {
 
 	@Override
 	public String toString() {
-		return String.format("MemberInfo [회원 번호=%s, 이름 =%s, 생년월일=%s, 전화번호=%s, 휴대전화=%s, 주소=%s]", memberNo,
+		return String.format("MemberInfo [회원 번호=%s, 이름 =%s, 생년월일=%tF, 전화번호=%s, 휴대전화=%s, 주소=%s]", memberNo,
 				name, births, homeNo, phoneNo, adress);
 	}
 	

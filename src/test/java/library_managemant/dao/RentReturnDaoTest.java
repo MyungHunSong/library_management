@@ -20,7 +20,7 @@ public class RentReturnDaoTest {
 		
 		System.out.println("testSelectRentReturnByMem()");
 		
-		RentReturn rR = new RentReturn(new MemberInfo(12001));
+		RentReturn rR = new RentReturn(0);
 		List<RentReturn> list = dao.selectRentReturnByMem(rR);
 		Assert.assertNotNull(list);
 			System.out.println(list);

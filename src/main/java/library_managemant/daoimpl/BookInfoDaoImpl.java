@@ -108,4 +108,6 @@ public class BookInfoDaoImpl implements BookInfoDao {
 		return new BookInfo(bookNum, bookName, bookCan);
 	}
 
+	
+
 }

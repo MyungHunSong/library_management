@@ -1,5 +1,6 @@
 package library_managemant.ui.exception;
 
+@SuppressWarnings("serial")
 public class NotSelectedException extends RuntimeException{
 	
 	public NotSelectedException() {
@@ -9,4 +10,5 @@ public class NotSelectedException extends RuntimeException{
 	public NotSelectedException(Throwable cause) {
 		super("목록을 넣어 주세요"+cause);
 	}
+	
 }

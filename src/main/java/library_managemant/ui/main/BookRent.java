@@ -1,35 +1,72 @@
 package library_managemant.ui.main;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.GridLayout;
-import javax.swing.JButton;
 import javax.swing.SwingConstants;
-import java.awt.FlowLayout;
-import library_managemant.ui.content.MemberSearchPanel;
-import library_managemant.ui.list.MemberSearchTablePanel;
-import library_managemant.ui.content.BookInfoSearchPanel;
-import library_managemant.ui.list.BookInfoSearchTablePanel;
-import library_managemant.ui.content.MemberInfoDetail;
-import library_managemant.ui.content.BookInfoDetail;
+import javax.swing.border.EmptyBorder;
 
+import library_managemant.service.BookInfoService;
+import library_managemant.service.MemberService;
+import library_managemant.ui.Detail.BookInfoDetail;
+import library_managemant.ui.Detail.MemberInfoDetail;
+import library_managemant.ui.content.BookInfoSearchPanel;
+import library_managemant.ui.content.MemSearchRentPanel;
+import library_managemant.ui.list.BookInfoSearchTablePanel;
+import library_managemant.ui.list.MemberSearchRentTablePanel;
+
+@SuppressWarnings("serial")
 public class BookRent extends JFrame {
 
 	private JPanel contentPane;
-	// 테이블 로드 해주는 것들
-	private MemberSearchPanel pMemSearch;
+	
 	private BookInfoSearchPanel pBookSearch;
-	private MemberSearchTablePanel pMemInfo;
-	private BookInfoSearchTablePanel pBookInfo;
-
+	
+	
+	private MemberService memService = new MemberService();
+	
+	private MemberSearchRentTablePanel rentMemTable = new MemberSearchRentTablePanel();
+	private MemSearchRentPanel rentMemSearch;
+	private MemberInfoDetail memInfoDetail; // 이친구 받아오는 테이블
+	
+	
+	private BookInfoService bookService = new BookInfoService();
+	
+	private BookInfoSearchPanel rentBookSearch;
+	private BookInfoSearchTablePanel rentBookTable;
+	private MemberInfoDetail pMemDetail;
 	
 	public BookRent() {
 		initialize();
 	}
+	
+	
+	
+//	public void setMemSevice(MemberService memSevice) {
+//		this.memService = memSevice;
+//	}
+//
+//	public void setpBookInfo(BookInfoSearchTablePanel pBookInfo) {
+//		this.pBookInfo = pBookInfo;
+//	}
+
+
+	public MemberSearchRentTablePanel getRentMemTable() {
+		return rentMemTable;
+	}
+
+
+
+	public void setRentMemTable(MemberSearchRentTablePanel rentMemTable) {
+		this.rentMemTable = rentMemTable;
+	}
+
+
+
 	private void initialize() {
 		setTitle("대여하기");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -43,24 +80,36 @@ public class BookRent extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(new BorderLayout(0, 0));
 		
-		MemberSearchPanel panel_5 = new MemberSearchPanel();
-		panel.add(panel_5, BorderLayout.NORTH);
+		rentMemSearch = new MemSearchRentPanel();
+		panel.add(rentMemSearch, BorderLayout.NORTH);
 		
-		MemberSearchTablePanel panel_7 = new MemberSearchTablePanel();
-		panel.add(panel_7, BorderLayout.CENTER);
+		rentMemTable = new MemberSearchRentTablePanel();
+		rentMemTable.setService(memService);
+		rentMemTable.loadData();
+		panel.add(rentMemTable, BorderLayout.CENTER);
 		
-		MemberInfoDetail panel_1 = new MemberInfoDetail();
-		contentPane.add(panel_1);
+		rentMemSearch.setMsrtp(rentMemTable);
+		
+		// 디테일 패널에 글귀 들어오게 하기.
+		pMemDetail = new MemberInfoDetail(); // 멤버 디테일 테이블
+//		pMemDetail.getMsrtp();
+//		rentMemTable.setMemDetail(memInfoDetail);// rentReturn테이블에다가
+//		pMemDetail.setMemService(memService);
+		contentPane.add(pMemDetail);
 		
 		JPanel panel_2 = new JPanel();
 		contentPane.add(panel_2);
 		panel_2.setLayout(new BorderLayout(0, 0));
 		
-		BookInfoSearchPanel panel_6 = new BookInfoSearchPanel();
-		panel_2.add(panel_6, BorderLayout.NORTH);
+		rentBookSearch = new BookInfoSearchPanel();
+		panel_2.add(rentBookSearch, BorderLayout.NORTH);
 		
-		BookInfoSearchTablePanel panel_8 = new BookInfoSearchTablePanel();
-		panel_2.add(panel_8, BorderLayout.CENTER);
+		rentBookTable = new BookInfoSearchTablePanel();
+		rentBookTable.setService(bookService);
+		rentBookTable.loadData();
+		panel_2.add(rentBookTable, BorderLayout.CENTER);
+		
+		rentBookSearch.setBistp(rentBookTable);
 		
 		BookInfoDetail panel_3 = new BookInfoDetail();
 		contentPane.add(panel_3);
@@ -77,5 +126,4 @@ public class BookRent extends JFrame {
 		btnCansle.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_4.add(btnCansle);
 	}
-
 }

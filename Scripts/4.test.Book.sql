@@ -23,15 +23,7 @@ select bookNum, bookName, r1.bookRent, r1.bookOver from book_info b1 join rent_r
 select * from member_info;
 
 alter table member_info change column `year` births datetime;
--- 
-select memberNo, name, births, homeNo, phoneNo, adress from member_info;
+-- 수정한 테이블들 
 
-select memberNo, name, homeNo, phoneNo from member_info;
-
-select memberNo, name, homeNo, phoneNo from member_info where memberNo like '%' or name like '김%%';
-
-
-select memberNo, name, homeNo, phoneNo from member_info where name like '김%%';
-select memberNo, name, homeNo, phoneNo from member_info where name like '김%%';
-
+select * from rent_return r join book_info b on r.rentNo1 = b.bookNum;
 

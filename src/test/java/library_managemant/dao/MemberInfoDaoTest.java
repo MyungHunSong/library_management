@@ -50,5 +50,5 @@ public class MemberInfoDaoTest {
 		System.out.println(list);
 		
 	}
-
+	
 }

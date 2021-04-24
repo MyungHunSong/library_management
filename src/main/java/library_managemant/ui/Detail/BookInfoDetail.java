@@ -1,4 +1,4 @@
-package library_managemant.ui.content;
+package library_managemant.ui.Detail;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
