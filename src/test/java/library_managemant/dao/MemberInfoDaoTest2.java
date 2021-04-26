@@ -1,10 +1,6 @@
 package library_managemant.dao;
 
-import static org.junit.Assert.*;
-
 import java.sql.Connection;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;

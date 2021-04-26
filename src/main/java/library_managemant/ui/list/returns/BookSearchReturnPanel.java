@@ -1,4 +1,4 @@
-package library_managemant.ui.content;
+package library_managemant.ui.list.returns;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -7,25 +7,20 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.xml.soap.Text;
 
 import library_managemant.dto.BookInfo;
-import library_managemant.service.BookInfoService;
-import library_managemant.service.MemberService;
-import library_managemant.ui.list.BookInfoSearchTablePanel;
 
 @SuppressWarnings("serial")
-public class BookInfoSearchPanel extends JPanel implements ActionListener {
-	private BookInfoSearchTablePanel bistp = new BookInfoSearchTablePanel();	
-	private BookInfoService service = new BookInfoService();
+public class BookSearchReturnPanel extends JPanel implements ActionListener{
+	private BookSearchReturnTablePanel bistp;
 	
-	public void setBistp(BookInfoSearchTablePanel bistp) {
+	
+
+	public void setBistp(BookSearchReturnTablePanel bistp) {
 		this.bistp = bistp;
 	}
-	
 	private JTextField tfSearch;
 	private JComboBox cmb1;
 	private JButton btnSearch;
@@ -34,9 +29,9 @@ public class BookInfoSearchPanel extends JPanel implements ActionListener {
 	private String[] bookInfo = {"도서번호"};
 	
 
-	public BookInfoSearchPanel() {
+	public BookSearchReturnPanel() {
 		initialize();
-		bistp = new BookInfoSearchTablePanel();
+		bistp = new BookSearchReturnTablePanel();
 		addBookCmb1Search();
 		cmb1.setSelectedIndex(-1);
 	}
@@ -105,4 +100,5 @@ public class BookInfoSearchPanel extends JPanel implements ActionListener {
 		}
 		
 	}
+
 }

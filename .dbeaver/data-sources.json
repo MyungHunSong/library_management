@@ -35,6 +35,20 @@
 			}
 		}
 	},
+	"virtual-models": {
+		"mysql5-1785987e5f6-469588f568c958e1": {
+			"information_schema": {
+				":COLUMNS": {
+					"constraints": {
+						"VIRTUAL_PK": {
+							"type": "vpk",
+							"useAllColumns": true
+						}
+					}
+				}
+			}
+		}
+	},
 	"connection-types": {
 		"dev": {
 			"name": "Development",

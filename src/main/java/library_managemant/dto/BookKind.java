@@ -2,22 +2,23 @@ package library_managemant.dto;
 
 public class BookKind {
 	private int bookKind;
-	private String bookTitle;
+	private String kindTitle;
 	
 	
 	
 	
-	public BookKind(int bookKind) {
-		
-		this.bookKind = bookKind;
+	public BookKind(String kindTitle) {
+		this.kindTitle = kindTitle;
 	}
 
-
-	public BookKind(int bookKind, String bookTitle) {
+	public BookKind(int bookKind) {	
 		this.bookKind = bookKind;
-		this.bookTitle = bookTitle;
 	}
-
+	
+	public BookKind(int bookKind, String kindTitle) {
+		this.bookKind = bookKind;
+		this.kindTitle = kindTitle;
+	}
 
 	public int getBookKind() {
 		return bookKind;
@@ -29,19 +30,19 @@ public class BookKind {
 	}
 
 
-	public String getBookTitle() {
-		return bookTitle;
+	public String getKindTitle() {
+		return kindTitle;
 	}
 
 
-	public void setBookTitle(String bookTitle) {
-		this.bookTitle = bookTitle;
+	public void setKindTitle(String kindTitle) {
+		this.kindTitle = kindTitle;
 	}
 
 
 	@Override
 	public String toString() {
-		return "BookKind [책종류 번호=" + bookKind + ", 책종류 =" + bookTitle +"]";
+		return "BookKind [책종류 번호=" + bookKind + ", 책종류 =" + kindTitle +"]";
 	}
 
 }

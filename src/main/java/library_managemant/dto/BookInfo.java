@@ -5,7 +5,9 @@ public class BookInfo {
 	private int bookNum;
 	private String bookName;
 	private String bookCan;
+	
 	private BookKind bookKind;
+	
 	private RentReturn rentReturn;
 	
 
@@ -22,6 +24,7 @@ public class BookInfo {
 		this.bookNum = bookNum;
 		this.bookName = bookName;
 	}
+	
 
 	public BookInfo(int bookNum, String bookName, RentReturn rentReturn) {
 		this.bookNum = bookNum;
@@ -40,11 +43,12 @@ public class BookInfo {
 
 	
 	// 1.도서번호 2.도서제목 3.도서구분
-	public BookInfo(int bookNum, String bookName, BookKind bookKind) {
+	public BookInfo(int bookNum, String bookName, BookKind bookKind, String bookCan) {
 		
 		this.bookNum = bookNum;
 		this.bookName = bookName;
 		this.bookKind = bookKind;
+		this.bookCan = bookCan;
 	}
 
 

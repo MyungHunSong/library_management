@@ -25,13 +25,14 @@ public class RentReturnDaoImpl implements RentReturnDao {
 
 	@Override
 	public List<RentReturn> selectRentReturnByMem(RentReturn rentReturn) {
-		String sql = "select m.memberNo, b.bookNum, b.bookName, r.bookRent, r.bookOver"
-				+ " from rent_return r join member_info m on r.memberNo1 = m.memberNo"
-				+ " join book_info b on b.rentNo =r.rentNo1 where m.memberNo = ?";
+		String sql = "select r.memberNo,r.bookNum1,b.bookName, r.bookRent, r.bookOver \r\n" + 
+				"from rent_return r join member_info m on r.memberNo = m.memberNo\r\n" + 
+				"join book_info b on r.bookNum1 =b.bookNum\r\n" + 
+				"where m.memberNo = ifnull(?,0)";
 
 		try (PreparedStatement pstmt = con.prepareStatement(sql);) {
 
-			pstmt.setInt(1, rentReturn.getMemberNo1().getMemberNo());
+			pstmt.setInt(1, rentReturn.getMemberNum());
 			try (ResultSet rs = pstmt.executeQuery();) {
 				if (rs.next()) {
 					List<RentReturn> list = new ArrayList<>();
@@ -40,7 +41,6 @@ public class RentReturnDaoImpl implements RentReturnDao {
 					}while(rs.next());
 					return list;
 				}
-
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -49,30 +49,18 @@ public class RentReturnDaoImpl implements RentReturnDao {
 	}
 
 	private RentReturn getRentReturn(ResultSet rs) throws SQLException{
-		int memberNo1 = 0;
-		BookInfo rentNo1 = null;
+		int memberNum = 0;
+		int bookNum1 = 0;
+		BookInfo bookName = new BookInfo(rs.getString("b.bookName"));
 		Date bookRent = null;
 		int bookOver = 0;
-		memberNo1 = rs.getInt("memberNo");
-		rentNo1 = new BookInfo(rs.getInt("b.bookNum"));
-		rentNo1.setBookName(rs.getString("b.bookName"));
-//		try {
-//			memberNo1 = rs.getInt("memberNo");
-//			System.out.println(memberNo1);
-//		} catch (SQLException e) {}
-//
-//		try {
-//			rentNo1 = new BookInfo(rs.getInt("b.bookNum"));
-//
-//			rentNo1.setBookName(rs.getString("b.bookName"));
-//		} catch (SQLException e) {}
-
+		
+		memberNum = rs.getInt("r.memberNo");
+		bookNum1 = rs.getInt("r.bookNum1");
+		bookName.setBookName(rs.getString("b.bookName"));
 		bookRent = rs.getDate("r.bookRent");
 		bookOver = rs.getInt("r.bookOver");
-		return new RentReturn(
-				new MemberInfo(memberNo1),
-				new BookInfo(rentNo1.getBookNum(),rentNo1.getBookName()),
-				bookRent, bookOver);
+		return new RentReturn(memberNum, bookNum1, bookName, bookRent, bookOver);
 	}
 
 	@Override

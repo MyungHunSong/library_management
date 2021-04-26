@@ -107,5 +107,74 @@ public class BookInfoDaoImpl implements BookInfoDao {
 		String bookCan = rs.getString("bookCan");
 		return new BookInfo(bookNum, bookName, bookCan);
 	}
+	
+	// 책 상세정보
+	@Override
+	public BookInfo selectBookDetail(int bookNum) {
+		String sql = "select bi.bookName, "
+				+ "bi.bookNum, "
+				+ "bk.kindTitle, "
+				+ "bi.bookCan "
+				+ "from book_info bi join book_kind bk on bi.bookKind =bk.bookKind where bookNum=?";
+		try(Connection con = JdbcCon.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)){
+			pstmt.setInt(1, bookNum);
+			
+			try(ResultSet rs = pstmt.executeQuery();){
+				if(rs.next()) {
+					return getDetail(rs);
+				}
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 
+	private BookInfo getDetail(ResultSet rs) throws NumberFormatException, SQLException {
+		String bookName = rs.getString("bi.bookName");
+		int bookNum = Integer.parseInt(rs.getString("bi.bookNum"));
+		BookKind kindTitle = new BookKind(rs.getString("bk.kindTitle"));
+		String bookCan = rs.getString("bi.bookCan");
+		return new BookInfo(bookNum, bookName, kindTitle, bookCan);
+	}
+
+	@Override
+	public List<BookInfo> selectBookDetailBookCan(String bookCan) {
+		String sql = "select bookNum, bookName, bookCan from book_info where bookCan= ? ";
+		try (Connection con = JdbcCon.getConnection();) {
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, bookCan);
+			
+			ResultSet rs = pstmt.executeQuery();
+			{
+				if (rs.next()) {
+					List<BookInfo> list = new ArrayList<>();
+
+					do {
+						list.add(getDetails(rs));
+					} while (rs.next());
+					return list;
+				}
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	private BookInfo getDetails(ResultSet rs) throws NumberFormatException, SQLException {
+		int bookNum = Integer.parseInt(rs.getString("bookNum"));
+		String bookName = rs.getString("bookName");
+		String bookCan = rs.getString("bookCan");
+		return new BookInfo(bookNum, bookName, bookCan);
+	}
 }
+
+	
+
+

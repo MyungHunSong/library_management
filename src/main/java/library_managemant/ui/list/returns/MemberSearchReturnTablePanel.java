@@ -1,4 +1,4 @@
-package library_managemant.ui.list;
+package library_managemant.ui.list.returns;
 
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
@@ -7,34 +7,38 @@ import library_managemant.dto.MemberInfo;
 import library_managemant.service.MemberService;
 import library_managemant.ui.Detail.MemberInfoDetail;
 import library_managemant.ui.exception.NotSelectedException;
+import library_managemant.ui.list.AbstractCustomTablePanel;
+import library_managemant.ui.list.returns.detail.MemberInfoReturnDetail;
+
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
-public class MemberSearchRentTablePanel extends AbstractCustomTablePanel<MemberInfo> implements MouseListener{
-	private MemberInfoDetail memDetail;
+public class MemberSearchReturnTablePanel extends AbstractCustomTablePanel<MemberInfo> implements MouseListener{
+	private MemberInfoReturnDetail memDetail;
 	private MemberService service;
 	  
 	public void setService(MemberService service) {
 			this.service = service;
 		}
 	
-	public MemberInfoDetail getMemDetail() {
+	public MemberInfoReturnDetail getMemDetail() {
 		return memDetail;
 	}
 
-	public void setMemDetail(MemberInfoDetail memDetail) {
+	public void setMemReturnDetail(MemberInfoReturnDetail memDetail) {
 		this.memDetail = memDetail;
 	}
 	
-	public MemberSearchRentTablePanel() {
+	public MemberSearchReturnTablePanel() {
 		initialize();
 	}
 	private void initialize() {
 		table.addMouseListener(this);
+		
 	}
 	
-	public void loadDataRent(MemberInfo memInfo) {
+	public void loadDataReturn(MemberInfo memInfo) {
 		service = new MemberService();
 		list = service.selectLikeMeminfo(memInfo);
 		setList();
@@ -93,14 +97,13 @@ public class MemberSearchRentTablePanel extends AbstractCustomTablePanel<MemberI
 	public Object[] toArray(MemberInfo m) {
 		return new Object[]{m.getMemberNo(),m.getName(),m.getHomeNo(),m.getPhoneNo()};
 	}
-	
 
 	public void mouseClicked(MouseEvent arg0) {
 		if (arg0.getSource() == table) {
 			thisTableMouseClicked(arg0);
 		}
 	}
-	public void mouseEntered(MouseEvent arg0) {
+	public void mouseEntered(MouseEvent e) {
 	}
 	public void mouseExited(MouseEvent e) {
 	}
@@ -112,15 +115,10 @@ public class MemberSearchRentTablePanel extends AbstractCustomTablePanel<MemberI
 		}
 		
 		MemberInfo selectMemInfo = service.selectMemInfoDetail(memberNo);
-		System.out.println("selectMemInfo>>"+selectMemInfo);
-		
 		memDetail.setItem(selectMemInfo);
-		
-
 	}
 	public void mouseReleased(MouseEvent e) {
 	}
 	protected void thisTableMouseClicked(MouseEvent arg0) {
 	}
 }
-	

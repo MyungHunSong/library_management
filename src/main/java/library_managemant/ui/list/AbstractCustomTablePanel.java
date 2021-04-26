@@ -87,7 +87,7 @@ public abstract class AbstractCustomTablePanel<T> extends JPanel {
 		for(int i=0; i<data.length; i++) {
 			data[i] = toArray(list.get(i));
 		}
-		
+			
 			CustomTableModel model = new CustomTableModel(data, getColumnNames());
 			table.setModel(model);
 			
@@ -96,13 +96,6 @@ public abstract class AbstractCustomTablePanel<T> extends JPanel {
 			
 			setAlignAndWidth();
 	};
-
-	/**
-	 * 	//컬럼내용 정렬
-		setTableAlign(SwingConstants.CENTER, 0,1,2);
-		//컬럼별 너비조정
-		setTableCellWidth(100,250,100);
-	 */
 
 	protected void setTableCellWidth(int...width) {
 		TableColumnModel tcm = table.getColumnModel();
@@ -115,7 +108,6 @@ public abstract class AbstractCustomTablePanel<T> extends JPanel {
 	}
 	protected void setTableCellAlign(int align, int...idx) {		
 		TableColumnModel tcm = table.getColumnModel();
-		
 		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
 		dtcr.setHorizontalAlignment(align);
 		for(int i=0 ; i<idx.length;i++) {

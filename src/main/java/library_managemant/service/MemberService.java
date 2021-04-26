@@ -12,7 +12,6 @@ public class MemberService {
 	public MemberService() {
 		
 	}
-	
 	//상세 정보
 	public List<MemberInfo> showMemberInfoByAll(){
 		
@@ -26,5 +25,9 @@ public class MemberService {
 	// 원하는 조건으로 이름 검색하는법
 	public List<MemberInfo> selectLikeMeminfo(MemberInfo memberInfo) {
 		return memDao.selectMemberInfoByNo(memberInfo);
+	}
+	
+	public MemberInfo selectMemInfoDetail(int memInfo){
+		return memDao.selectMemberDetailByNo(memInfo);
 	}
 }

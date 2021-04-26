@@ -24,4 +24,13 @@ public class BookInfoService {
 		return bookDao.selectBookInfoBy(bookInfo);
 	}
 	
+	public BookInfo selectBookDetailByNo(int bookNum) {
+		return bookDao.selectBookDetail(bookNum);
+	}
+	
+	// 대출 가능한것들
+	public List<BookInfo> selectBookCan(String bookCan){
+		return bookDao.selectBookDetailBookCan(bookCan);
+	}
+	
 }

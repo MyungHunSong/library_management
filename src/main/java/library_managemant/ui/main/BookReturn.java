@@ -1,35 +1,52 @@
 package library_managemant.ui.main;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import library_managemant.ui.content.BookInfoSearchPanel;
-import library_managemant.ui.content.MemberSearchPanel;
-import library_managemant.ui.list.BookInfoSearchTablePanel;
-import library_managemant.ui.list.MemberSearchTablePanel;
+import library_managemant.service.BookInfoService;
+import library_managemant.service.MemberService;
+import library_managemant.ui.list.returns.BookSearchReturnPanel;
+import library_managemant.ui.list.returns.BookSearchReturnTablePanel;
+import library_managemant.ui.list.returns.MemberSearchReturnPanel;
+import library_managemant.ui.list.returns.MemberSearchReturnTablePanel;
+import library_managemant.ui.list.returns.detail.BookInfoReturnDetail;
+import library_managemant.ui.list.returns.detail.MemberInfoReturnDetail;
 
-import java.awt.GridLayout;
-import javax.swing.JButton;
-import java.awt.FlowLayout;
-import library_managemant.ui.content.BookInfoDetail;
-import library_managemant.ui.content.MemberInfoDetail;
-
+@SuppressWarnings("serial")
 public class BookReturn extends JFrame {
 
 	private JPanel contentPane;
 	
-	private MemberSearchPanel pMemSearch;
-	private MemberSearchTablePanel pMemInfo;
-	private BookInfoSearchPanel pBookSearch;
-	private BookInfoSearchTablePanel  pBookInfo;
+	private MemberSearchReturnPanel pMemSearch;
+	private MemberSearchReturnTablePanel returnMemInfo;
 	
+	private BookSearchReturnPanel returnBookSearch;
+	private BookSearchReturnTablePanel  returnBookInfo;
 	
+	private MemberService memService = new MemberService();
+	private BookInfoService bookService;
+	private MemberInfoReturnDetail pMemDetail;
+	private BookInfoReturnDetail pBookDetail;
 	
-
+	public MemberSearchReturnTablePanel getReturnMemInfo() {
+		return returnMemInfo;
+	}
+	public void setReturnMemInfo(MemberSearchReturnTablePanel returnMemInfo) {
+		this.returnMemInfo = returnMemInfo;
+	}
+	public BookSearchReturnTablePanel getReturnBookInfo() {
+		return returnBookInfo;
+	}
+	public void setReturnBookInfo(BookSearchReturnTablePanel returnBookInfo) {
+		this.returnBookInfo = returnBookInfo;
+	}
+	
 	
 	public BookReturn() {
 		initialize();
@@ -37,7 +54,7 @@ public class BookReturn extends JFrame {
 	private void initialize() {
 		setTitle("반납하기");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 813, 516);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -47,30 +64,41 @@ public class BookReturn extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(new BorderLayout(0, 0));
 		
-		pMemSearch = new MemberSearchPanel();
+		pMemSearch = new MemberSearchReturnPanel();
 		
 		panel.add(pMemSearch, BorderLayout.NORTH);
 		
-		pMemInfo = new MemberSearchTablePanel();
-		pMemInfo.loadData();
-		panel.add(pMemInfo, BorderLayout.CENTER);
+		// 회원반납목록
+		returnMemInfo = new MemberSearchReturnTablePanel();
+		returnMemInfo.setService(memService);
+		returnMemInfo.loadData();
+		panel.add(returnMemInfo, BorderLayout.CENTER);
 		
-		MemberInfoDetail panel_1 = new MemberInfoDetail();
-		contentPane.add(panel_1);
+		pMemSearch.setMstrpReturn(returnMemInfo);
+		
+		pMemDetail = new MemberInfoReturnDetail();
+		returnMemInfo.setMemReturnDetail(pMemDetail);
+		contentPane.add(pMemDetail);
 		
 		JPanel panel_2 = new JPanel();
 		contentPane.add(panel_2);
 		panel_2.setLayout(new BorderLayout(0, 0));
 		
-		pBookSearch = new BookInfoSearchPanel();
-		panel_2.add(pBookSearch, BorderLayout.NORTH);
+		returnBookSearch = new BookSearchReturnPanel();
+		panel_2.add(returnBookSearch, BorderLayout.NORTH);
 		
-		pBookInfo = new BookInfoSearchTablePanel();
-		pBookInfo.loadData();
-		panel_2.add(pBookInfo, BorderLayout.CENTER);
 		
-		BookInfoDetail panel_3 = new BookInfoDetail();
-		contentPane.add(panel_3);
+		// pBookReturnTable
+		returnBookInfo = new BookSearchReturnTablePanel();
+		returnBookInfo.setService(bookService);
+		returnBookInfo.loadData();
+		panel_2.add(returnBookInfo, BorderLayout.CENTER);
+		
+		returnBookSearch.setBistp(returnBookInfo);
+		
+		pBookDetail = new BookInfoReturnDetail();
+		returnBookInfo.setBookDetail(pBookDetail);
+		contentPane.add(pBookDetail);
 		
 		JPanel panel_4 = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panel_4.getLayout();

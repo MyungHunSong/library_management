@@ -1,30 +1,26 @@
-package library_managemant.ui.content;
+package library_managemant.ui.list.returns;
 
-import javax.swing.JPanel;
 import java.awt.GridLayout;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import library_managemant.dto.MemberInfo;
-import library_managemant.service.MemberService;
-import library_managemant.ui.list.MemberSearchRentTablePanel;
-import library_managemant.ui.list.returns.MemberSearchReturnTablePanel;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
-public class MemSearchRentPanel extends JPanel implements ActionListener {
-	//테이블 끌고오기
-	private MemberSearchRentTablePanel msrtp;
-	
-	public void setMsrtp(MemberSearchRentTablePanel msrtp) {
-		this.msrtp = msrtp;
+public class MemberSearchReturnPanel extends JPanel implements ActionListener {
+	private MemberSearchReturnTablePanel mstrpReturn;
+
+
+	public void setMstrpReturn(MemberSearchReturnTablePanel mstrpReturn) {
+		this.mstrpReturn = mstrpReturn;
 	}
-		
 	private JTextField tfSearch;
 	private JButton btnSearch;
 	
@@ -34,7 +30,7 @@ public class MemSearchRentPanel extends JPanel implements ActionListener {
 	
 	
 	
-	public MemSearchRentPanel() {
+	public MemberSearchReturnPanel() {
 		initialize();
 		addDateCmb1();
 		cmb1.setSelectedIndex(-1);
@@ -76,7 +72,7 @@ public class MemSearchRentPanel extends JPanel implements ActionListener {
 		}
 		
 	}catch (NullPointerException e) {
-		msrtp.loadData();
+		mstrpReturn.loadData();
 		
 	}
 	
@@ -86,17 +82,18 @@ public class MemSearchRentPanel extends JPanel implements ActionListener {
 		if(cmb1.getSelectedItem().equals("회원번호")) {
 			int memInt = Integer.parseInt(tfSearch.getText());
 			MemberInfo memInfo = new MemberInfo(memInt,"뭐고!");
-			System.out.println(msrtp);
-			msrtp.loadDataRent(memInfo);
+			System.out.println(mstrpReturn);
+			mstrpReturn.loadDataReturn(memInfo);
 			clearTf();
 			cmb1.setSelectedIndex(-1);
 		}else if(cmb1.getSelectedItem().equals("회원이름")) {
 			String memName = tfSearch.getText();
 			MemberInfo memInfo = null;
 			memInfo = new MemberInfo(99999, memName);
-			msrtp.loadDataRent(memInfo);
+			mstrpReturn.loadDataReturn(memInfo);
 			clearTf();
 		}
 		
 	}
+
 }

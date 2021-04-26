@@ -21,43 +21,53 @@ import library_managemant.dto.MemberInfo;
 import library_managemant.dto.RentReturn;
 import library_managemant.service.MemberService;
 import library_managemant.service.RentReturnService;
+import library_managemant.ui.Detail.MemberInfoDetail;
 import library_managemant.ui.exception.NotSelectedException;
+import library_managemant.ui.main.BookRent;
+
 
 @SuppressWarnings("serial")
-public class MemberSearchTablePanel extends JPanel implements MouseListener{
+public class MemberSearchTablePanel extends JPanel implements MouseListener {
 
-	
 	private List<MemberInfo> list;
 	private JTable table;
 	private JScrollPane scrollPane;
 	
+	private MemberInfoDetail memDetail;
+
 	private RentReturnService rService;
 	private RentReturnClickTablePanel rentTable;
-	
-	
-	
+
 	private MemberService service;
 	
+	public MemberInfoDetail getMemDetail() {
+		return memDetail;
+	}
+
+	public void setMemDetail(MemberInfoDetail memDetail) {
+		this.memDetail = memDetail;
+	}
+
 	public RentReturnClickTablePanel getRentT() {
 		return rentTable;
 	}
+	
+	// 리턴 클릭 테이블 패널을 받아옴
 	public void setRentTable(RentReturnClickTablePanel rentTable) {
 		this.rentTable = rentTable;
 	}
-
-
 
 	// 서비스를 놓아주고 요서비스를 쓰기위한것.
 	public void setrService(RentReturnService rService) {
 		this.rService = rService;
 	}
 
-	//RentReturnClickTablePanel 생성후, table에 마우스 리스너를 달아주는것
+	// RentReturnClickTablePanel 생성후, table에 마우스 리스너를 달아주는것
 	public MemberSearchTablePanel() {
 		initialize();
 		table.addMouseListener(this);
 	}
-	
+
 	//
 
 	// --- 묶어 ----
@@ -73,15 +83,13 @@ public class MemberSearchTablePanel extends JPanel implements MouseListener{
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table);
 	}
-	
-	
 
 	// 내부 클래스 선언해서 열을 작성시켜주는 방법.
 	class CustomTableModel extends DefaultTableModel {
 		public CustomTableModel(Object[][] data, Object[] columnNames) {
 			super(data, columnNames);
 		}
-		
+
 		public boolean isCellEditable(int row, int column) {
 			return false;
 		}
@@ -108,18 +116,18 @@ public class MemberSearchTablePanel extends JPanel implements MouseListener{
 		initList();
 		setList();
 	}
-	
+
 	public void loadData2(MemberInfo memInfo) {
 		service = new MemberService();
 		list = service.selectLikeMeminfo(memInfo);
 		setList();
 	}
-	
-	// 수정 불가 
+
+	// 수정 불가
 	public boolean isCellEditable(int row, int column) {
 		return false;
 	}
-	
+
 	public void initList() {
 		service = new MemberService();
 		list = service.showMemberInfoList();
@@ -140,6 +148,7 @@ public class MemberSearchTablePanel extends JPanel implements MouseListener{
 
 		setAlignAndWidth();
 	}
+
 	// MemberService 를 쓰기위해서 MemberService를 설정 해주는것.
 	public void setService(MemberService service) {
 		this.service = service;
@@ -152,11 +161,7 @@ public class MemberSearchTablePanel extends JPanel implements MouseListener{
 
 	// --- 위에 셋 리스트에 들어갈 목록들을 찝어주는것 ----
 	public MemberInfo getItem() {
-		int row = table.getSelectedRow();
-		int memberNo = (int) table.getValueAt(row, 0);
-		if (row == -1) {
-			throw new NotSelectedException();
-		}
+		int memberNo = getSelectIdx();
 		return list.get(list.indexOf(new MemberInfo(memberNo)));
 	}
 
@@ -182,49 +187,75 @@ public class MemberSearchTablePanel extends JPanel implements MouseListener{
 	// 컬럼 너비 조정.
 	private void setTableCellWidth(int... width) {
 		TableColumnModel tcm = table.getColumnModel();
-		
+
 		for (int i = 0; i < width.length; i++) {
 			tcm.getColumn(i).setPreferredWidth(width[i]);
 		}
 
 	}
-	
-	// 마우스 클릭시 뜨게하는기능
-	
-	
+
+
+
 	public void mouseClicked(MouseEvent arg0) {
-		if (arg0.getSource() == table) {
-			tableMouseClicked(arg0);
+		
+		if (arg0.getClickCount() == 2) {
+			mouseDoubleClickBookRent();
 		}
+		
 	}
+
+	private void mouseDoubleClickBookRent() {
+
+		try {
+			int memberNo = getSelectIdx();
+
+			rentTable.loadRentInfo(new RentReturn(memberNo));
+			rentTable.setList();
+
+		} catch (NullPointerException n) {
+			int memberNo = getSelectIdx();
+
+			BookRent frame = new BookRent();
+			MemberInfo selectMemInfo = service.selectMemInfoDetail(memberNo);
+			frame.getRentMemTable().getMemDetail().setItem(selectMemInfo);
+			frame.setVisible(true);
+		}
+
+	}
+	
 	public void mouseEntered(MouseEvent e) {
 	}
+
 	public void mouseExited(MouseEvent e) {
 	}
 	public void mousePressed(MouseEvent e) {
-		//눌럿다 땟을떄
-		if(e.getSource()==table) {
+		if (e.getSource() == table) {
 			mousePressedThisTable(e);
 		}
+		
+		
 	}
 	public void mouseReleased(MouseEvent e) {
 	}
 	protected void tableMouseClicked(MouseEvent arg0) {
+		
 	}
 	
-	//마우스를 눌럿다 땟을때 나오게하는법
 	private void mousePressedThisTable(MouseEvent e) {
+		int memberNo = getSelectIdx();
+		rentTable.loadRentInfo(new RentReturn(memberNo));
+		System.out.println(memberNo);
+		rentTable.setList();
+		rentTable.rentVisible();
+
+	}
+
+	private int getSelectIdx() {
 		int idx = table.getSelectedRow();
 		int memberNo = (int) table.getValueAt(idx, 0);
-		if(idx==-1) {
+		if (idx == -1) {
 			throw new NotSelectedException();
 		}
-			rService = new RentReturnService();
-			rentTable.loadRentInfo(new RentReturn(new MemberInfo(memberNo)));
-			if(rService != null) {
-				setVisible(true);
-			}
-			rentTable.setList();
+		return memberNo;
 	}
 }
-	
