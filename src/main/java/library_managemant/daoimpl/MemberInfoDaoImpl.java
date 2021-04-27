@@ -119,20 +119,13 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 
 	@Override
 	public MemberInfo selectMemberDetailByNo(int memInfo) {
-		String sql="select memberNo\r\n" + 
-				"	   ,name\r\n" + 
-				"	   ,births \r\n" + 
-				"	   ,homeNo\r\n" + 
-				"	   ,phoneNo\r\n" + 
-				"	   ,adress\r\n" + 
-				"from member_info\r\n" + 
-				"where memberNo = ?";
-		try(Connection con = JdbcCon.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(sql)){
+		String sql = "select memberNo\r\n" + "	   ,name\r\n" + "	   ,births \r\n" + "	   ,homeNo\r\n"
+				+ "	   ,phoneNo\r\n" + "	   ,adress\r\n" + "from member_info\r\n" + "where memberNo = ?";
+		try (Connection con = JdbcCon.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setInt(1, memInfo);
-			
-			try(ResultSet rs = pstmt.executeQuery()){
-				if(rs.next()) {
+
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
 					return getMemDetail(rs);
 				}
 			}
@@ -141,28 +134,24 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 		}
 		return null;
 	}
-	
+
 	private MemberInfo getMemDetail(ResultSet rs) throws NumberFormatException, SQLException {
 		int memberNo = Integer.parseInt(rs.getString("memberNo"));
 		String name = rs.getString("name");
 		Date births = rs.getDate("births");
 		String homeNo = rs.getString("homeNo");
 		String phoneNo = rs.getString("phoneNo");
-		String adress =rs.getString("adress");
+		String adress = rs.getString("adress");
 		return new MemberInfo(memberNo, name, births, homeNo, phoneNo, adress);
 	}
-
+	// 리스트로 회원 검색법
 	@Override
-	public List<MemberInfo> selectMemberDetailClick(int memNo, RentReturn rentReturn) {
-		String sql = "select m.memberNo, m.name,m.births, m.homeNo,m.phoneNo, m.adress\r\n" + 
-				"from member_info m join rent_return r on m.memberNo = r.memberNo\r\n" + 
-				"where m.memberNo like ? and r.bookNum1 like ?";
-		
+	public List<MemberInfo> selectMemberInfoByReturnD(MemberInfo memInfo) {
+		String sql = "select memberNo\r\n" + "	   ,name\r\n" + "	   ,births \r\n" + "	   ,homeNo\r\n"
+				+ "	   ,phoneNo\r\n" + "	   ,adress\r\n" + "from member_info\r\n" + "where memberNo = ?";
 		try (Connection con = JdbcCon.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
-
-			pstmt.setInt(1, rentReturn.getMemberNum());
-			pstmt.setInt(2, rentReturn.getBookNum1());
-
+			pstmt.setInt(1, memInfo.getMemberNo());
+			
 			try (ResultSet rs = pstmt.executeQuery()) {
 				if (rs.next()) {
 					List<MemberInfo> list = new ArrayList<>();
@@ -178,4 +167,60 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 		}
 		return null;
 	}
+
+//	@Override
+//	public MemberInfo selectMemberDetailReturn(String bookCan) {
+//		String sql = "select m.memberNo,m.name, m.births,m.homeNo,m.phoneNo \r\n" + 
+//				"from member_info m join rent_return r on m.memberNo = r.memberNo \r\n" + 
+//				"join book_info b on r.bookNum1 = b.bookNum\r\n" + 
+//				"where bookCan = ?";
+//		try (Connection con = JdbcCon.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+//			pstmt.setString(1, bookCan);
+//
+//			try (ResultSet rs = pstmt.executeQuery()) {
+//				if (rs.next()) {
+//					return getRentDetail(rs);
+//				}
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		return null;
+//	}	
+//	// 한번 해보는것
+	
+	private MemberInfo getRentDetail(ResultSet rs) throws NumberFormatException, SQLException {
+		int memberNo = Integer.parseInt(rs.getString("memberNo"));
+		String name = rs.getString("name");
+		Date births = rs.getDate("births");
+		String homeNo = rs.getString("homeNo");
+		String phoneNo = rs.getString("phoneNo");
+		String adress = rs.getString("adress");
+		return new MemberInfo(memberNo, name, births, homeNo, phoneNo, adress);
+	}
+
+	@Override
+	public MemberInfo selectMemberDetailReturn(int memInfo) {
+		String sql = "select memberNo " + 
+				"	   ,name " + 
+				"	   ,births " + 
+				"	   ,homeNo " + 
+				"	   ,phoneNo " + 
+				"	   ,adress " + 
+				" from member_info " + 
+				" where memberNo=? ";
+		try (Connection con = JdbcCon.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setInt(1, memInfo);
+
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					return getRentDetail(rs);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

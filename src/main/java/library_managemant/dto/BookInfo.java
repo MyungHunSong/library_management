@@ -5,11 +5,33 @@ public class BookInfo {
 	private int bookNum;
 	private String bookName;
 	private String bookCan;
-	
 	private BookKind bookKind;
 	
 	private RentReturn rentReturn;
 	
+	// bookInfoReturn 테이블에 넣을것
+	
+	
+	
+	
+	private MemberInfo memInfo;
+	
+	
+	public BookInfo(MemberInfo memInfo) {	
+		this.memInfo = memInfo;
+	}
+	
+	public MemberInfo getMemInfo() {
+		return memInfo;
+	}
+
+
+
+	public void setMemInfo(MemberInfo memInfo) {
+		this.memInfo = memInfo;
+	}
+
+
 
 	public BookInfo(int bookNum) {
 		this.bookNum = bookNum;

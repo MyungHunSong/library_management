@@ -18,7 +18,6 @@ public class BookSearchReturnTablePanel extends AbstractCustomTablePanel<BookInf
 	private BookInfoService service;
 	private BookInfoReturnDetail bookDetail;
 	
-
 	public void setBookDetail(BookInfoReturnDetail bookDetail) {
 		this.bookDetail = bookDetail;
 	}
@@ -27,6 +26,7 @@ public class BookSearchReturnTablePanel extends AbstractCustomTablePanel<BookInf
 		initialize();
 	}
 	private void initialize() {
+		setVisible(false);
 		table.addMouseListener(this);
 
 	}
@@ -36,6 +36,11 @@ public class BookSearchReturnTablePanel extends AbstractCustomTablePanel<BookInf
 			service = new BookInfoService();
 			list = service.selectBookInfoBy(bookInfo);
 			setList(); // 테이블 을 만드는기능 셀렉No할때 써줘야한다.
+		}
+		
+		public void loadBookReturnTable(int memNum) {
+			service = new BookInfoService();
+			 
 		}
 
 		// 이거 로드나오게 할려면 필수다
@@ -60,14 +65,14 @@ public class BookSearchReturnTablePanel extends AbstractCustomTablePanel<BookInf
 
 		@Override
 		public void initList() {
-			service = new BookInfoService();
+			service = new BookInfoService();			
 			String bookCan = "대출불가";
 			list = service.selectBookCan(bookCan);
 		}
 
 		@Override
 		public String[] getColumnNames() {
-			return new String[] { "도서번호", "도서제목", "대출여부" };
+			return new String[] { "도서번호", "도서제목", "도서연체일","도서대여일" };
 		}
 
 		@Override
@@ -106,6 +111,8 @@ public class BookSearchReturnTablePanel extends AbstractCustomTablePanel<BookInf
 		
 		BookInfo selectBookInfo = service.selectBookDetailByNo(bookNum);
 		bookDetail.setItem(selectBookInfo);
+		
+		
 	}
 	public void mouseReleased(MouseEvent e) {
 	}

@@ -20,6 +20,7 @@ import javax.swing.table.TableRowSorter;
 import library_managemant.dto.MemberInfo;
 import library_managemant.dto.RentReturn;
 import library_managemant.service.MemberService;
+import library_managemant.service.RentReturnService;
 import library_managemant.ui.Detail.MemberInfoDetail;
 import library_managemant.ui.exception.NotSelectedException;
 import library_managemant.ui.main.BookRent;
@@ -33,7 +34,6 @@ public class MemberSearchTablePanel extends JPanel implements MouseListener {
 	private JScrollPane scrollPane;
 	
 	private MemberInfoDetail memDetail;
-
 	private RentReturnClickTablePanel rentTable;
 
 	private MemberService service;
@@ -199,7 +199,12 @@ public class MemberSearchTablePanel extends JPanel implements MouseListener {
 	private void mouseDoubleClickBookRent() {
 
 		try {
-			rentTable.setList();
+			
+		int memberNo = getSelectIdx();
+		rentTable.loadRentInfo(new RentReturn(memberNo));
+//		rentTable.loadRentInfo(new RentReturn(memberNo));
+		rentTable.setList();
+		
 		} catch (NullPointerException n) {
 			
 			int memberNo = getSelectIdx();	
@@ -232,8 +237,11 @@ public class MemberSearchTablePanel extends JPanel implements MouseListener {
 	
 	private void mousePressedThisTable(MouseEvent e) {
 		int memberNo = getSelectIdx();
+		
 		rentTable.loadRentInfo(new RentReturn(memberNo));
-		System.out.println(memberNo);
+		System.out.println("MemberSearchTablePanel MEMBERNO >> " +  memberNo);
+		rentTable.setList();
+		rentTable.rentVisible();
 		
 		try {
 			rentTable.setList();

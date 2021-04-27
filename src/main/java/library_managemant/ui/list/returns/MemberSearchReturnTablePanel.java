@@ -1,23 +1,38 @@
 package library_managemant.ui.list.returns;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.List;
+
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
+import library_managemant.dto.BookInfo;
 import library_managemant.dto.MemberInfo;
+import library_managemant.dto.RentReturn;
+import library_managemant.service.BookInfoService;
 import library_managemant.service.MemberService;
-import library_managemant.ui.Detail.MemberInfoDetail;
 import library_managemant.ui.exception.NotSelectedException;
 import library_managemant.ui.list.AbstractCustomTablePanel;
 import library_managemant.ui.list.returns.detail.MemberInfoReturnDetail;
-
-import java.awt.event.MouseListener;
-import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
 public class MemberSearchReturnTablePanel extends AbstractCustomTablePanel<MemberInfo> implements MouseListener{
 	private MemberInfoReturnDetail memDetail;
 	private MemberService service;
-	  
+	
+	private BookInfoService bookService;
+	private BookSearchReturnTablePanel bsrt;
+	
+// 4/27 고칠곳
+//	private List<BookInfo> list;
+//	
+//	public void loadReturnTable(BookInfo bookInfo) {
+//		bookService = new BookInfoService(); 
+//		int bList = bookInfo.getMemInfo().getMemberNo();
+//		list = bookService.selectBookRentTable(bList);
+//	}
+
 	public void setService(MemberService service) {
 			this.service = service;
 		}
@@ -34,8 +49,13 @@ public class MemberSearchReturnTablePanel extends AbstractCustomTablePanel<Membe
 		initialize();
 	}
 	private void initialize() {
-		table.addMouseListener(this);
-		
+		table.addMouseListener(this);	
+	}
+	
+	// 클릭시 이게 나와야한다.
+	public void loadDateReturnDetail(int memNo) {
+//		bookService = new BookInfoService();
+		setList();
 	}
 	
 	public void loadDataReturn(MemberInfo memInfo) {
@@ -113,9 +133,15 @@ public class MemberSearchReturnTablePanel extends AbstractCustomTablePanel<Membe
 		if(idx == -1) {
 			throw new NotSelectedException();
 		}
-		
+		// 애가 detail 에 이름 뛰워주는 친구
 		MemberInfo selectMemInfo = service.selectMemInfoDetail(memberNo);
 		memDetail.setItem(selectMemInfo);
+		
+//		List<BookInfo> selectReturnTable = bookService.selectBookRentTable(new MemberInfo(memberNo));
+//		setItem(rentBookInfo.get(0));
+		
+		
+		
 	}
 	public void mouseReleased(MouseEvent e) {
 	}

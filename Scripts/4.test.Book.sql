@@ -41,8 +41,21 @@ case when bookCan = '대출가능' then 1
 	end
 from book_info;
 
+-- 1.
+-- Return(반납)의 메인 기능중하나.
+
+select
+	rentNo, memberNo, bookNum1 , book
+from rent_return where rentNo;
+
+-- 안대노
+select m.memberNo, name,births, homeNo, phoneNo,adress 
+from member_info m join rent_return r on m.memberNo =r.memberNo
+where m.memberNo= 12001;
+
+select m.memberNo,name,births, homeNo, phoneNo,adress 
+from member_info m join rent_return r on m.memberNo =r.memberNo
+where rentNo = 1;
 
 
 
-
- 

@@ -5,30 +5,36 @@ import java.util.Date;
 public class MemberInfo {
 	private int memberNo;
 	private String name;
-	
 	private Date births;
-	
 	private String homeNo;
 	private String phoneNo;
 	private String adress;
 	
-	//요것은 요것이다. 가즈아~!
-	
-	public MemberInfo(int memberNo) {
-		this.memberNo = memberNo;
+	// 이거 한번 넣어줘보자.
+	private BookInfo bookCan;
+
+	public BookInfo getBookCan() {
+		return bookCan;
+	}
+
+	public void setBookCan(BookInfo bookCan) {
+		this.bookCan = bookCan;
 	}
 	
 	
 
+	public MemberInfo(int memberNo, RentReturn bookNum1) {
+		this.memberNo = memberNo;
+	}
+
+	public MemberInfo(int memberNo) {
+		this.memberNo = memberNo;
+	}
 
 	public MemberInfo(int memberNo, String name) {
 		this.memberNo = memberNo;
 		this.name = name;
 	}
-
-
-
-
 	public MemberInfo(int memberNo, String name, String homeNo, String phoneNo) {
 		super();
 		this.memberNo = memberNo;
@@ -36,9 +42,6 @@ public class MemberInfo {
 		this.homeNo = homeNo;
 		this.phoneNo = phoneNo;
 	}
-	
-	
-
 
 	public MemberInfo(String name, Date births, String homeNo, String phoneNo, String adress) {
 		this.name = name;
@@ -47,10 +50,6 @@ public class MemberInfo {
 		this.phoneNo = phoneNo;
 		this.adress = adress;
 	}
-
-
-
-
 	public MemberInfo(int memberNo, String name, Date births, String homeNo, String phoneNo, String adress) {
 		super();
 		this.memberNo = memberNo;
@@ -60,23 +59,14 @@ public class MemberInfo {
 		this.phoneNo = phoneNo;
 		this.adress = adress;
 	}
-
 	
-	
-
 	public Date getBirths() {
 		return births;
 	}
 
-
-
-
 	public void setBirths(Date births) {
 		this.births = births;
 	}
-
-
-
 
 	public int getMemberNo() {
 		return memberNo;

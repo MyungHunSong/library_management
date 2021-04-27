@@ -3,6 +3,7 @@ package library_managemant.dao;
 import java.util.List;
 
 import library_managemant.dto.BookInfo;
+import library_managemant.dto.MemberInfo;
 import library_managemant.dto.RentReturn;
 
 public interface BookInfoDao {
@@ -16,6 +17,9 @@ public interface BookInfoDao {
 	
 	List<BookInfo> selectBookDetailBookCan(String bookCan);
 	
+	BookInfo selectBookReturnDetail(int memNo); //디테일에서 맴버 번호로 책빌린사람만 책을 뛰어주는것 pRentTable에 넣어주어라.
+	
+	List<BookInfo> selectBookReturnDetailTable(BookInfo memNo); // 테이블에 나타내 주는것
 	
 	//int insertBookInfo(BookInfo bookInfo);
 	//int updateBookInfo(BookInfo bookInfo);

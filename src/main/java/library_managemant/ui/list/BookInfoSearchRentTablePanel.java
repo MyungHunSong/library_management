@@ -27,7 +27,7 @@ public class BookInfoSearchRentTablePanel extends AbstractCustomTablePanel<BookI
 		table.addMouseListener(this);
 	}
 
-	// byNo 기능
+		// byNo 기능
 		public void loadBookInfo(BookInfo bookInfo) {
 			service = new BookInfoService();
 			list = service.selectBookInfoBy(bookInfo);

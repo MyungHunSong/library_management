@@ -5,29 +5,23 @@ import java.util.Date;
 public class RentReturn {
 	private int rentNo;
 	private int memberNum;
-	
 	private int bookNum1;
 	private BookInfo bookName;
-	
 	private Date bookRent;
 	private Date bookReturn;
 	private int bookOver;
 	
-	// 따로 멤버와 쓰기 위한것
-	private MemberInfo memNum;
 	
-	
-	
-	public RentReturn(int bookNum1, MemberInfo memNum) {
-		this.bookNum1 = bookNum1;
-		this.memNum = memNum;
-	}
-
-	public RentReturn(int memberNum) {
 		
+	public RentReturn(Date bookRent, int bookOver) {
+		this.bookRent = bookRent;
+		this.bookOver = bookOver;
+	}
+	public RentReturn(int memberNum) {	
 		this.memberNum = memberNum;
 	}
-		
+
+	
 	public RentReturn(int memberNum, int bookNum1) {
 		this.memberNum = memberNum;
 		this.bookNum1 = bookNum1;
@@ -51,7 +45,6 @@ public class RentReturn {
 		this.bookReturn = bookReturn;
 		this.bookOver = bookOver;
 	}
-	
 	
 	public int getRentNo() {
 		return rentNo;

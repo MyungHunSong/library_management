@@ -18,7 +18,6 @@ public class MemberSearchRentTablePanel extends AbstractCustomTablePanel<MemberI
 	public void setService(MemberService service) {
 			this.service = service;
 		}
-	
 	public MemberInfoDetail getMemDetail() {
 		return memDetail;
 	}
@@ -113,10 +112,7 @@ public class MemberSearchRentTablePanel extends AbstractCustomTablePanel<MemberI
 		
 		MemberInfo selectMemInfo = service.selectMemInfoDetail(memberNo);
 		System.out.println("selectMemInfo>>"+selectMemInfo);
-		
 		memDetail.setItem(selectMemInfo);
-		
-
 	}
 	public void mouseReleased(MouseEvent e) {
 	}

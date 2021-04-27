@@ -5,8 +5,6 @@ public class BookKind {
 	private String kindTitle;
 	
 	
-	
-	
 	public BookKind(String kindTitle) {
 		this.kindTitle = kindTitle;
 	}

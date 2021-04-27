@@ -11,6 +11,7 @@ import library_managemant.ui.list.returns.detail.MemberInfoReturnDetail;
 import library_managemant.ui.main.BookReturn;
 
 import java.awt.event.MouseListener;
+import java.util.List;
 import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
@@ -21,7 +22,7 @@ public class RentReturnClickTablePanel extends AbstractCustomTablePanel<RentRetu
 	
 	private MemberInfoReturnDetail memDetail;
 	
-	private MemberService memService;
+	private MemberService memService = new MemberService();
 	
 	
 	
@@ -114,12 +115,15 @@ public class RentReturnClickTablePanel extends AbstractCustomTablePanel<RentRetu
 	}
 	protected void thisTableMouseClicked(MouseEvent e) {
 		int memberNo = getSelectIdx();
-
 		BookReturn frame = new BookReturn();
-		System.out.println(memberNo);	
-//		MemberInfo selectMemInfo = memService.selectMemInfoDetail(memberNo);
-//		frame.getReturnMemInfo().getMemDetail().setItem(selectMemInfo);
+		MemberInfo memberInfo = memService.SelectReturnDetail(memberNo);
+		frame.getReturnMemInfo().getMemDetail().setItem(memberInfo);
 		frame.setVisible(true);
+
+		System.out.println("" + memberNo);
+		
+		
+	
 	}
 	
 	private int getSelectIdx() {

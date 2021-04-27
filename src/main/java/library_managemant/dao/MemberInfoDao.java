@@ -13,7 +13,10 @@ public interface MemberInfoDao {
 	
 	MemberInfo selectMemberDetailByNo(int memInfo);// 회원 번호로 검색 
 	
+	// 회원 번호로 검색 list로 받아오기.
+	List<MemberInfo> selectMemberInfoByReturnD(MemberInfo memInfo);
 	
-	List<MemberInfo> selectMemberDetailClick(int memNo, RentReturn rentReturn);
-	// 반납을 위한것.
+	MemberInfo selectMemberDetailReturn(int memInfo);
+	//MemberInfo selectMemberDetailReturn(String bookCan);
+	
 }

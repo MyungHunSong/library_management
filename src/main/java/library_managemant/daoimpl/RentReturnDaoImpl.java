@@ -73,4 +73,10 @@ public class RentReturnDaoImpl implements RentReturnDao {
 		return null;
 	}
 
+	@Override
+	public RentReturn selectRentInfoByRentNum(RentReturn rentReturn) {
+		
+		return null;
+	}
+
 }

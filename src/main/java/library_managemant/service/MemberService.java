@@ -30,4 +30,16 @@ public class MemberService {
 	public MemberInfo selectMemInfoDetail(int memInfo){
 		return memDao.selectMemberDetailByNo(memInfo);
 	}
+	
+	// returntable 대여한사람 검색법 (리스트로)
+	public List<MemberInfo> SelectRentNeedReturn(MemberInfo memInfo) {
+		return memDao.selectMemberInfoByReturnD(memInfo);
+	}
+ 
+	public MemberInfo SelectReturnDetail(int memInfo) {
+		return memDao.selectMemberDetailReturn(memInfo);
+		
+	}
+	
+	// 새로운 리턴 스트링 기능
 }

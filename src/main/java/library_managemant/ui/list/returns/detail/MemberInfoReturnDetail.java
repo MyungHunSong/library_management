@@ -207,5 +207,4 @@ public class MemberInfoReturnDetail extends JPanel {
 		tfDay.setText("");
 		tfAddress.setText("");
 	}
-
 }

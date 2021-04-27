@@ -151,24 +151,17 @@ select * from rent_return;
 select r.memberNo, r.bookNum1, b.bookName, r.bookRent, r.bookOver 
 from rent_return r join member_info m on r.memberNo = m.memberNo
 join book_info b on r.bookNum1 =b.bookNum
-where m.memberNo = ifnull(null,0);
+where m.memberNo = ifnull(12001,0);
 
 insert into member_info values(0, '정보없음','00000000','000-000-0000','000-0000-0000','없음');
 
 select * from rent_return;
 select * from member_info;
 
-select m.memberNo , m.name, m.homeNo, m.phoneNo 
-from rent_return r left outer join book_info b on r.bookNum1 = r.bookNum1  
-left outer join member_info m on r.memberNo = m.memberNo
-where b.bookCan ='대출불가';
-
-insert into
-
 -- 맞춰서 뜨게 해주기
 select m.memberNo, m.name,m.births, m.homeNo,m.phoneNo, m.adress
 from member_info m join rent_return r on m.memberNo = r.memberNo
-where r.memberNo like '%12%' and r.bookNum1 like '%40%';
+where m.memberNo like '%12%' and r.bookNum1 like '%40%';
 
 -- 날짜 비교.
 select bookReturn 
@@ -177,3 +170,16 @@ where rentNo = 1;
 
 select datediff(dd, bookRent , now()) as '날짜차이' from rent_return;
 
+-- 메인화면 하단 (clickTablePanel) 
+select memberNo
+	   ,name
+	   ,births 
+	   ,homeNo
+	   ,phoneNo
+	   ,adress
+from member_info
+where memberNo=12001;
+-- 그대로 쓰면 대겟는데?
+where memberNo,name,birth,homeNo,phoneNo,adress 
+from member_info
+where memberNo = 12001;
