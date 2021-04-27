@@ -1,8 +1,5 @@
 package library_managemant.ui.list;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
 import javax.swing.SwingConstants;
 
 import library_managemant.dto.MemberInfo;
@@ -10,9 +7,11 @@ import library_managemant.dto.RentReturn;
 import library_managemant.service.MemberService;
 import library_managemant.service.RentReturnService;
 import library_managemant.ui.exception.NotSelectedException;
-import library_managemant.ui.list.returns.MemberSearchReturnTablePanel;
 import library_managemant.ui.list.returns.detail.MemberInfoReturnDetail;
 import library_managemant.ui.main.BookReturn;
+
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
 public class RentReturnClickTablePanel extends AbstractCustomTablePanel<RentReturn> implements MouseListener{
@@ -43,8 +42,8 @@ public class RentReturnClickTablePanel extends AbstractCustomTablePanel<RentRetu
 	}
 	
 	private void initialize() {
-		table.addMouseListener(this);
 		table.setVisible(false);
+		table.addMouseListener(this);
 	}
 	public void rentVisible() {
 		table.setVisible(true);
@@ -99,37 +98,12 @@ public class RentReturnClickTablePanel extends AbstractCustomTablePanel<RentRetu
 				,r.getBookOver
 				(),r.getBookRent()};
 	}
-	public void mouseClicked(MouseEvent arg0) {
-		if (arg0.getClickCount() == 2) {
-			mouseDoubleClickBookRent();
+	
+	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == table) {
+			thisTableMouseClicked(e);
 		}
-		
 	}
-	
-	private void mouseDoubleClickBookRent() {
-		
-			int memberNo = getSelectIdx();
-
-			BookReturn frame = new BookReturn();
-			System.out.println(frame);
-			
-			MemberInfo selectMemInfo = memService.selectMemInfoDetail(memberNo);
-			frame.getReturnMemInfo().getMemDetail().setItem(selectMemInfo);
-			
-			frame.setVisible(true);
-		}
-
-	
-	
-	private int getSelectIdx() {
-		int idx = table.getSelectedRow();
-		int memberNo = (int) table.getValueAt(idx, 0);
-		if (idx == -1) {
-			throw new NotSelectedException();
-		}
-		return memberNo;
-	}
-	
 	public void mouseEntered(MouseEvent e) {
 	}
 	public void mouseExited(MouseEvent e) {
@@ -138,6 +112,22 @@ public class RentReturnClickTablePanel extends AbstractCustomTablePanel<RentRetu
 	}
 	public void mouseReleased(MouseEvent e) {
 	}
-	protected void thisTableMouseClicked(MouseEvent arg0) {
+	protected void thisTableMouseClicked(MouseEvent e) {
+		int memberNo = getSelectIdx();
+
+		BookReturn frame = new BookReturn();
+		System.out.println(memberNo);	
+//		MemberInfo selectMemInfo = memService.selectMemInfoDetail(memberNo);
+//		frame.getReturnMemInfo().getMemDetail().setItem(selectMemInfo);
+		frame.setVisible(true);
+	}
+	
+	private int getSelectIdx() {
+		int idx = table.getSelectedRow();
+		int memberNo = (int) table.getValueAt(idx, 0);
+		if (idx == -1) {
+			throw new NotSelectedException();
+		}
+		return memberNo;
 	}
 }

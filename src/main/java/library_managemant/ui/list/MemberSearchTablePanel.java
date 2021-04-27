@@ -20,7 +20,6 @@ import javax.swing.table.TableRowSorter;
 import library_managemant.dto.MemberInfo;
 import library_managemant.dto.RentReturn;
 import library_managemant.service.MemberService;
-import library_managemant.service.RentReturnService;
 import library_managemant.ui.Detail.MemberInfoDetail;
 import library_managemant.ui.exception.NotSelectedException;
 import library_managemant.ui.main.BookRent;
@@ -35,7 +34,6 @@ public class MemberSearchTablePanel extends JPanel implements MouseListener {
 	
 	private MemberInfoDetail memDetail;
 
-	private RentReturnService rService;
 	private RentReturnClickTablePanel rentTable;
 
 	private MemberService service;
@@ -57,18 +55,13 @@ public class MemberSearchTablePanel extends JPanel implements MouseListener {
 		this.rentTable = rentTable;
 	}
 
-	// 서비스를 놓아주고 요서비스를 쓰기위한것.
-	public void setrService(RentReturnService rService) {
-		this.rService = rService;
-	}
 
-	// RentReturnClickTablePanel 생성후, table에 마우스 리스너를 달아주는것
+
+	//RentReturnClickTablePanel 생성후, table에 마우스 리스너를 달아주는것
 	public MemberSearchTablePanel() {
 		initialize();
 		table.addMouseListener(this);
 	}
-
-	//
 
 	// --- 묶어 ----
 	private void initialize() {
@@ -197,8 +190,7 @@ public class MemberSearchTablePanel extends JPanel implements MouseListener {
 
 
 	public void mouseClicked(MouseEvent arg0) {
-		
-		if (arg0.getClickCount() == 2) {
+		if (arg0.getClickCount() == 3) {
 			mouseDoubleClickBookRent();
 		}
 		
@@ -207,14 +199,10 @@ public class MemberSearchTablePanel extends JPanel implements MouseListener {
 	private void mouseDoubleClickBookRent() {
 
 		try {
-			int memberNo = getSelectIdx();
-
-			rentTable.loadRentInfo(new RentReturn(memberNo));
 			rentTable.setList();
-
 		} catch (NullPointerException n) {
-			int memberNo = getSelectIdx();
-
+			
+			int memberNo = getSelectIdx();	
 			BookRent frame = new BookRent();
 			MemberInfo selectMemInfo = service.selectMemInfoDetail(memberNo);
 			frame.getRentMemTable().getMemDetail().setItem(selectMemInfo);
@@ -222,20 +210,21 @@ public class MemberSearchTablePanel extends JPanel implements MouseListener {
 		}
 
 	}
-	
 	public void mouseEntered(MouseEvent e) {
 	}
 
 	public void mouseExited(MouseEvent e) {
 	}
 	public void mousePressed(MouseEvent e) {
-		if (e.getSource() == table) {
-			mousePressedThisTable(e);
-		}
+		
 		
 		
 	}
 	public void mouseReleased(MouseEvent e) {
+		if (e.getSource() == table) {
+			mousePressedThisTable(e);
+		}
+		
 	}
 	protected void tableMouseClicked(MouseEvent arg0) {
 		
@@ -245,8 +234,15 @@ public class MemberSearchTablePanel extends JPanel implements MouseListener {
 		int memberNo = getSelectIdx();
 		rentTable.loadRentInfo(new RentReturn(memberNo));
 		System.out.println(memberNo);
-		rentTable.setList();
-		rentTable.rentVisible();
+		
+		try {
+			rentTable.setList();
+		}catch (NullPointerException n) {
+			System.out.println(1);
+		
+		}finally {
+			rentTable.rentVisible();
+		}
 
 	}
 

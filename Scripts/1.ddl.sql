@@ -15,13 +15,6 @@ CREATE TABLE library_managemant.member_info (
 )
 COMMENT '회원정보';
 
--- 회원정보
--- ALTER TABLE library_managemant.member_info
--- 	ADD CONSTRAINT PK_member_info -- 회원정보 기본키
--- 		PRIMARY KEY (
--- 			memberNo -- 회원번호
--- 		);
-
 -- 도서정보
 CREATE TABLE library_managemant.book_info (
 	bookNum  INT(11)     NOT NULL COMMENT '도서번호', -- 도서번호
@@ -38,7 +31,6 @@ ALTER TABLE library_managemant.book_info
 			bookNum -- 도서번호
 		);
 	
-
 -- 대출/반납
 CREATE TABLE library_managemant.rent_return (
 	rentNo  INT      NOT null primary key auto_increment  COMMENT 'rentNo', -- rentNo
@@ -60,7 +52,6 @@ ALTER TABLE library_managemant.rent_return
 		REFERENCES library_managemant.book_info ( -- 도서정보
 			bookNum -- 도서번호
 		);
-
 
 -- 도서구분 
 CREATE TABLE library_managemant.book_kind (

@@ -65,7 +65,11 @@ public class RentReturnDaoImpl implements RentReturnDao {
 
 	@Override
 	public List<RentReturn> selectRentReturnByAll() {
-		String sql = "";
+		return null;
+	}
+
+	@Override
+	public List<MemberInfo> selectMemberDetailClick(int memberNo, RentReturn returnRent) {
 		return null;
 	}
 

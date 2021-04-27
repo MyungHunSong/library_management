@@ -105,6 +105,7 @@ public class MemberInfoReturnDetail extends JPanel {
 		panel1_1.add(lblName);
 
 		tfName = new JTextField();
+		tfName.setEditable(false);
 		panel1_1.add(tfName);
 		tfName.setColumns(5);
 
@@ -117,6 +118,7 @@ public class MemberInfoReturnDetail extends JPanel {
 		panel1_2.add(lblBirths);
 
 		tflYear = new JTextField();
+		tflYear.setEditable(false);
 		panel1_2.add(tflYear);
 		tflYear.setColumns(4);
 
@@ -125,6 +127,7 @@ public class MemberInfoReturnDetail extends JPanel {
 		panel1_2.add(lblYear);
 
 		tfMonth = new JTextField();
+		tfMonth.setEditable(false);
 		tfMonth.setColumns(2);
 		panel1_2.add(tfMonth);
 
@@ -133,6 +136,7 @@ public class MemberInfoReturnDetail extends JPanel {
 		panel1_2.add(lblMonth);
 
 		tfDay = new JTextField();
+		tfDay.setEditable(false);
 		tfDay.setColumns(2);
 		panel1_2.add(tfDay);
 
@@ -149,6 +153,7 @@ public class MemberInfoReturnDetail extends JPanel {
 		panel1_3.add(lblAddress);
 
 		tfAddress = new JTextField();
+		tfAddress.setEditable(false);
 		tfAddress.setColumns(12);
 		panel1_3.add(tfAddress);
 
@@ -168,6 +173,7 @@ public class MemberInfoReturnDetail extends JPanel {
 		panel2_2.add(lblNewLabel);
 
 		tfHomeNo = new JTextField();
+		tfHomeNo.setEditable(false);
 		panel2_2.add(tfHomeNo);
 		tfHomeNo.setColumns(10);
 
@@ -176,6 +182,7 @@ public class MemberInfoReturnDetail extends JPanel {
 		panel2_2.add(lblNewLabel_1);
 
 		tfPhoneNo = new JTextField();
+		tfPhoneNo.setEditable(false);
 		panel2_2.add(tfPhoneNo);
 		tfPhoneNo.setColumns(10);
 	}

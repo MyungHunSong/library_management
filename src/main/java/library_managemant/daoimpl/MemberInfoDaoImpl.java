@@ -10,6 +10,7 @@ import java.util.List;
 
 import library_managemant.dao.MemberInfoDao;
 import library_managemant.dto.MemberInfo;
+import library_managemant.dto.RentReturn;
 import library_managemant.libdb.JdbcCon;
 
 public class MemberInfoDaoImpl implements MemberInfoDao {
@@ -151,5 +152,30 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 		return new MemberInfo(memberNo, name, births, homeNo, phoneNo, adress);
 	}
 
+	@Override
+	public List<MemberInfo> selectMemberDetailClick(int memNo, RentReturn rentReturn) {
+		String sql = "select m.memberNo, m.name,m.births, m.homeNo,m.phoneNo, m.adress\r\n" + 
+				"from member_info m join rent_return r on m.memberNo = r.memberNo\r\n" + 
+				"where m.memberNo like ? and r.bookNum1 like ?";
+		
+		try (Connection con = JdbcCon.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
 
+			pstmt.setInt(1, rentReturn.getMemberNum());
+			pstmt.setInt(2, rentReturn.getBookNum1());
+
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					List<MemberInfo> list = new ArrayList<>();
+
+					do {
+						list.add(getMemSearch(rs));
+					} while (rs.next());
+					return list;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

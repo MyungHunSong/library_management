@@ -25,9 +25,6 @@ select name
 select bookNum, bookName, bookCan, bookkind
 	from book_info;
 
-
-
-
 -- 4 연체일자
 select bookto_days(now()) - now(date) then > 3; 
 	from rent_return;
@@ -168,5 +165,15 @@ where b.bookCan ='대출불가';
 
 insert into
 
+-- 맞춰서 뜨게 해주기
+select m.memberNo, m.name,m.births, m.homeNo,m.phoneNo, m.adress
+from member_info m join rent_return r on m.memberNo = r.memberNo
+where r.memberNo like '%12%' and r.bookNum1 like '%40%';
 
+-- 날짜 비교.
+select bookReturn 
+from rent_return
+where rentNo = 1;
+
+select datediff(dd, bookRent , now()) as '날짜차이' from rent_return;
 

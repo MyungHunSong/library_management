@@ -8,9 +8,9 @@ import library_managemant.dto.MemberInfo;
 
 public class MemberService {
 	private MemberInfoDao memDao = MemberInfoDaoImpl.getInstance();
-
-	public MemberService() {
-		
+	
+	
+	public MemberService() {	
 	}
 	//상세 정보
 	public List<MemberInfo> showMemberInfoByAll(){

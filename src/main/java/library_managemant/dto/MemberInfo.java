@@ -12,9 +12,7 @@ public class MemberInfo {
 	private String phoneNo;
 	private String adress;
 	
-	// 시간을 표현하기중 하나.
-	
-	
+	//요것은 요것이다. 가즈아~!
 	
 	public MemberInfo(int memberNo) {
 		this.memberNo = memberNo;

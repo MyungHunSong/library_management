@@ -58,6 +58,7 @@ public class BookInfoDetail extends JPanel {
 		add(lblNewLabel);
 		
 		tfBookName = new JTextField();
+		tfBookName.setEditable(false);
 		tfBookName.setHorizontalAlignment(SwingConstants.CENTER);
 		add(tfBookName);
 		tfBookName.setColumns(15);
@@ -67,6 +68,7 @@ public class BookInfoDetail extends JPanel {
 		add(label);
 		
 		tfBookNo = new JTextField();
+		tfBookNo.setEditable(false);
 		tfBookNo.setHorizontalAlignment(SwingConstants.CENTER);
 		tfBookNo.setColumns(5);
 		add(tfBookNo);
@@ -76,6 +78,7 @@ public class BookInfoDetail extends JPanel {
 		add(label_1);
 		
 		tfBookKind = new JTextField();
+		tfBookKind.setEditable(false);
 		tfBookKind.setHorizontalAlignment(SwingConstants.CENTER);
 		tfBookKind.setColumns(5);
 		add(tfBookKind);
@@ -85,6 +88,7 @@ public class BookInfoDetail extends JPanel {
 		add(label_2);
 		
 		tfBookCan = new JTextField();
+		tfBookCan.setEditable(false);
 		tfBookCan.setHorizontalAlignment(SwingConstants.CENTER);
 		tfBookCan.setColumns(5);
 		add(tfBookCan); 
