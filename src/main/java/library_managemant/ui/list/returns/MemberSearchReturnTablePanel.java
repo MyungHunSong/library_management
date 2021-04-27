@@ -24,14 +24,7 @@ public class MemberSearchReturnTablePanel extends AbstractCustomTablePanel<Membe
 	private BookInfoService bookService;
 	private BookSearchReturnTablePanel bsrt;
 	
-// 4/27 고칠곳
-//	private List<BookInfo> list;
-//	
-//	public void loadReturnTable(BookInfo bookInfo) {
-//		bookService = new BookInfoService(); 
-//		int bList = bookInfo.getMemInfo().getMemberNo();
-//		list = bookService.selectBookRentTable(bList);
-//	}
+
 
 	public void setService(MemberService service) {
 			this.service = service;

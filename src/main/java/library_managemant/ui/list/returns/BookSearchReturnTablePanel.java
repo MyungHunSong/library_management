@@ -18,6 +18,13 @@ public class BookSearchReturnTablePanel extends AbstractCustomTablePanel<BookInf
 	private BookInfoService service;
 	private BookInfoReturnDetail bookDetail;
 	
+	
+		public void loadReturnTable(BookInfo bookInfo) {
+			service = new BookInfoService(); 
+			list = service.selectBookRentTable(bookInfo);
+			setList();
+		}
+	
 	public void setBookDetail(BookInfoReturnDetail bookDetail) {
 		this.bookDetail = bookDetail;
 	}

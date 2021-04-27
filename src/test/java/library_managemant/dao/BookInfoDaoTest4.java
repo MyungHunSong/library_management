@@ -15,8 +15,9 @@ public class BookInfoDaoTest4 {
 	@Test
 	public void testSelectBookReturnDetailTable() {
 		System.out.println("testSelectBookReturnDetailTable()");
+		MemberInfo mem = new MemberInfo(12001);
 		
-		BookInfo memNo = new BookInfo(12001);
+		BookInfo memNo = new BookInfo(mem);
 		List<BookInfo> list = dao.selectBookReturnDetailTable(memNo);
 		
 		Assert.assertNotNull(list);
