@@ -20,8 +20,7 @@ public class RentReturnClickTablePanel extends AbstractCustomTablePanel<RentRetu
 	private RentReturnService service = new RentReturnService();
 	private RentReturn rentReturn;
 	
-	private MemberInfoReturnDetail memDetail;
-	
+	private MemberInfoReturnDetail memDetail;	
 	private MemberService memService = new MemberService();
 	
 	
@@ -116,8 +115,14 @@ public class RentReturnClickTablePanel extends AbstractCustomTablePanel<RentRetu
 	protected void thisTableMouseClicked(MouseEvent e) {
 		int memberNo = getSelectIdx();
 		BookReturn frame = new BookReturn();
+		
+		
+		
 		MemberInfo memberInfo = memService.SelectReturnDetail(memberNo);
 		frame.getReturnMemInfo().getMemDetail().setItem(memberInfo);
+		
+		
+		
 		frame.setVisible(true);
 
 		System.out.println("" + memberNo);

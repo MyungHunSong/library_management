@@ -101,7 +101,6 @@ public class BookInfoSearchRentTablePanel extends AbstractCustomTablePanel<BookI
 		}
 		
 		BookInfo selectBookInfo = service.selectBookDetailByNo(new BookInfo(bookNum));
-		System.out.println("selectBookInfo>>" + selectBookInfo);
 		bookDetail.setItem(selectBookInfo);
 	}
 	public void mouseReleased(MouseEvent e) {

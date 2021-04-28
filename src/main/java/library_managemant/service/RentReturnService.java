@@ -26,8 +26,4 @@ public class RentReturnService {
 		return transDao.transInsertUpdateBookInfo(bookInfo, memberInfo);
 	}
 	
-		// 이게 렌트 테이블로 ReturnTable 바다오는 방법
-		public List<RentReturn> selectReturnTableALl(RentReturn rentReturn){
-			return dao.selectReturnTableByAll(rentReturn);
-		}
 }

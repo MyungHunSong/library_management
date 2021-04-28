@@ -15,11 +15,8 @@ public class BookInfoReturnDetail extends JPanel {
 	private JTextField tfBookName;
 	private JTextField tfBookNo;
 	private JTextField tfBookKind;
-	
 	private BookInfo bookInfo;
 	
-	
-
 	public BookInfo getBookInfo() {
 		return bookInfo;
 	}
@@ -85,11 +82,9 @@ public class BookInfoReturnDetail extends JPanel {
 	}
 	
 	public void setItem(BookInfo bookInfo) {
-		System.out.println(bookInfo);
 		tfBookName.setText(bookInfo.getBookName());
 		tfBookNo.setText(bookInfo.getBookNum()+"");
 		tfBookKind.setText(bookInfo.getBookKind().getKindTitle());
-		
 	}
 	
 	public void clearTf() {

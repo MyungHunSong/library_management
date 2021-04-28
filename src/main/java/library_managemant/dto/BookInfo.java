@@ -14,8 +14,6 @@ public class BookInfo {
 	private MemberInfo memInfo;
 	
 	
-	
-	
 	public BookInfo(int bookNum, String bookName, RentReturn bookRent) {
 		this.bookNum = bookNum;
 		this.bookName = bookName;

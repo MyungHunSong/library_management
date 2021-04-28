@@ -234,7 +234,7 @@ public class MemberSearchTablePanel extends JPanel implements MouseListener {
 	
 	private void mousePressedThisTable(MouseEvent e) {
 		int memberNo = getSelectIdx();
-		
+
 		rentTable.loadRentInfo(new RentReturn(memberNo));
 		System.out.println("MemberSearchTablePanel MEMBERNO >> " +  memberNo);
 		rentTable.setList();

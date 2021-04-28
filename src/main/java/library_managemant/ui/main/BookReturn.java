@@ -97,6 +97,7 @@ public class BookReturn extends JFrame {
 		
 		
 		pBookDetail = new BookInfoReturnDetail();
+		returnBookInfo.setBookDetail(pBookDetail);
 		contentPane.add(pBookDetail);
 		
 		JPanel panel_4 = new JPanel();

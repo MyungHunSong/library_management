@@ -88,7 +88,7 @@ public class BookSearchReturnTablePanel extends AbstractCustomTablePanel<BookInf
 
 		@Override
 		public Object[] toArray(BookInfo b) {
-			return new Object[] { b.getBookNum(), b.getBookName(), b.getBookCan() };
+			return new Object[] { b.getBookNum(), b.getBookName(), b.getBookRent().getBookOver(), b.getBookRent().getBookRent()};
 		}
 
 		
@@ -118,6 +118,15 @@ public class BookSearchReturnTablePanel extends AbstractCustomTablePanel<BookInf
 		}
 	public void mouseReleased(MouseEvent e) {
 	}
+	
 	protected void thisTableMouseClicked(MouseEvent e) {
+		int row = table.getSelectedRow();
+		int bookNum = (int) table.getValueAt(row, 0);
+		if (row == -1) {
+			throw new NotSelectedException();
+		}
+		
+		BookInfo selectBookInfo = service.selectBookDetailByNo(new BookInfo(bookNum));
+		bookDetail.setItem(selectBookInfo);
 	}
 }

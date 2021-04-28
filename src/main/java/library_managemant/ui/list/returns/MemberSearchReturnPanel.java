@@ -28,8 +28,6 @@ public class MemberSearchReturnPanel extends JPanel implements ActionListener {
 	private String[] memInfo= {"회원번호", "회원이름"};
 	
 	
-	
-	
 	public MemberSearchReturnPanel() {
 		initialize();
 		addDateCmb1();

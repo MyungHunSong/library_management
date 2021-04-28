@@ -46,6 +46,9 @@ public class MemberSearchReturnTablePanel extends AbstractCustomTablePanel<Membe
 		table.addMouseListener(this);	
 	}
 	
+	
+	
+	
 	// 디테일 에 넣어줄것
 	public void loadDateReturnDetail(int memNo) {
 //		bookService = new BookInfoService();
