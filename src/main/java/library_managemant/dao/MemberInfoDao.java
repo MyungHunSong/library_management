@@ -17,6 +17,6 @@ public interface MemberInfoDao {
 	List<MemberInfo> selectMemberInfoByReturnD(MemberInfo memInfo);
 	
 	MemberInfo selectMemberDetailReturn(int memInfo);
-	//MemberInfo selectMemberDetailReturn(String bookCan);
 	
+	List<MemberInfo> selectAllReturnTable();
 }

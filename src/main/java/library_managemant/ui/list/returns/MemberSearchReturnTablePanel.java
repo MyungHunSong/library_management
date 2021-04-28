@@ -19,9 +19,8 @@ import library_managemant.ui.list.returns.detail.MemberInfoReturnDetail;
 @SuppressWarnings("serial")
 public class MemberSearchReturnTablePanel extends AbstractCustomTablePanel<MemberInfo> implements MouseListener{
 	private MemberInfoReturnDetail memDetail;
-	private MemberService service;
+	private MemberService service = new MemberService();
 	
-	private BookInfoService bookService = new BookInfoService();
 	private BookSearchReturnTablePanel bsrt = new BookSearchReturnTablePanel();
 	
 	public void setBsrt(BookSearchReturnTablePanel bsrt) {
@@ -47,15 +46,20 @@ public class MemberSearchReturnTablePanel extends AbstractCustomTablePanel<Membe
 		table.addMouseListener(this);	
 	}
 	
-	// 클릭시 이게 나와야한다.
+	// 디테일 에 넣어줄것
 	public void loadDateReturnDetail(int memNo) {
 //		bookService = new BookInfoService();
 		setList();
 	}
-	
+// 멤버번호 & 이름 검색법
 	public void loadDataReturn(MemberInfo memInfo) {
-		service = new MemberService();
+		
 		list = service.selectLikeMeminfo(memInfo);
+		setList();
+	}
+	
+	public void loadReturnTable() {
+		list = service.SelectReturnByAll();
 		setList();
 	}
 
@@ -112,7 +116,7 @@ public class MemberSearchReturnTablePanel extends AbstractCustomTablePanel<Membe
 	public Object[] toArray(MemberInfo m) {
 		return new Object[]{m.getMemberNo(),m.getName(),m.getHomeNo(),m.getPhoneNo()};
 	}
-
+	
 	public void mouseClicked(MouseEvent arg0) {
 		if (arg0.getSource() == table) {
 			thisTableMouseClicked(arg0);
@@ -131,12 +135,9 @@ public class MemberSearchReturnTablePanel extends AbstractCustomTablePanel<Membe
 		
 		bsrt.loadReturnTable(new BookInfo(new MemberInfo(memberNo)));
 		bsrt.setList();
-		bsrt.returnVisible();
 	
 		MemberInfo selectMemInfo = service.selectMemInfoDetail(memberNo);
 		memDetail.setItem(selectMemInfo);
-		
-		
 		
 		bsrt.setVisible(true);		
 	}

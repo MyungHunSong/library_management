@@ -13,8 +13,8 @@ public interface BookInfoDao {
 	
 	List<BookInfo> selectBookInfoBy(BookInfo bookInfo); // 도서번호 제목 대출여부 and 휴대전화 전화번호 까지. 
 	
-	BookInfo selectBookDetail(int bookNum);
-	
+	// BookInfo selectBookDetail(int bookNum);
+	BookInfo selectBookDetail(BookInfo bookInfo);
 	List<BookInfo> selectBookDetailBookCan(String bookCan);
 	
 	BookInfo selectBookReturnDetail(int memNo); //디테일에서 맴버 번호로 책빌린사람만 책을 뛰어주는것 pRentTable에 넣어주어라.

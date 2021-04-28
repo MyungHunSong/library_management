@@ -16,5 +16,6 @@ public class MemberInfoDaoTest2 {
 		System.out.println(res);
 		Assert.assertNotNull(res);
 	}
-
+	
+	
 }

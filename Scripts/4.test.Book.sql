@@ -7,9 +7,6 @@ select kindTitle from book_kind where bookKind = 1;
 select bookKind,kindTitle from book_kind;
 
 select bookKind,kindTitle from book_kind where bookKind = 1;
--- 인서트
-insert into book_kind values (5, '과학');
-
 
 -- update 업데이타
 update book_kind 
@@ -48,7 +45,7 @@ select
 	rentNo, memberNo, bookNum1 , book
 from rent_return where rentNo;
 
--- 안대노
+-- 전체를 멤버번호로 검색하는법
 select m.memberNo, name,births, homeNo, phoneNo,adress 
 from member_info m join rent_return r on m.memberNo =r.memberNo
 where m.memberNo= 12001;
@@ -56,6 +53,17 @@ where m.memberNo= 12001;
 select m.memberNo,name,births, homeNo, phoneNo,adress 
 from member_info m join rent_return r on m.memberNo =r.memberNo
 where rentNo = 1;
+
+select *
+from member_info m join rent_return r on m.memberNo =r.memberNo;
+
+-- 그냥 반납하기 들어가면 나오는 선택창
+select m.memberNo, m.name, m.homeNo, m.memberNo from
+member_info m join rent_return r on m.memberNo = r.memberNo;
+
+-- 하단 패널에서 대여자를 클릭해서 들어가면 나오는 반납창
+select * from member_info m join rent_return r on m.memberNo = r.memberNo where m.memberNo = 12001;
+
 
 
 

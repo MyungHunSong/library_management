@@ -9,7 +9,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import library_managemant.dto.BookInfo;
 import library_managemant.service.BookInfoService;
 import library_managemant.service.MemberService;
 import library_managemant.ui.list.returns.BookSearchReturnPanel;
@@ -53,7 +52,6 @@ public class BookReturn extends JFrame {
 		this.returnBookInfo = returnBookInfo;
 	}
 	
-	
 	public BookReturn() {
 		initialize();
 	}
@@ -74,10 +72,10 @@ public class BookReturn extends JFrame {
 		
 		panel.add(pMemSearch, BorderLayout.NORTH);
 		
-		// 회원반납목록
+		// 회원 반납 목록이 이거말고 딴게 떠야한다.
 		returnMemInfo = new MemberSearchReturnTablePanel();
 		returnMemInfo.setService(memService);
-		returnMemInfo.loadData();
+		returnMemInfo.loadReturnTable();
 		panel.add(returnMemInfo, BorderLayout.CENTER);
 		
 		pMemSearch.setMstrpReturn(returnMemInfo);
@@ -90,22 +88,15 @@ public class BookReturn extends JFrame {
 		contentPane.add(panel_1);
 		panel_1.setLayout(new BorderLayout(0, 0));
 		
-		returnBookSearch = new BookSearchReturnPanel();
-		panel_1.add(returnBookSearch, BorderLayout.NORTH);
-		
-		
 		// pBookReturnTable
 		returnBookInfo = new BookSearchReturnTablePanel();
 		returnMemInfo.setBsrt(returnBookInfo);
 		returnBookInfo .setService(bookService);
-//		returnBookInfo.setService(bookService);
-//		returnBookInfo.load
 		panel_1.add(returnBookInfo, BorderLayout.CENTER);
 		
-		returnBookSearch.setBistp(returnBookInfo);
+		
 		
 		pBookDetail = new BookInfoReturnDetail();
-//		returnBookInfo.setBookDetail(pBookDetail);
 		contentPane.add(pBookDetail);
 		
 		JPanel panel_4 = new JPanel();

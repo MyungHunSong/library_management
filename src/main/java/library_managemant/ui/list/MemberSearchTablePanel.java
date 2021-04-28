@@ -67,8 +67,7 @@ public class MemberSearchTablePanel extends JPanel implements MouseListener {
 		setLayout(new BorderLayout(0, 0));
 
 		scrollPane = new JScrollPane();
-		add(scrollPane, BorderLayout.CENTER);
-
+		add(scrollPane, BorderLayout.CENTER);		
 		table = new JTable();
 		table.addMouseListener(this);
 		table.setModel(getModel());
@@ -201,7 +200,6 @@ public class MemberSearchTablePanel extends JPanel implements MouseListener {
 			
 		int memberNo = getSelectIdx();
 		rentTable.loadRentInfo(new RentReturn(memberNo));
-//		rentTable.loadRentInfo(new RentReturn(memberNo));
 		rentTable.setList();
 		
 		} catch (NullPointerException n) {

@@ -111,15 +111,16 @@ public class BookInfoDaoImpl implements BookInfoDao {
 	
 	// 책 상세정보
 	@Override
-	public BookInfo selectBookDetail(int bookNum) {
-		String sql = "select bi.bookName, "
-				+ "bi.bookNum, "
-				+ "bk.kindTitle, "
-				+ "bi.bookCan "
-				+ "from book_info bi join book_kind bk on bi.bookKind =bk.bookKind where bookNum=?";
+	public BookInfo selectBookDetail(BookInfo bookInfo) {
+		String sql = "select"
+				+ " b.bookName, "
+				+ " b.bookNum, "
+				+ " bk.kindTitle, "
+				+ " b.bookCan "
+				+ " from book_info b join book_kind bk on b.bookKind = bk.bookKind where b.bookNum=? ";
 		try(Connection con = JdbcCon.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)){
-			pstmt.setInt(1, bookNum);
+			pstmt.setInt(1, bookInfo.getBookNum());
 			
 			try(ResultSet rs = pstmt.executeQuery();){
 				if(rs.next()) {
@@ -135,10 +136,10 @@ public class BookInfoDaoImpl implements BookInfoDao {
 	}
 
 	private BookInfo getDetail(ResultSet rs) throws NumberFormatException, SQLException {
-		String bookName = rs.getString("bi.bookName");
-		int bookNum = Integer.parseInt(rs.getString("bi.bookNum"));
+		String bookName = rs.getString("b.bookName");
+		int bookNum = Integer.parseInt(rs.getString("b.bookNum"));
 		BookKind kindTitle = new BookKind(rs.getString("bk.kindTitle"));
-		String bookCan = rs.getString("bi.bookCan");
+		String bookCan = rs.getString("b.bookCan");
 		return new BookInfo(bookNum, bookName, kindTitle, bookCan);
 	}
 
@@ -174,7 +175,8 @@ public class BookInfoDaoImpl implements BookInfoDao {
 		String bookCan = rs.getString("bookCan");
 		return new BookInfo(bookNum, bookName, bookCan);
 	}
-
+	
+	// 리턴 테이블의 상세정보를 뛰어주는 것이다.
 	@Override
 	public BookInfo selectBookReturnDetail(int memNo) {
 		String sql = "select b.bookNum, b.bookName, bk.kindTitle, b.bookCan \r\n" + 

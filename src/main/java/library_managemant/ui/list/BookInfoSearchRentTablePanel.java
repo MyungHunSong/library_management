@@ -100,7 +100,7 @@ public class BookInfoSearchRentTablePanel extends AbstractCustomTablePanel<BookI
 			throw new NotSelectedException();
 		}
 		
-		BookInfo selectBookInfo = service.selectBookDetailByNo(bookNum);
+		BookInfo selectBookInfo = service.selectBookDetailByNo(new BookInfo(bookNum));
 		System.out.println("selectBookInfo>>" + selectBookInfo);
 		bookDetail.setItem(selectBookInfo);
 	}

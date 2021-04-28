@@ -17,3 +17,14 @@ select datediff('returndate','rentdate') from rent_return;
 
 -- 날짜 비교 오늘날짜와 렌트한날짜를 비교한다 -> 거기서 연체일자가 나올것이고.
 select * from rent_return where (to_days(now()) - to_days(bookRent))<3;
+
+-- 반납 북인포 테이블에 넣어줄것(검색해서).
+select r.bookNum1, b.bookName, r.bookRent,r.bookOver 
+from rent_return r join book_info b on r.bookNum1 = b.bookNum
+join member_info m on r.memberNo = m.memberNo 
+where r.memberNo = 12001;
+
+select r.memberNo,r.bookNum1,b.bookName, r.bookRent, r.bookOver
+			from rent_return r join member_info m on r.memberNo = m.memberNo 
+			join book_info b on r.bookNum1 =b.bookNum 
+			where m.memberNo = 12001;

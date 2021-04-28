@@ -15,12 +15,19 @@ public class BookInfoReturnDetail extends JPanel {
 	private JTextField tfBookName;
 	private JTextField tfBookNo;
 	private JTextField tfBookKind;
-	private JLabel label_2;
-	private JTextField tfBookCan;
 	
+	private BookInfo bookInfo;
 	
 	
 
+	public BookInfo getBookInfo() {
+		return bookInfo;
+	}
+	public void setBookInfo(BookInfo bookInfo) {
+		this.bookInfo = bookInfo;
+	}
+	
+	
 	public JTextField getTfBookName() {
 		return tfBookName;
 	}
@@ -75,16 +82,6 @@ public class BookInfoReturnDetail extends JPanel {
 		tfBookKind.setHorizontalAlignment(SwingConstants.CENTER);
 		tfBookKind.setColumns(5);
 		add(tfBookKind);
-		
-		label_2 = new JLabel("		대출여부:");
-		label_2.setHorizontalAlignment(SwingConstants.CENTER);
-		add(label_2);
-		
-		tfBookCan = new JTextField();
-		tfBookCan.setEditable(false);
-		tfBookCan.setHorizontalAlignment(SwingConstants.CENTER);
-		tfBookCan.setColumns(5);
-		add(tfBookCan); 
 	}
 	
 	public void setItem(BookInfo bookInfo) {
@@ -92,15 +89,13 @@ public class BookInfoReturnDetail extends JPanel {
 		tfBookName.setText(bookInfo.getBookName());
 		tfBookNo.setText(bookInfo.getBookNum()+"");
 		tfBookKind.setText(bookInfo.getBookKind().getKindTitle());
-		tfBookCan.setText(bookInfo.getBookCan());
+		
 	}
 	
 	public void clearTf() {
 		tfBookName.setText("");
 		tfBookNo.setText("");;
 		tfBookKind.setText("");
-		tfBookCan.setText("");
-		
 	}
 
 }

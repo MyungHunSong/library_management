@@ -3,12 +3,15 @@ package library_managemant.service;
 import java.util.List;
 
 import library_managemant.dao.MemberInfoDao;
+import library_managemant.dao.RentReturnDao;
 import library_managemant.daoimpl.MemberInfoDaoImpl;
+import library_managemant.daoimpl.RentReturnDaoImpl;
 import library_managemant.dto.MemberInfo;
+import library_managemant.dto.RentReturn;
 
 public class MemberService {
 	private MemberInfoDao memDao = MemberInfoDaoImpl.getInstance();
-	
+	private RentReturnDao rentDao =RentReturnDaoImpl.getInstance();
 	
 	public MemberService() {	
 	}
@@ -37,9 +40,13 @@ public class MemberService {
 	}
  
 	public MemberInfo SelectReturnDetail(int memInfo) {
-		return memDao.selectMemberDetailReturn(memInfo);
-		
+		return memDao.selectMemberDetailReturn(memInfo);	
 	}
 	
+	// 이게 ReturnTable 멤버인포로 받아온 방법
+	public List<MemberInfo> SelectReturnByAll() {
+		return memDao.selectAllReturnTable();
+	}
+
 	// 새로운 리턴 스트링 기능
 }

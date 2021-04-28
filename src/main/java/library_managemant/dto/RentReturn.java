@@ -6,17 +6,32 @@ public class RentReturn {
 	private int rentNo;
 	private int memberNum;
 	private int bookNum1;
+	
 	private BookInfo bookName;
+	
 	private Date bookRent;
 	private Date bookReturn;
 	private int bookOver;
 	
 	
-		
+	
+	
+	public RentReturn(Date bookRent) {
+		super();
+		this.bookRent = bookRent;
+	}
 	public RentReturn(Date bookRent, int bookOver) {
 		this.bookRent = bookRent;
 		this.bookOver = bookOver;
 	}
+	public RentReturn(int bookNum1, BookInfo bookName, Date bookRent, int bookOver) {
+	
+	this.bookNum1 = bookNum1;
+	this.bookName = bookName;
+	this.bookRent = bookRent;
+	this.bookOver = bookOver;
+	}
+	
 	public RentReturn(int memberNum) {	
 		this.memberNum = memberNum;
 	}

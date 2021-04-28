@@ -5,18 +5,23 @@ public class BookInfo {
 	private int bookNum;
 	private String bookName;
 	private String bookCan;
+	
 	private BookKind bookKind;
 	
-	private RentReturn rentReturn;
-	
-	// bookInfoReturn 테이블에 넣을것
-	
-	
-	
+//	private int bookOver;
+	private RentReturn bookRent;
 	
 	private MemberInfo memInfo;
 	
 	
+	
+	
+	public BookInfo(int bookNum, String bookName, RentReturn bookRent) {
+		this.bookNum = bookNum;
+		this.bookName = bookName;
+		this.bookRent = bookRent;
+	}
+
 	public BookInfo(MemberInfo memInfo) {	
 		this.memInfo = memInfo;
 	}
@@ -47,13 +52,6 @@ public class BookInfo {
 		this.bookName = bookName;
 	}
 	
-
-	public BookInfo(int bookNum, String bookName, RentReturn rentReturn) {
-		this.bookNum = bookNum;
-		this.bookName = bookName;
-		this.rentReturn = rentReturn;
-	}
-
 
 	// 1.도서번호 2.도서제목 3.대출여부
 	public BookInfo(int bookNum, String bookName, String bookCan) {
@@ -136,33 +134,23 @@ public class BookInfo {
 		this.bookKind = bookKind;
 	}
 	
-	
-
-
-	public RentReturn getRentReturn() {
-		return rentReturn;
+	public RentReturn getBookRent() {
+		return bookRent;
 	}
 
-
-	public void setRentReturn(RentReturn rentReturn) {
-		this.rentReturn = rentReturn;
+	public void setBookRent(RentReturn bookRent) {
+		this.bookRent = bookRent;
 	}
-
 
 	@Override
 	public String toString() {
-		return "BookInfo [대여 번호=" + rentNo + ", 도서 번호 =" + bookNum + ", 도서 제목=" + bookName + ", 대출 여부 =" + bookCan
-				+ ", 도서 구분 =" + bookKind +  "대여일 =" +rentReturn  + "]";
+		return "BookInfo 대여 번호=" + rentNo + ", 도서 번호 =" + bookNum + ", 도서 제목=" + bookName + ", 대출 여부 =" + bookCan
+				+ ", 도서 구분 =" + bookKind +  "대여일 =";
 	}
 	
 	public String toString1() {
 		return "도서번호: "+ bookNum +" 도서제목"+ bookName +" 대출여부:" + bookCan;
 	}
-	
-	public String toString2() {
-		return "도서번호 : "+bookNum+" 도서제목: "+bookName+" 도서연체일: "+rentReturn.getBookOver()+" 도서대여일: "+rentReturn.getBookRent();
-				
-	} 
 	
 	
 	

@@ -12,6 +12,7 @@ import library_managemant.ui.list.returns.detail.BookInfoReturnDetail;
 
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
+import javax.swing.border.TitledBorder;
 
 @SuppressWarnings("serial")
 public class BookSearchReturnTablePanel extends AbstractCustomTablePanel<BookInfo> implements MouseListener{
@@ -33,6 +34,7 @@ public class BookSearchReturnTablePanel extends AbstractCustomTablePanel<BookInf
 		initialize();
 	}
 	private void initialize() {
+		setBorder(new TitledBorder(null, "\uB300\uC5EC\uC911\uC778\uB3C4\uC11C", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setVisible(false);
 		table.addMouseListener(this);
 	}
@@ -40,7 +42,7 @@ public class BookSearchReturnTablePanel extends AbstractCustomTablePanel<BookInf
 		table.setVisible(true);
 	}
 
-	// byNo 기능
+		// byNo 기능
 		public void loadBookInfo(BookInfo bookInfo) {
 			service = new BookInfoService();
 			list = service.selectBookInfoBy(bookInfo);
@@ -112,16 +114,8 @@ public class BookSearchReturnTablePanel extends AbstractCustomTablePanel<BookInf
 	public void mouseExited(MouseEvent e) {
 	}
 	public void mousePressed(MouseEvent e) {
-		int idx=table.getSelectedRow();
-		int bookNum = (int) table.getValueAt(idx, 0);
-		if(idx == -1) {
-			throw new NotSelectedException();
+		
 		}
-		BookInfo selectBookInfo = service.selectBookDetailByNo(bookNum);
-		bookDetail.setItem(selectBookInfo);
-		
-		
-	}
 	public void mouseReleased(MouseEvent e) {
 	}
 	protected void thisTableMouseClicked(MouseEvent e) {

@@ -168,26 +168,6 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 		return null;
 	}
 
-//	@Override
-//	public MemberInfo selectMemberDetailReturn(String bookCan) {
-//		String sql = "select m.memberNo,m.name, m.births,m.homeNo,m.phoneNo \r\n" + 
-//				"from member_info m join rent_return r on m.memberNo = r.memberNo \r\n" + 
-//				"join book_info b on r.bookNum1 = b.bookNum\r\n" + 
-//				"where bookCan = ?";
-//		try (Connection con = JdbcCon.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
-//			pstmt.setString(1, bookCan);
-//
-//			try (ResultSet rs = pstmt.executeQuery()) {
-//				if (rs.next()) {
-//					return getRentDetail(rs);
-//				}
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		return null;
-//	}	
-//	// 한번 해보는것
 	
 	private MemberInfo getRentDetail(ResultSet rs) throws NumberFormatException, SQLException {
 		int memberNo = Integer.parseInt(rs.getString("memberNo"));
@@ -221,6 +201,40 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@Override
+	public List<MemberInfo> selectAllReturnTable() {
+		String sql="select m.memberNo, m.name, m.homeNo, m.phoneNo from\r\n" + 
+				"member_info m join rent_return r on m.memberNo = r.memberNo";
+		
+		try (Connection con = JdbcCon.getConnection()) {
+			PreparedStatement pstmt = con.prepareStatement(sql);
+
+			ResultSet rs = pstmt.executeQuery();
+			{
+				if (rs.next()) {
+					List<MemberInfo> list = new ArrayList<>();
+
+					do {
+						list.add(getMemberInfoReturn(rs));
+					} while (rs.next());
+					return list;
+				}
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	private MemberInfo getMemberInfoReturn(ResultSet rs) throws SQLException {
+		int memberNo = Integer.parseInt(rs.getString("m.memberNo"));
+		String name = rs.getString("m.name");
+		String homeNo = rs.getString("m.homeNo");
+		String phoneNo = rs.getString("m.phoneNo");
+		return new MemberInfo(memberNo, name, homeNo, phoneNo);
 	}
 
 }

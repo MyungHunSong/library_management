@@ -25,7 +25,7 @@ public class BookInfoService {
 		return bookDao.selectBookInfoBy(bookInfo);
 	}
 	
-	public BookInfo selectBookDetailByNo(int bookNum) {
+	public BookInfo selectBookDetailByNo(BookInfo bookNum) {
 		return bookDao.selectBookDetail(bookNum);
 	}
 	
