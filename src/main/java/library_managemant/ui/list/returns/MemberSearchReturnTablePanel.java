@@ -24,9 +24,6 @@ public class MemberSearchReturnTablePanel extends AbstractCustomTablePanel<Membe
 	private BookInfoService bookService = new BookInfoService();
 	private BookSearchReturnTablePanel bsrt = new BookSearchReturnTablePanel();
 	
-	
-	
-
 	public void setBsrt(BookSearchReturnTablePanel bsrt) {
 		this.bsrt = bsrt;
 	}
