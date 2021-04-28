@@ -21,10 +21,15 @@ public class MemberSearchReturnTablePanel extends AbstractCustomTablePanel<Membe
 	private MemberInfoReturnDetail memDetail;
 	private MemberService service;
 	
-	private BookInfoService bookService;
-	private BookSearchReturnTablePanel bsrt;
+	private BookInfoService bookService = new BookInfoService();
+	private BookSearchReturnTablePanel bsrt = new BookSearchReturnTablePanel();
+	
+	
 	
 
+	public void setBsrt(BookSearchReturnTablePanel bsrt) {
+		this.bsrt = bsrt;
+	}
 
 	public void setService(MemberService service) {
 			this.service = service;
@@ -126,15 +131,17 @@ public class MemberSearchReturnTablePanel extends AbstractCustomTablePanel<Membe
 		if(idx == -1) {
 			throw new NotSelectedException();
 		}
-		// 애가 detail 에 이름 뛰워주는 친구
+		
+		bsrt.loadReturnTable(new BookInfo(new MemberInfo(memberNo)));
+		bsrt.setList();
+		bsrt.returnVisible();
+	
 		MemberInfo selectMemInfo = service.selectMemInfoDetail(memberNo);
 		memDetail.setItem(selectMemInfo);
 		
-//		List<BookInfo> selectReturnTable = bookService.selectBookRentTable(new MemberInfo(memberNo));
-//		setItem(rentBookInfo.get(0));
 		
 		
-		
+		bsrt.setVisible(true);		
 	}
 	public void mouseReleased(MouseEvent e) {
 	}

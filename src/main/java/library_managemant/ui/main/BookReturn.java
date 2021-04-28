@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import library_managemant.dto.BookInfo;
 import library_managemant.service.BookInfoService;
 import library_managemant.service.MemberService;
 import library_managemant.ui.list.returns.BookSearchReturnPanel;
@@ -33,6 +34,7 @@ public class BookReturn extends JFrame {
 	private BookInfoService bookService;
 	private MemberInfoReturnDetail pMemDetail;
 	private BookInfoReturnDetail pBookDetail;
+	private JPanel panel_1;
 	
 	
 	
@@ -84,24 +86,26 @@ public class BookReturn extends JFrame {
 		returnMemInfo.setMemReturnDetail(pMemDetail);
 		contentPane.add(pMemDetail);
 		
-		JPanel panel_2 = new JPanel();
-		contentPane.add(panel_2);
-		panel_2.setLayout(new BorderLayout(0, 0));
+		panel_1 = new JPanel();
+		contentPane.add(panel_1);
+		panel_1.setLayout(new BorderLayout(0, 0));
 		
 		returnBookSearch = new BookSearchReturnPanel();
-		panel_2.add(returnBookSearch, BorderLayout.NORTH);
+		panel_1.add(returnBookSearch, BorderLayout.NORTH);
 		
 		
 		// pBookReturnTable
 		returnBookInfo = new BookSearchReturnTablePanel();
-		returnBookInfo.setService(bookService);
-		returnBookInfo.loadData();
-		panel_2.add(returnBookInfo, BorderLayout.CENTER);
+		returnMemInfo.setBsrt(returnBookInfo);
+		returnBookInfo .setService(bookService);
+//		returnBookInfo.setService(bookService);
+//		returnBookInfo.load
+		panel_1.add(returnBookInfo, BorderLayout.CENTER);
 		
 		returnBookSearch.setBistp(returnBookInfo);
 		
 		pBookDetail = new BookInfoReturnDetail();
-		returnBookInfo.setBookDetail(pBookDetail);
+//		returnBookInfo.setBookDetail(pBookDetail);
 		contentPane.add(pBookDetail);
 		
 		JPanel panel_4 = new JPanel();

@@ -30,8 +30,6 @@ public class library_managemant extends JFrame implements ActionListener {
 			}
 		});
 	}
-
-	
 	public library_managemant() {
 		initialize();
 	}

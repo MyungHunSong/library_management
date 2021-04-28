@@ -34,8 +34,6 @@ public class BookInfoService {
 		return bookDao.selectBookDetailBookCan(bookCan);
 	}
 	
-	
-	
 	// 하단 도서 테이블에 넣어줄 rentTable값 번호 제목 연체일 도서대여일
 	public List<BookInfo> selectBookRentTable(BookInfo memNo){
 		return bookDao.selectBookReturnDetailTable(memNo);

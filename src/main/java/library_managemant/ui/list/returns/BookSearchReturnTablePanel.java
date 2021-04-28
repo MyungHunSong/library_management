@@ -35,7 +35,9 @@ public class BookSearchReturnTablePanel extends AbstractCustomTablePanel<BookInf
 	private void initialize() {
 		setVisible(false);
 		table.addMouseListener(this);
-
+	}
+	public void returnVisible() {
+		table.setVisible(true);
 	}
 
 	// byNo 기능
@@ -115,7 +117,6 @@ public class BookSearchReturnTablePanel extends AbstractCustomTablePanel<BookInf
 		if(idx == -1) {
 			throw new NotSelectedException();
 		}
-		
 		BookInfo selectBookInfo = service.selectBookDetailByNo(bookNum);
 		bookDetail.setItem(selectBookInfo);
 		
