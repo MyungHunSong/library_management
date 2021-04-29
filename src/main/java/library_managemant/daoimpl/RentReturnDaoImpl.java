@@ -10,6 +10,7 @@ import java.util.List;
 
 import library_managemant.dao.RentReturnDao;
 import library_managemant.dto.BookInfo;
+import library_managemant.dto.BookKind;
 import library_managemant.dto.MemberInfo;
 import library_managemant.dto.RentReturn;
 import library_managemant.libdb.JdbcCon;
@@ -105,5 +106,63 @@ public class RentReturnDaoImpl implements RentReturnDao {
 		e.printStackTrace();
 	}
 		return 0;
+	}
+
+	@Override
+	public List<RentReturn> selectReturnInfoByRentNo(MemberInfo memInfo) {
+		String sql = "select r.rentNo, r.memberNo,b.bookNum , b.bookNum,r.bookOver, r.bookRent, r.bookReturn\r\n" + 
+				"from book_info b join rent_return r on b.bookNum = r.bookNum1\r\n" + 
+				"join member_info m on r.memberNo =m.memberNo\r\n" + 
+				"where r.memberNo = ?";
+		
+		try (PreparedStatement pstmt = con.prepareStatement(sql);) {
+
+			pstmt.setInt(1, memInfo.getMemberNo());
+			try (ResultSet rs = pstmt.executeQuery();) {
+				if (rs.next()) {
+					List<RentReturn> list = new ArrayList<>();
+					do {
+						list.add(getRentReturn(rs));
+					}while(rs.next());
+					return list;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	// 검색해주는 기능
+	@Override
+	public RentReturn ReturnByNo(int rentNo) {
+		String sql = "select r.rentNo, r.memberNo, r.bookNum1, b.bookName, bk.kindTitle\r\n" + 
+				"from rent_return r join book_info b on r.bookNum1  =b.bookNum \r\n" + 
+				"join member_info m on m.memberNo  = r.memberNo \r\n" + 
+				"join book_kind bk on b.bookKind = bk.bookKind \r\n" + 
+				"where rentNo = ?  order by rentNo";
+		
+		try (Connection con = JdbcCon.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
+			pstmt.setInt(1, rentNo);
+
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+
+					return getRent2(rs);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	private RentReturn getRent2(ResultSet rs) throws NumberFormatException, SQLException {
+		int rentNo = Integer.parseInt(rs.getString("r.rentNo"));
+		MemberInfo memNo = new MemberInfo(rs.getInt("r.memberNo"));
+		BookInfo bookNo = new BookInfo(rs.getInt("r.bookNum1"));
+		bookNo.setBookName(rs.getString("b.bookName"));
+		bookNo.setBookKind(new BookKind(rs.getString("bk.kindTitle")));
+		return new RentReturn(rentNo, memNo,bookNo);
 	}
 }

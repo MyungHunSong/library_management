@@ -12,8 +12,15 @@ public class BookInfo {
 	private MemberInfo memInfo;
 	
 	
-
 		
+
+	public BookInfo(int bookNum, BookKind bookKind) {
+		super();
+		this.bookNum = bookNum;
+		this.bookKind = bookKind;
+	}
+
+
 
 	public BookInfo(int bookNum, RentReturn bookRent) {
 		this.bookNum = bookNum;

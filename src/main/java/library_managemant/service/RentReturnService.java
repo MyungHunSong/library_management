@@ -29,4 +29,8 @@ public class RentReturnService {
 		return dao.updateReturn(rentNo);
 	}
 	
+	public List<RentReturn> showRentReturnListMemNo(MemberInfo memNo){
+		return dao.selectReturnInfoByRentNo(memNo);
+	}
+	
 }

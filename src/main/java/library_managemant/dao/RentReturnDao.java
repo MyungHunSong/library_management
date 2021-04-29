@@ -11,11 +11,15 @@ public interface RentReturnDao {
 
 	List<RentReturn> selectRentReturnByMem(RentReturn rentReturn);
 	
+	List<RentReturn> selectReturnInfoByRentNo(MemberInfo memNo);
 
 	// 대출
 	int insertBookTable(MemberInfo memNo, BookInfo bookNo);
+	RentReturn ReturnByNo(int rentNo);
 	
 	// 반납
 	int updateReturn(RentReturn rentNo);
+	
+	
 		
 }

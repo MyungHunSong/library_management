@@ -14,14 +14,36 @@ public class RentReturn {
 	private Date bookReturn;
 	private int bookOver;
 	
-	
-	
-	
 	public RentReturn(int rentNo) {
 		this.rentNo = rentNo;
 	}
-
 	
+	public RentReturn(int rentNo, BookInfo bookNum1) {
+		
+		this.rentNo = rentNo;
+		this.bookNum1 = bookNum1;
+	}
+	
+
+	public RentReturn(int rentNo, MemberInfo memberNum, BookInfo bookNum1) {
+		this.rentNo = rentNo;
+		this.memberNum = memberNum;
+		this.bookNum1 = bookNum1;
+	}
+
+	public RentReturn(BookInfo bookNum1) {
+		super();
+		this.bookNum1 = bookNum1;
+	}
+
+	public RentReturn(int rentNo, MemberInfo memberNum, BookInfo bookNum1, int bookOver) {
+		super();
+		this.rentNo = rentNo;
+		this.memberNum = memberNum;
+		this.bookNum1 = bookNum1;
+		this.bookOver = bookOver;
+	}
+
 	public RentReturn(Date bookRent) {
 		this.bookRent = bookRent;
 	}
@@ -110,6 +132,8 @@ public class RentReturn {
 	public void setBookOver(int bookOver) {
 		this.bookOver = bookOver;
 	}
+	
+	
 	
 	@Override
 	public String toString() {

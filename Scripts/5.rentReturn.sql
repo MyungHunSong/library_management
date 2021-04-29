@@ -36,3 +36,16 @@ select r.rentNo, b.bookName, b.bookNum, bk.kindTitle, b.bookCan
 from book_info b join book_kind bk on b.bookKind = bk.bookKind
 join rent_return r on r.bookNum1 = b.bookNum 
 where b.bookNum = ?;
+
+-- 회원번호로 검색방법
+select r.rentNo, r.memberNo,b.bookNum , b.bookNum,r.bookOver, r.bookRent, r.bookReturn
+from book_info b join rent_return r on b.bookNum = r.bookNum1
+join member_info m on r.memberNo =m.memberNo
+where r.memberNo = 12008s;
+
+select r.rentNo, r.memberNo, r.bookNum1, b.bookName, bk.kindTitle
+from rent_return r join book_info b on r.bookNum1  =b.bookNum 
+join member_info m on m.memberNo  = r.memberNo 
+join book_kind bk on b.bookKind = bk.bookKind 
+where rentNo = 1  order by rentNo;
+
