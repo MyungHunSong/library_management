@@ -199,7 +199,7 @@ public class MemberSearchTablePanel extends JPanel implements MouseListener {
 		try {
 			
 		int memberNo = getSelectIdx();
-		rentTable.loadRentInfo(new RentReturn(memberNo));
+		rentTable.loadRentInfo(new RentReturn(new MemberInfo(memberNo)));
 		rentTable.setList();
 		
 		} catch (NullPointerException n) {
@@ -235,7 +235,7 @@ public class MemberSearchTablePanel extends JPanel implements MouseListener {
 	private void mousePressedThisTable(MouseEvent e) {
 		int memberNo = getSelectIdx();
 
-		rentTable.loadRentInfo(new RentReturn(memberNo));
+		rentTable.loadRentInfo(new RentReturn(new MemberInfo(memberNo)));
 		System.out.println("MemberSearchTablePanel MEMBERNO >> " +  memberNo);
 		rentTable.setList();
 		rentTable.rentVisible();

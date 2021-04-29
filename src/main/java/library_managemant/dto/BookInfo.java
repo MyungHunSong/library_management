@@ -12,11 +12,35 @@ public class BookInfo {
 	private MemberInfo memInfo;
 	
 	
+
+		
+
+	public BookInfo(int bookNum, RentReturn bookRent) {
+		this.bookNum = bookNum;
+		this.bookRent = bookRent;
+	}
+
+
+
+	public BookInfo(RentReturn bookRent) {
+		this.bookRent = bookRent;
+	}
 	
+	
+
 	public BookInfo(String bookCan) {
 		this.bookCan = bookCan;
 	}
 	
+	public BookInfo(int bookNum, String bookName, String bookCan, BookKind bookKind, RentReturn bookRent) {
+		this.bookNum = bookNum;
+		this.bookName = bookName;
+		this.bookCan = bookCan;
+		this.bookKind = bookKind;
+		this.bookRent = bookRent;
+	}
+
+
 
 	public BookInfo(int bookNum, String bookName, RentReturn bookRent) {
 		this.bookNum = bookNum;

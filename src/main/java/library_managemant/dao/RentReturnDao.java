@@ -16,6 +16,6 @@ public interface RentReturnDao {
 	int insertBookTable(MemberInfo memNo, BookInfo bookNo);
 	
 	// 반납
-	int updateReturn(BookInfo bookInfo, RentReturn rentNo);
+	int updateReturn(RentReturn rentNo);
 		
 }

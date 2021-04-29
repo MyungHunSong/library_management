@@ -96,13 +96,18 @@ public class BookInfoReturnDetail extends JPanel {
 		add(tfBookKind);
 	}
 	
-//	public BookInfo getBookReturnCan() {
-//		
-//	}
+	public BookInfo getItmeBookNum() {
+		String bookNum = tfBookNo.getText().trim();
+		return new BookInfo(bookNum);
+	}
+	
+	public BookInfo getItemRentNo() {
+		int rentNo = Integer.parseInt(tfRentNo.getText().trim());
+		return new BookInfo(new RentReturn(rentNo));	
+	}
 	
 	public void setItem(BookInfo bookInfo) {
-		
-		tfRentNo.setText(rentReturn.getRentNo()+""); //도서 번호로 반납하기.		
+		tfRentNo.setText(bookInfo.getBookRent().getRentNo()+""); //도서 번호로 반납하기.		
 		tfBookName.setText(bookInfo.getBookName());
 		tfBookNo.setText(bookInfo.getBookNum()+"");
 		tfBookKind.setText(bookInfo.getBookKind().getKindTitle());

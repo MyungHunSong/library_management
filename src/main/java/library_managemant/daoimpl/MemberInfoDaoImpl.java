@@ -10,7 +10,6 @@ import java.util.List;
 
 import library_managemant.dao.MemberInfoDao;
 import library_managemant.dto.MemberInfo;
-import library_managemant.dto.RentReturn;
 import library_managemant.libdb.JdbcCon;
 
 public class MemberInfoDaoImpl implements MemberInfoDao {

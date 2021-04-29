@@ -35,6 +35,8 @@ public class BookRent extends JFrame implements ActionListener {
     private RentReturnService rentService = new RentReturnService(); // 트랜잭션 쓰자.
     
 	private MemberSearchRentTablePanel rentMemTable; //= new MemberSearchRentTablePanel();
+	
+	
 	private MemSearchRentPanel rentMemSearch;
 	
 	private BookInfoService bookService = new BookInfoService();
@@ -43,6 +45,8 @@ public class BookRent extends JFrame implements ActionListener {
 	private BookInfoSearchRentTablePanel rentBookTable;
 	
 	private MemberInfoDetail pMemDetail;
+	
+	
 	private BookInfoDetail pBookDetail;
 	private JButton btnRent;
 	private JButton btnCansle;
@@ -168,7 +172,7 @@ public class BookRent extends JFrame implements ActionListener {
 			pBookDetail.clearTf();
 			pistp.loadData();
 			pistp.setList();
-			JOptionPane.showMessageDialog(null, "도서 대여 완료.");
+			JOptionPane.showMessageDialog(null, "도서 대여완료.");
 			
 		}else if(bookCan.getBookCan().equals(bookN)){
 			JOptionPane.showMessageDialog(null, "대여중인 도서입니다.", "메세지",JOptionPane.ERROR_MESSAGE);

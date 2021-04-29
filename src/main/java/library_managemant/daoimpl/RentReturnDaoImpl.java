@@ -32,7 +32,7 @@ public class RentReturnDaoImpl implements RentReturnDao {
 
 		try (PreparedStatement pstmt = con.prepareStatement(sql);) {
 
-			pstmt.setInt(1, rentReturn.getMemberNum());
+			pstmt.setInt(1, rentReturn.getMemberNum().getMemberNo());
 			try (ResultSet rs = pstmt.executeQuery();) {
 				if (rs.next()) {
 					List<RentReturn> list = new ArrayList<>();
@@ -60,7 +60,7 @@ public class RentReturnDaoImpl implements RentReturnDao {
 		bookName.setBookName(rs.getString("b.bookName"));
 		bookRent = rs.getDate("r.bookRent");
 		bookOver = rs.getInt("r.bookOver");
-		return new RentReturn(memberNum, bookNum1, bookName, bookRent, bookOver);
+		return new RentReturn(new MemberInfo(memberNum), new BookInfo(bookNum1), bookName, bookRent, bookOver);
 	}
 	
 	
@@ -88,14 +88,15 @@ public class RentReturnDaoImpl implements RentReturnDao {
 	
 	//반납
 	@Override
-	public int updateReturn(BookInfo bookInfo, RentReturn rentNo) {
+	public int updateReturn(RentReturn rentNo) {
 		String sql1 = "update book_info set bookCan = '대출가능' where bookNum = ?";
+		
 		String sql2 = "update rent_return set bookReturn = now() where rentNo = ? and bookReturn is null";
 		
 		try(Connection con = JdbcCon.getConnection();
 				PreparedStatement pstmt1 = con.prepareStatement(sql1);
 					PreparedStatement pstmt2 = con.prepareStatement(sql2);){
-		pstmt1.setInt(1, bookInfo.getBookNum());
+		pstmt1.setInt(1, rentNo.getBookNum1().getBookNum());
 		pstmt1.executeUpdate();
 		
 		pstmt2.setInt(1, rentNo.getRentNo());
@@ -104,6 +105,5 @@ public class RentReturnDaoImpl implements RentReturnDao {
 		e.printStackTrace();
 	}
 		return 0;
-	
 	}
 }

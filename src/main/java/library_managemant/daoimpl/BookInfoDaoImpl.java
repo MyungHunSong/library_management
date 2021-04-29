@@ -112,13 +112,13 @@ public class BookInfoDaoImpl implements BookInfoDao {
 	// 책 상세정보
 	@Override
 	public BookInfo selectBookDetail(BookInfo bookInfo) {
-		String sql = "select b.bookName, b.bookNum, bk.kindTitle, b.bookCan \r\n" + 
-				"from book_info b join book_kind bk on b.bookKind = bk.bookKind \r\n" + 
+		String sql = "select r.rentNo, b.bookName, b.bookNum, bk.kindTitle, b.bookCan\r\n" + 
+				"from book_info b join book_kind bk on b.bookKind = bk.bookKind\r\n" + 
+				"join rent_return r on r.bookNum1 = b.bookNum \r\n" + 
 				"where b.bookNum = ?";
 		try(Connection con = JdbcCon.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)){
 			pstmt.setInt(1, bookInfo.getBookNum());
-			
 			try(ResultSet rs = pstmt.executeQuery();){
 				if(rs.next()) {
 					return getDetail(rs);
@@ -128,16 +128,17 @@ public class BookInfoDaoImpl implements BookInfoDao {
 			
 			e.printStackTrace();
 		}
-		
 		return null;
 	}
 
 	private BookInfo getDetail(ResultSet rs) throws NumberFormatException, SQLException {
+		
 		String bookName = rs.getString("b.bookName");
 		int bookNum = Integer.parseInt(rs.getString("b.bookNum"));
+		int rentNo =Integer.parseInt(rs.getString("r.rentNo"));
 		BookKind kindTitle = new BookKind(rs.getString("bk.kindTitle"));
 		String bookCan = rs.getString("b.bookCan");
-		return new BookInfo(bookNum, bookName, kindTitle, bookCan);
+		return new BookInfo(bookNum, bookName, bookCan, new BookKind(kindTitle.getKindTitle()), new RentReturn(rentNo));
 	}
 
 	@Override

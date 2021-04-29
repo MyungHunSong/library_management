@@ -25,8 +25,8 @@ public class RentReturnService {
 		return dao.insertBookTable(memNo, bookNo);	
 	}
 	
-	public int updateReturnService(BookInfo bookNo, RentReturn rentNo) {
-		return dao.updateReturn(bookNo, rentNo);
+	public int updateReturnService(RentReturn rentNo) {
+		return dao.updateReturn(rentNo);
 	}
 	
 }

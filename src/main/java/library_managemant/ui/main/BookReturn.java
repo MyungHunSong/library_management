@@ -6,9 +6,12 @@ import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import library_managemant.dto.BookInfo;
+import library_managemant.dto.RentReturn;
 import library_managemant.service.BookInfoService;
 import library_managemant.service.MemberService;
 import library_managemant.service.RentReturnService;
@@ -18,9 +21,11 @@ import library_managemant.ui.list.returns.MemberSearchReturnPanel;
 import library_managemant.ui.list.returns.MemberSearchReturnTablePanel;
 import library_managemant.ui.list.returns.detail.BookInfoReturnDetail;
 import library_managemant.ui.list.returns.detail.MemberInfoReturnDetail;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
-public class BookReturn extends JFrame {
+public class BookReturn extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	
@@ -37,6 +42,8 @@ public class BookReturn extends JFrame {
 	
 	private RentReturnService rentService;
 	private JPanel panel_1;
+	private JButton btnReturn;
+	private JButton btnCansle;
 	
 	public MemberSearchReturnTablePanel getReturnMemInfo() {
 		return returnMemInfo;
@@ -106,11 +113,40 @@ public class BookReturn extends JFrame {
 		flowLayout.setAlignment(FlowLayout.RIGHT);
 		contentPane.add(panel_4);
 		
-		JButton btnReturn = new JButton("반납하기");
+		btnReturn = new JButton("반납하기");
+		btnReturn.addActionListener(this);
 		panel_4.add(btnReturn);
 		
-		JButton btnCansle = new JButton("취소");
+		btnCansle = new JButton("취소");
+		btnCansle.addActionListener(this);
 		panel_4.add(btnCansle);
 	}
 
+	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnCansle) {
+			btnCansleActionPerformed(arg0);
+		}
+		if (arg0.getSource() == btnReturn) {
+			btnReturnActionPerformed(arg0);
+		}
+	}
+	protected void btnReturnActionPerformed(ActionEvent arg0) {
+		int rentNo = pBookDetail.getItemRentNo().getBookRent().getRentNo();
+		
+		try {		
+			rentService.updateReturnService(new RentReturn(rentNo));
+			returnMemInfo.loadData();
+			returnBookInfo.loadData();
+			pMemDetail.clearTf();
+			pBookDetail.clearTf();
+			JOptionPane.showInternalMessageDialog(null, "도서 반납완료.");
+			
+		} catch (NullPointerException e) {
+			JOptionPane.showMessageDialog(null, "도서정보를 선택하세요.", "메세지", JOptionPane.WARNING_MESSAGE);
+		}
+	}
+	protected void btnCansleActionPerformed(ActionEvent arg0) {
+		pMemDetail.clearTf();
+		pBookDetail.clearTf();
+	}
 }

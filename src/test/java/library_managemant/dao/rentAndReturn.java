@@ -31,10 +31,10 @@ public class rentAndReturn {
 	public void testUpdateReturn() {
 		System.out.println("testUpdateReturn()");
 		
-		BookInfo bookNum = new BookInfo(40004);
+		
 		RentReturn rentNo = new RentReturn(7);
 		
-		int res = dao.updateReturn(bookNum, rentNo);
+		int res = dao.updateReturn(rentNo);
 		
 		System.out.println(res);
 		

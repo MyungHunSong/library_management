@@ -5,8 +5,8 @@ import java.util.Date;
 public class RentReturn {
 	private int rentNo;
 	
-	private int memberNum;
-	private int bookNum1;
+	private MemberInfo memberNum;
+	private BookInfo bookNum1;
 	
 	private BookInfo bookName;
 	
@@ -17,21 +17,20 @@ public class RentReturn {
 	
 	
 	
-//	public RentReturn(int rentNo) {
-//		this.rentNo = rentNo;
-//	}
+	public RentReturn(int rentNo) {
+		this.rentNo = rentNo;
+	}
 
-
+	
 	public RentReturn(Date bookRent) {
 		this.bookRent = bookRent;
 	}
-	
 	
 	public RentReturn(Date bookRent, int bookOver) {
 		this.bookRent = bookRent;
 		this.bookOver = bookOver;
 	}
-	public RentReturn(int bookNum1, BookInfo bookName, Date bookRent, int bookOver) {
+	public RentReturn(BookInfo bookNum1, BookInfo bookName, Date bookRent, int bookOver) {
 	
 	this.bookNum1 = bookNum1;
 	this.bookName = bookName;
@@ -39,25 +38,25 @@ public class RentReturn {
 	this.bookOver = bookOver;
 	}
 	
-	public RentReturn(int memberNum) {	
+	public RentReturn(MemberInfo memberNum) {	
 		this.memberNum = memberNum;
 	}
 
 	
-	public RentReturn(int memberNum, int bookNum1) {
+	public RentReturn(MemberInfo memberNum, BookInfo bookNum1) {
 		this.memberNum = memberNum;
 		this.bookNum1 = bookNum1;
 	}
 
 
-	public RentReturn(int memberNum, int bookNum1, BookInfo bookName, Date bookRent, int bookOver) {
+	public RentReturn(MemberInfo memberNum, BookInfo bookNum1, BookInfo bookName, Date bookRent, int bookOver) {
 		this.memberNum = memberNum;
 		this.bookNum1 = bookNum1;
 		this.bookName = bookName;
 		this.bookRent = bookRent;
 		this.bookOver = bookOver;
 	}
-	public RentReturn(int rentNo, int memberNum, int bookNum1, BookInfo bookName, Date bookRent,
+	public RentReturn(int rentNo, MemberInfo memberNum, BookInfo bookNum1, BookInfo bookName, Date bookRent,
 			Date bookReturn, int bookOver) {
 		this.rentNo = rentNo;
 		this.memberNum = memberNum;
@@ -74,16 +73,16 @@ public class RentReturn {
 	public void setRentNo(int rentNo) {
 		this.rentNo = rentNo;
 	}
-	public int getMemberNum() {
+	public MemberInfo getMemberNum() {
 		return memberNum;
 	}
-	public void setMemberNum(int memberNum) {
+	public void setMemberNum(MemberInfo memberNum) {
 		this.memberNum = memberNum;
 	}
-	public int getBookNum1() {
+	public BookInfo getBookNum1() {
 		return bookNum1;
 	}
-	public void setBookNum1(int bookNum1) {
+	public void setBookNum1(BookInfo bookNum1) {
 		this.bookNum1 = bookNum1;
 	}
 	

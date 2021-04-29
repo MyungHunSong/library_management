@@ -10,7 +10,6 @@ import library_managemant.dto.RentReturn;
 import library_managemant.service.MemberService;
 import library_managemant.service.RentReturnService;
 import library_managemant.ui.exception.NotSelectedException;
-import library_managemant.ui.list.returns.MemberSearchReturnTablePanel;
 import library_managemant.ui.list.returns.detail.MemberInfoReturnDetail;
 import library_managemant.ui.returnclick.ClickDirectReturn;
 
@@ -62,7 +61,7 @@ public class RentReturnClickTablePanel extends AbstractCustomTablePanel<RentRetu
 		if(row == -1) {
 			throw new NotSelectedException();
 		}
-		return list.get(list.indexOf(new RentReturn(memberNo)));
+		return list.get(list.indexOf(new RentReturn(new MemberInfo(memberNo))));
 	}
 
 	@Override
@@ -92,8 +91,9 @@ public class RentReturnClickTablePanel extends AbstractCustomTablePanel<RentRetu
 
 	@Override
 	public Object[] toArray(RentReturn r) {
-		return new Object[] {r.getMemberNum()
-				,r.getBookNum1()
+		return new Object[] {
+				String.format("%s", r.getMemberNum().getMemberNo())
+				,String.format("%s", r.getBookNum1().getBookNum())
 				,r.getBookName().getBookName()
 				,r.getBookOver
 				(),r.getBookRent()};
@@ -113,12 +113,10 @@ public class RentReturnClickTablePanel extends AbstractCustomTablePanel<RentRetu
 	public void mouseReleased(MouseEvent e) {
 	}
 	protected void thisTableMouseClicked(MouseEvent e) {
-		int memberNo = getSelectIdx();
-		
-		ClickDirectReturn frame = new ClickDirectReturn();
-		
-		MemberInfo memberInfo = memService.selectClickReturnTable(memberNo);
-		System.out.println("memberInfo click >>" + memberInfo);
+
+		ClickDirectReturn frame = new ClickDirectReturn();	
+//		MemberInfo memberInfo = memService.selectClickReturnTable(memberNo);
+//		System.out.println("memberInfo click >>" + memberInfo);
 //		frame.getgetClickMemDetail().setItem(memberInfo);
 		frame.setVisible(true);
 				

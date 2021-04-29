@@ -4,6 +4,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import library_managemant.dto.BookInfo;
+import library_managemant.dto.RentReturn;
 import library_managemant.service.BookInfoService;
 import library_managemant.ui.Detail.BookInfoDetail;
 import library_managemant.ui.exception.NotSelectedException;
@@ -70,7 +71,6 @@ public class BookInfoSearchRentTablePanel extends AbstractCustomTablePanel<BookI
 		public Object[] toArray(BookInfo b) {
 			return new Object[] { b.getBookNum(), b.getBookName(), b.getBookCan() };
 		}
-
 		
 
 		class CustomBookTableModel extends DefaultTableModel {

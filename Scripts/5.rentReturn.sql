@@ -31,3 +31,8 @@ where bookCan = '대출불가';
 
 select * from rent_return;
 delete from rent_return where rentNo = 9;
+
+select r.rentNo, b.bookName, b.bookNum, bk.kindTitle, b.bookCan
+from book_info b join book_kind bk on b.bookKind = bk.bookKind
+join rent_return r on r.bookNum1 = b.bookNum 
+where b.bookNum = ?;
