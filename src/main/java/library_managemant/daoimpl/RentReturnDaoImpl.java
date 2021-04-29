@@ -63,22 +63,47 @@ public class RentReturnDaoImpl implements RentReturnDao {
 		return new RentReturn(memberNum, bookNum1, bookName, bookRent, bookOver);
 	}
 	
-	@Override
-	public List<RentReturn> selectRentReturnByAll() {
-		return null;
-	}
-
-	@Override
-	public List<MemberInfo> selectMemberDetailClick(int memberNo, RentReturn returnRent) {
-		return null;
-	}
-
-	@Override
-	public RentReturn selectRentInfoByRentNum(RentReturn rentReturn) {
-		
-		return null;
-	}
-
 	
-
+	// 대출
+	@Override
+	public int insertBookTable(MemberInfo memNo, BookInfo bookNo) {
+		String sql1 = "insert into rent_return(memberNo, bookNum1, bookRent, bookReturn, bookOver) values(?,?, now(), null,0)";
+		String sql2 = "update book_info set bookCan = '대출불가' where bookNum = ?";
+		
+		try(Connection con = JdbcCon.getConnection();
+			PreparedStatement pstmt1 = con.prepareStatement(sql1);
+				PreparedStatement pstmt2 = con.prepareStatement(sql2);){
+			
+			pstmt1.setInt(1, memNo.getMemberNo());
+			pstmt1.setInt(2, bookNo.getBookNum());
+			pstmt1.executeUpdate();
+			
+			pstmt2.setInt(1, bookNo.getBookNum());
+			pstmt2.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	//반납
+	@Override
+	public int updateReturn(BookInfo bookInfo, RentReturn rentNo) {
+		String sql1 = "update book_info set bookCan = '대출가능' where bookNum = ?";
+		String sql2 = "update rent_return set bookReturn = now() where rentNo = ? and bookReturn is null";
+		
+		try(Connection con = JdbcCon.getConnection();
+				PreparedStatement pstmt1 = con.prepareStatement(sql1);
+					PreparedStatement pstmt2 = con.prepareStatement(sql2);){
+		pstmt1.setInt(1, bookInfo.getBookNum());
+		pstmt1.executeUpdate();
+		
+		pstmt2.setInt(1, rentNo.getRentNo());
+		pstmt2.executeUpdate();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+		return 0;
+	
+	}
 }

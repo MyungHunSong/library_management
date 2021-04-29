@@ -15,11 +15,11 @@ public class RentReturn {
 	
 	
 	
-	
 	public RentReturn(Date bookRent) {
-		super();
 		this.bookRent = bookRent;
 	}
+	
+	
 	public RentReturn(Date bookRent, int bookOver) {
 		this.bookRent = bookRent;
 		this.bookOver = bookOver;
@@ -110,14 +110,5 @@ public class RentReturn {
 		return String.format(
 				"RentReturn [대여번호=%s, 회원번호=%s, 책번호=%s, 책이름=%s, 대여일자=%s, 반납일자=%s, 연체일자=%s]",
 				rentNo, memberNum, bookNum1, bookName, bookRent, bookReturn, bookOver);
-	}
-	
-	
-
-//	@Override
-//	public String toString() {
-//		return String.format("RentReturn [회원번호 = %s 도서번호=%s, 도서제목=%s, 도서연체일=%s, 도서대여일=%s]",
-//				memberNo1.getMemberNo(),rentNo1.getBookNum(), rentNo1.getBookName(),getBookOver(),getBookRent());
-//	}
-	
+	}	
 }

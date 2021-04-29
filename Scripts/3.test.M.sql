@@ -183,3 +183,13 @@ where memberNo=12001;
 where memberNo,name,birth,homeNo,phoneNo,adress 
 from member_info
 where memberNo = 12001;
+
+select * from member_info m;
+-- 회원번호 기준으로 클릭시 테이블이 뜨 게한후 그사람이 대여중인 정보만 보여주는 창이다.
+select m.memberNo,name,homeNo,phoneNo from member_info m join rent_return r on m.memberNo = r.memberNo where m.memberNo = 12003;
+
+-- 5가지만 상세정보에 뜨게 하는것
+select m.memberNo, name, births, phoneNo, adress 
+from member_info m join rent_return r on m.memberNo = r.memberNo 
+where m.memberNo =12003;
+

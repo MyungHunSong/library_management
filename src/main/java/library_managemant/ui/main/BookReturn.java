@@ -35,12 +35,10 @@ public class BookReturn extends JFrame {
 	private BookInfoReturnDetail pBookDetail;
 	private JPanel panel_1;
 	
-	
-	
-	
 	public MemberSearchReturnTablePanel getReturnMemInfo() {
 		return returnMemInfo;
 	}
+	
 	public void setReturnMemInfo(MemberSearchReturnTablePanel returnMemInfo) {
 		this.returnMemInfo = returnMemInfo;
 	}

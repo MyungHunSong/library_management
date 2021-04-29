@@ -10,7 +10,13 @@ public class MemberInfo {
 	private String phoneNo;
 	private String adress;
 	
-	// 이거 한번 넣어줘보자.
+
+	
+	
+	public MemberInfo() {
+	}
+
+
 	private BookInfo bookCan;
 
 	public BookInfo getBookCan() {
@@ -20,9 +26,6 @@ public class MemberInfo {
 	public void setBookCan(BookInfo bookCan) {
 		this.bookCan = bookCan;
 	}
-	
-	
-
 	public MemberInfo(int memberNo, RentReturn bookNum1) {
 		this.memberNo = memberNo;
 	}
@@ -35,8 +38,19 @@ public class MemberInfo {
 		this.memberNo = memberNo;
 		this.name = name;
 	}
+	
+	
+	
+	
+	public MemberInfo(int memberNo, String name, Date births, String phoneNo, String adress) {
+		this.memberNo = memberNo;
+		this.name = name;
+		this.births = births;
+		this.phoneNo = phoneNo;
+		this.adress = adress;
+	}
+
 	public MemberInfo(int memberNo, String name, String homeNo, String phoneNo) {
-		super();
 		this.memberNo = memberNo;
 		this.name = name;
 		this.homeNo = homeNo;

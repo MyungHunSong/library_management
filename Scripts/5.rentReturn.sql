@@ -24,7 +24,3 @@ from rent_return r join book_info b on r.bookNum1 = b.bookNum
 join member_info m on r.memberNo = m.memberNo 
 where r.memberNo = 12001;
 
-select r.memberNo,r.bookNum1,b.bookName, r.bookRent, r.bookOver
-			from rent_return r join member_info m on r.memberNo = m.memberNo 
-			join book_info b on r.bookNum1 =b.bookNum 
-			where m.memberNo = 12001;

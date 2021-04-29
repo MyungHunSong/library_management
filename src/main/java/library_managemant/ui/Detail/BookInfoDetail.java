@@ -94,6 +94,16 @@ public class BookInfoDetail extends JPanel {
 		add(tfBookCan); 
 	}
 	
+	public BookInfo getItemBookCan() {
+		String bookCan = tfBookCan.getText().trim();
+		return null;
+	}
+	
+	public BookInfo getItemBookNo() {
+		int bookNo = Integer.parseInt(tfBookNo.getText().trim());
+		return new BookInfo(bookNo);
+	}
+	
 	public void setItem(BookInfo bookInfo) {
 		System.out.println(bookInfo);
 		tfBookName.setText(bookInfo.getBookName());

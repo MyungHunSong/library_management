@@ -1,5 +1,8 @@
 package library_managemant.ui.list;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import javax.swing.SwingConstants;
 
 import library_managemant.dto.MemberInfo;
@@ -7,12 +10,9 @@ import library_managemant.dto.RentReturn;
 import library_managemant.service.MemberService;
 import library_managemant.service.RentReturnService;
 import library_managemant.ui.exception.NotSelectedException;
+import library_managemant.ui.list.returns.MemberSearchReturnTablePanel;
 import library_managemant.ui.list.returns.detail.MemberInfoReturnDetail;
-import library_managemant.ui.main.BookReturn;
-
-import java.awt.event.MouseListener;
-import java.util.List;
-import java.awt.event.MouseEvent;
+import library_managemant.ui.returnclick.ClickDirectReturn;
 
 @SuppressWarnings("serial")
 public class RentReturnClickTablePanel extends AbstractCustomTablePanel<RentReturn> implements MouseListener{
@@ -24,7 +24,7 @@ public class RentReturnClickTablePanel extends AbstractCustomTablePanel<RentRetu
 	private MemberService memService = new MemberService();
 	
 	
-	
+
 	public MemberInfoReturnDetail getMemDetail() {
 		return memDetail;
 	}
@@ -114,21 +114,14 @@ public class RentReturnClickTablePanel extends AbstractCustomTablePanel<RentRetu
 	}
 	protected void thisTableMouseClicked(MouseEvent e) {
 		int memberNo = getSelectIdx();
-		BookReturn frame = new BookReturn();
 		
+		ClickDirectReturn frame = new ClickDirectReturn();
 		
-		
-		MemberInfo memberInfo = memService.SelectReturnDetail(memberNo);
-		frame.getReturnMemInfo().getMemDetail().setItem(memberInfo);
-		
-		
-		
+		MemberInfo memberInfo = memService.selectClickReturnTable(memberNo);
+		System.out.println("memberInfo click >>" + memberInfo);
+//		frame.getgetClickMemDetail().setItem(memberInfo);
 		frame.setVisible(true);
-
-		System.out.println("" + memberNo);
-		
-		
-	
+				
 	}
 	
 	private int getSelectIdx() {
