@@ -96,7 +96,7 @@ public class BookInfoDetail extends JPanel {
 	
 	public BookInfo getItemBookCan() {
 		String bookCan = tfBookCan.getText().trim();
-		return null;
+		return new BookInfo(bookCan);
 	}
 	
 	public BookInfo getItemBookNo() {

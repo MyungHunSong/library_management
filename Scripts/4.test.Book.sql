@@ -64,6 +64,9 @@ member_info m join rent_return r on m.memberNo = r.memberNo;
 -- 하단 패널에서 대여자를 클릭해서 들어가면 나오는 반납창
 select * from member_info m join rent_return r on m.memberNo = r.memberNo where m.memberNo = 12001;
 
-
+select b.bookName, b.bookNum, bk.kindTitle, b.bookCan,r.rentNo 
+from book_info b join book_kind bk on b.bookKind = bk.bookKind 
+join rent_return r on r.bookNum1 = b.bookNum 
+where b.bookNum=40001; 
 
 

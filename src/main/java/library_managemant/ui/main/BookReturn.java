@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 
 import library_managemant.service.BookInfoService;
 import library_managemant.service.MemberService;
+import library_managemant.service.RentReturnService;
 import library_managemant.ui.list.returns.BookSearchReturnPanel;
 import library_managemant.ui.list.returns.BookSearchReturnTablePanel;
 import library_managemant.ui.list.returns.MemberSearchReturnPanel;
@@ -33,6 +34,8 @@ public class BookReturn extends JFrame {
 	private BookInfoService bookService;
 	private MemberInfoReturnDetail pMemDetail;
 	private BookInfoReturnDetail pBookDetail;
+	
+	private RentReturnService rentService;
 	private JPanel panel_1;
 	
 	public MemberSearchReturnTablePanel getReturnMemInfo() {

@@ -205,7 +205,7 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 
 	@Override
 	public List<MemberInfo> selectAllReturnTable() {
-		String sql="select m.memberNo, m.name, m.homeNo, m.phoneNo from\r\n" + 
+		String sql="select distinct m.memberNo, m.name, m.homeNo, m.phoneNo from\r\n" + 
 				"				member_info m join rent_return r on m.memberNo = r.memberNo \r\n" + 
 				"				join book_info b on b.bookNum = r.bookNum1\r\n" + 
 				"				where bookCan = '대출불가'";

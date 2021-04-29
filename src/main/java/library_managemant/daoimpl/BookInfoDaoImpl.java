@@ -18,7 +18,8 @@ import library_managemant.libdb.JdbcCon;
 public class BookInfoDaoImpl implements BookInfoDao {
 
 	private static BookInfoDaoImpl instance = new BookInfoDaoImpl();
-
+	private RentReturn rentReturn;
+	
 	public static BookInfoDaoImpl getInstance() {
 		return instance;
 	}
@@ -34,7 +35,6 @@ public class BookInfoDaoImpl implements BookInfoDao {
 			{
 				if (rs.next()) {
 					List<BookInfo> list = new ArrayList<>();
-
 					do {
 						list.add(getBookInfo(rs));
 					} while (rs.next());
@@ -51,12 +51,12 @@ public class BookInfoDaoImpl implements BookInfoDao {
 	}
 
 	private BookInfo getBookInfo(ResultSet rs) throws SQLException {
-		int rentNo = rs.getInt("rentNo");
+		int rentNo = Integer.parseInt(rs.getString("rentNo"));
 		int bookNum = rs.getInt("bookNum");
 		String bookName = rs.getString("bookName");
 		String bookCan = rs.getString("bookCan");
 		int bookKind = rs.getInt("bookKind");
-		return new BookInfo(rentNo, bookNum, bookName, bookCan, new BookKind(bookKind));
+		return new BookInfo(rentNo ,bookNum, bookName, bookCan, new BookKind(bookKind));
 	}
 	// 3개만 검색하는 기능
 	@Override
@@ -112,12 +112,9 @@ public class BookInfoDaoImpl implements BookInfoDao {
 	// 책 상세정보
 	@Override
 	public BookInfo selectBookDetail(BookInfo bookInfo) {
-		String sql = "select"
-				+ " b.bookName, "
-				+ " b.bookNum, "
-				+ " bk.kindTitle, "
-				+ " b.bookCan "
-				+ " from book_info b join book_kind bk on b.bookKind = bk.bookKind where b.bookNum=? ";
+		String sql = "select b.bookName, b.bookNum, bk.kindTitle, b.bookCan \r\n" + 
+				"from book_info b join book_kind bk on b.bookKind = bk.bookKind \r\n" + 
+				"where b.bookNum = ?";
 		try(Connection con = JdbcCon.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)){
 			pstmt.setInt(1, bookInfo.getBookNum());

@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class RentReturn {
 	private int rentNo;
+	
 	private int memberNum;
 	private int bookNum1;
 	
@@ -15,6 +16,12 @@ public class RentReturn {
 	
 	
 	
+	
+//	public RentReturn(int rentNo) {
+//		this.rentNo = rentNo;
+//	}
+
+
 	public RentReturn(Date bookRent) {
 		this.bookRent = bookRent;
 	}

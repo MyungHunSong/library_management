@@ -22,6 +22,4 @@ public interface MemberInfoDao {
 	MemberInfo selectClickReturnTable(int memberNo);
 	
 	List<MemberInfo> selectAllReturnTable();
-	
-	
 }

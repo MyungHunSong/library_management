@@ -24,3 +24,10 @@ from rent_return r join book_info b on r.bookNum1 = b.bookNum
 join member_info m on r.memberNo = m.memberNo 
 where r.memberNo = 12001;
 
+select distinct m.memberNo, m.name, m.homeNo, m.phoneNo 
+from member_info m  join rent_return r on m.memberNo = r.memberNo  
+left join book_info b on b.bookNum = r.bookNum1
+where bookCan = '대출불가';
+
+select * from rent_return;
+delete from rent_return where rentNo = 9;

@@ -9,6 +9,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
 import library_managemant.dto.BookInfo;
+import library_managemant.dto.RentReturn;
+import library_managemant.service.RentReturnService;
 
 @SuppressWarnings("serial")
 public class BookInfoReturnDetail extends JPanel {
@@ -16,6 +18,10 @@ public class BookInfoReturnDetail extends JPanel {
 	private JTextField tfBookNo;
 	private JTextField tfBookKind;
 	private BookInfo bookInfo;
+	private RentReturn rentReturn;
+	private RentReturnService returnService;
+	private JLabel lblNewLabel_1;
+	private JTextField tfRentNo;
 	
 	public BookInfo getBookInfo() {
 		return bookInfo;
@@ -50,6 +56,15 @@ public class BookInfoReturnDetail extends JPanel {
 		setBorder(new TitledBorder(null, "\uB300\uC5EC\uB3C4\uC11C\uC0C1\uC138\uC815\uBCF4", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setLayout(new GridLayout(0, 2, 5, 5));
 		
+		lblNewLabel_1 = new JLabel("대여번호:");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		add(lblNewLabel_1);
+		
+		tfRentNo = new JTextField();
+		tfRentNo.setEditable(false);
+		add(tfRentNo);
+		tfRentNo.setColumns(10);
+		
 		JLabel lblNewLabel = new JLabel("		도서제목:");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblNewLabel);
@@ -81,13 +96,20 @@ public class BookInfoReturnDetail extends JPanel {
 		add(tfBookKind);
 	}
 	
+//	public BookInfo getBookReturnCan() {
+//		
+//	}
+	
 	public void setItem(BookInfo bookInfo) {
+		
+		tfRentNo.setText(rentReturn.getRentNo()+""); //도서 번호로 반납하기.		
 		tfBookName.setText(bookInfo.getBookName());
 		tfBookNo.setText(bookInfo.getBookNum()+"");
 		tfBookKind.setText(bookInfo.getBookKind().getKindTitle());
 	}
 	
 	public void clearTf() {
+		tfRentNo.setText("");
 		tfBookName.setText("");
 		tfBookNo.setText("");;
 		tfBookKind.setText("");

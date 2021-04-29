@@ -4,10 +4,14 @@ import java.util.List;
 
 import library_managemant.dao.RentReturnDao;
 import library_managemant.daoimpl.RentReturnDaoImpl;
+import library_managemant.dto.BookInfo;
+import library_managemant.dto.MemberInfo;
 import library_managemant.dto.RentReturn;
 
 public class RentReturnService {
 	private RentReturnDao dao = RentReturnDaoImpl.getInstance();
+	
+	
 	
 	public RentReturnService() {
 	}
@@ -17,6 +21,12 @@ public class RentReturnService {
 		return dao.selectRentReturnByMem(rentReturn);
 	}
 	
+	public int insertRentService(MemberInfo memNo, BookInfo bookNo) {
+		return dao.insertBookTable(memNo, bookNo);	
+	}
 	
+	public int updateReturnService(BookInfo bookNo, RentReturn rentNo) {
+		return dao.updateReturn(bookNo, rentNo);
+	}
 	
 }

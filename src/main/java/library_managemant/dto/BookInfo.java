@@ -5,19 +5,31 @@ public class BookInfo {
 	private int bookNum;
 	private String bookName;
 	private String bookCan;
-	
 	private BookKind bookKind;
-	
-//	private int bookOver;
+
 	private RentReturn bookRent;
 	
 	private MemberInfo memInfo;
 	
 	
+	
+	public BookInfo(String bookCan) {
+		this.bookCan = bookCan;
+	}
+	
+
 	public BookInfo(int bookNum, String bookName, RentReturn bookRent) {
 		this.bookNum = bookNum;
 		this.bookName = bookName;
 		this.bookRent = bookRent;
+	}
+
+	public BookInfo(int rentNo, int bookNum, String bookName, String bookCan, BookKind bookKind) {
+		this.rentNo = rentNo;
+		this.bookNum = bookNum;
+		this.bookName = bookName;
+		this.bookCan = bookCan;
+		this.bookKind = bookKind;
 	}
 
 	public BookInfo(MemberInfo memInfo) {	
@@ -40,9 +52,9 @@ public class BookInfo {
 		this.bookNum = bookNum;
 	}
 	
-	public BookInfo(String bookName) {
-		this.bookName = bookName;
-	}
+//	public BookInfo(String bookName) {
+//		this.bookName = bookName;
+//	}
 	
 
 	public BookInfo(int bookNum, String bookName) {
@@ -71,14 +83,6 @@ public class BookInfo {
 
 
 	// 1. 도서 상세정보
-	public BookInfo(int rentNo, int bookNum, String bookName, String bookCan, BookKind bookKind) {
-		
-		this.rentNo = rentNo;
-		this.bookNum = bookNum;
-		this.bookName = bookName;
-		this.bookCan = bookCan;
-		this.bookKind = bookKind;
-	}
 	
 	
 
