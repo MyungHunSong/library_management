@@ -1,5 +1,8 @@
 package library_managemant.ui.list;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
@@ -7,8 +10,6 @@ import library_managemant.dto.MemberInfo;
 import library_managemant.service.MemberService;
 import library_managemant.ui.Detail.MemberInfoDetail;
 import library_managemant.ui.exception.NotSelectedException;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
 public class MemberSearchRentTablePanel extends AbstractCustomTablePanel<MemberInfo> implements MouseListener{
@@ -84,7 +85,7 @@ public class MemberSearchRentTablePanel extends AbstractCustomTablePanel<MemberI
 
 	protected void setAlignAndWidth() {
 		setTableCellAlign(SwingConstants.CENTER, 1);
-		setTableCellAlign(SwingConstants.RIGHT, 0, 2);
+		setTableCellAlign(SwingConstants.LEFT, 0, 2);
 
 		setTableCellWidth(100, 250, 200);
 	}

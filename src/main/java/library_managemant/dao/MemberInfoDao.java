@@ -18,5 +18,8 @@ public interface MemberInfoDao {
 	
 	MemberInfo selectMemberDetailReturn(int memInfo);
 	
+	//클릭 테이블에서 반납 화면에 다 뛰어주는법
+	MemberInfo selectClickReturnTable(int memberNo);
+	
 	List<MemberInfo> selectAllReturnTable();
 }

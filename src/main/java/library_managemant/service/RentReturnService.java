@@ -1,18 +1,17 @@
 package library_managemant.service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import library_managemant.dao.RentReturnDao;
 import library_managemant.daoimpl.RentReturnDaoImpl;
-import library_managemant.daoimpl.TransAction;
 import library_managemant.dto.BookInfo;
 import library_managemant.dto.MemberInfo;
 import library_managemant.dto.RentReturn;
 
 public class RentReturnService {
 	private RentReturnDao dao = RentReturnDaoImpl.getInstance();
-	private TransAction transDao = TransAction.getInstance();
+	
+	
 	
 	public RentReturnService() {
 	}
@@ -22,8 +21,16 @@ public class RentReturnService {
 		return dao.selectRentReturnByMem(rentReturn);
 	}
 	
-	public String rentBookTransAction(BookInfo bookInfo, MemberInfo memberInfo) throws SQLException {
-		return transDao.transInsertUpdateBookInfo(bookInfo, memberInfo);
+	public int insertRentService(MemberInfo memNo, BookInfo bookNo) {
+		return dao.insertBookTable(memNo, bookNo);	
+	}
+	
+	public int updateReturnService(RentReturn rentNo) {
+		return dao.updateReturn(rentNo);
+	}
+	
+	public List<RentReturn> showRentReturnListMemNo(MemberInfo memNo){
+		return dao.selectReturnInfoByRentNo(memNo);
 	}
 	
 }

@@ -34,6 +34,7 @@ public class MemberSearchReturnPanel extends JPanel implements ActionListener {
 		cmb1.setSelectedIndex(-1);
 	}
 	
+	
 	private void addDateCmb1() {
 		for(String s: memInfo) {
 			cmb1.addItem(s);

@@ -1,4 +1,9 @@
 
+select b.bookName, b.bookNum, bk.kindTitle, b.bookCan  
+				from book_info b join book_kind bk on b.bookKind = bk.bookKind 
+				where b.bookCan = '대출불가'
+				and b.bookNum = 40001;
+
 -- 1.
 -- 회원 검색
 select memberNo, name, homeNo, phoneNo

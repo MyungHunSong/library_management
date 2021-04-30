@@ -48,5 +48,8 @@ public class MemberService {
 		return memDao.selectAllReturnTable();
 	}
 
-	// 새로운 리턴 스트링 기능
+	//selectClickReturnTable 클리겥이블 클릭시 리턴 테이블로 가주는값
+	public MemberInfo selectClickReturnTable(int memberNo) {
+		return memDao.selectClickReturnTable(memberNo);
+	}
 }

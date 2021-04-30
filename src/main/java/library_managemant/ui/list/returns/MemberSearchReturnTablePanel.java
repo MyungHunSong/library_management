@@ -2,30 +2,45 @@ package library_managemant.ui.list.returns;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.List;
 
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import library_managemant.dto.BookInfo;
 import library_managemant.dto.MemberInfo;
-import library_managemant.dto.RentReturn;
-import library_managemant.service.BookInfoService;
 import library_managemant.service.MemberService;
 import library_managemant.ui.exception.NotSelectedException;
 import library_managemant.ui.list.AbstractCustomTablePanel;
 import library_managemant.ui.list.returns.detail.MemberInfoReturnDetail;
+import library_managemant.ui.returnclick.ClickMemDetail;
 
 @SuppressWarnings("serial")
 public class MemberSearchReturnTablePanel extends AbstractCustomTablePanel<MemberInfo> implements MouseListener{
 	private MemberInfoReturnDetail memDetail;
+	
+	private ClickMemDetail clickMemDetail;
 	private MemberService service = new MemberService();
 	
 	private BookSearchReturnTablePanel bsrt = new BookSearchReturnTablePanel();
 	
+	
+	
+	public ClickMemDetail getClickMemDetail() {
+		return clickMemDetail;
+	}
+
+	public void setClickMemDetail(ClickMemDetail clickMemDetail) {
+		this.clickMemDetail = clickMemDetail;
+	}
+
 	public void setBsrt(BookSearchReturnTablePanel bsrt) {
 		this.bsrt = bsrt;
 	}
+	
+	public MemberService getService() {
+		return service;
+	}
+
 
 	public void setService(MemberService service) {
 			this.service = service;
@@ -46,17 +61,17 @@ public class MemberSearchReturnTablePanel extends AbstractCustomTablePanel<Membe
 		table.addMouseListener(this);	
 	}
 	
-	
-	
-	
-	// 디테일 에 넣어줄것
-	public void loadDateReturnDetail(int memNo) {
-//		bookService = new BookInfoService();
-		setList();
+	//리턴클릭테이블에서 클릭시 멤버로 받아와서 그사람만 뛰어주는 방법(다음 기회에 쓰도록)
+	public void loadReturnMemberNo(int memNo) {
+//		list = service.selectClickReturnTable(memNo);
+//		setList();
 	}
+	
+	// 클릭테이블에서 반납화면 회원정보에 넣어줄 값들
+	
+	
 // 멤버번호 & 이름 검색법
 	public void loadDataReturn(MemberInfo memInfo) {
-		
 		list = service.selectLikeMeminfo(memInfo);
 		setList();
 	}
@@ -111,7 +126,7 @@ public class MemberSearchReturnTablePanel extends AbstractCustomTablePanel<Membe
 
 	protected void setAlignAndWidth() {
 		setTableCellAlign(SwingConstants.CENTER, 1);
-		setTableCellAlign(SwingConstants.RIGHT, 0, 2);
+		setTableCellAlign(SwingConstants.LEFT, 0, 2);
 
 		setTableCellWidth(100, 250, 200);
 	}

@@ -28,3 +28,11 @@ select r.memberNo,r.bookNum1,b.bookName, r.bookRent, r.bookOver
 			from rent_return r join member_info m on r.memberNo = m.memberNo 
 			join book_info b on r.bookNum1 =b.bookNum 
 			where m.memberNo = 12001;
+			
+select b.bookName, b.bookNum, bk.kindTitle, b.bookCan
+				from book_info b join book_kind bk on b.bookKind = bk.bookKind 
+				join rent_return r on r.bookNum1 = b.bookNum  
+				where b.bookNum = 40001;
+				
+				
+			

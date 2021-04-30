@@ -9,6 +9,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
 import library_managemant.dto.BookInfo;
+import library_managemant.ui.list.BookInfoSearchRentTablePanel;
 
 @SuppressWarnings("serial")
 public class BookInfoDetail extends JPanel {
@@ -17,16 +18,6 @@ public class BookInfoDetail extends JPanel {
 	private JTextField tfBookKind;
 	private JLabel label_2;
 	private JTextField tfBookCan;
-	
-	private BookInfo bookInfo;
-	
-
-	public BookInfo getBookInfo() {
-		return bookInfo;
-	}
-	public void setBookInfo(BookInfo bookInfo) {
-		this.bookInfo = bookInfo;
-	}
 	
 	public JTextField getTfBookName() {
 		return tfBookName;
@@ -92,6 +83,16 @@ public class BookInfoDetail extends JPanel {
 		tfBookCan.setHorizontalAlignment(SwingConstants.CENTER);
 		tfBookCan.setColumns(5);
 		add(tfBookCan); 
+	}
+	
+	public BookInfo getItemBookCan() {
+		String bookCan = tfBookCan.getText().trim();
+		return new BookInfo(bookCan);
+	}
+	
+	public BookInfo getItemBookNo() {
+		int bookNo = Integer.parseInt(tfBookNo.getText().trim());
+		return new BookInfo(bookNo);
 	}
 	
 	public void setItem(BookInfo bookInfo) {

@@ -49,10 +49,6 @@ public class BookSearchReturnTablePanel extends AbstractCustomTablePanel<BookInf
 			setList(); // 테이블 을 만드는기능 셀렉No할때 써줘야한다.
 		}
 		
-		public void loadBookReturnTable(int memNum) {
-			service = new BookInfoService();
-			 
-		}
 
 		// 이거 로드나오게 할려면 필수다
 		public void setService(BookInfoService service) {
@@ -126,7 +122,8 @@ public class BookSearchReturnTablePanel extends AbstractCustomTablePanel<BookInf
 			throw new NotSelectedException();
 		}
 		
-		BookInfo selectBookInfo = service.selectBookDetailByNo(new BookInfo(bookNum));
+		BookInfo selectBookInfo = service.selectBookDetailByNo(bookNum);
+		System.out.println("selectBOOOOKINFO>>>>" + selectBookInfo);
 		bookDetail.setItem(selectBookInfo);
 	}
 }

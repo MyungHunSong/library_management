@@ -67,7 +67,7 @@ public class BookInfoSearchTablePanel extends AbstractCustomTablePanel<BookInfo>
 
 	protected void setAlignAndWidth() {
 		setTableCellAlign(SwingConstants.CENTER, 1);
-		setTableCellAlign(SwingConstants.RIGHT, 0, 2);
+		setTableCellAlign(SwingConstants.LEFT, 0, 2);
 		setTableCellWidth(100, 250, 200);
 	}
 

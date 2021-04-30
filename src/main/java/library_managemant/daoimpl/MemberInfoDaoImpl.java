@@ -10,7 +10,6 @@ import java.util.List;
 
 import library_managemant.dao.MemberInfoDao;
 import library_managemant.dto.MemberInfo;
-import library_managemant.dto.RentReturn;
 import library_managemant.libdb.JdbcCon;
 
 public class MemberInfoDaoImpl implements MemberInfoDao {
@@ -120,7 +119,7 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 	@Override
 	public MemberInfo selectMemberDetailByNo(int memInfo) {
 		String sql = "select memberNo\r\n" + "	   ,name\r\n" + "	   ,births \r\n" + "	   ,homeNo\r\n"
-				+ "	   ,phoneNo\r\n" + "	   ,adress\r\n" + "from member_info\r\n" + "where memberNo = ?";
+				+ "	   ,phoneNo\r\n" + "	 ,adress\r\n" + "from member_info\r\n" + "where memberNo = ?";
 		try (Connection con = JdbcCon.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setInt(1, memInfo);
 
@@ -188,7 +187,7 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 				"	   ,phoneNo " + 
 				"	   ,adress " + 
 				" from member_info " + 
-				" where memberNo=? ";
+				" where memberNo=?";
 		try (Connection con = JdbcCon.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setInt(1, memInfo);
 
@@ -205,8 +204,10 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 
 	@Override
 	public List<MemberInfo> selectAllReturnTable() {
-		String sql="select m.memberNo, m.name, m.homeNo, m.phoneNo from\r\n" + 
-				"member_info m join rent_return r on m.memberNo = r.memberNo";
+		String sql="select distinct m.memberNo, m.name, m.homeNo, m.phoneNo from\r\n" + 
+				"				member_info m join rent_return r on m.memberNo = r.memberNo \r\n" + 
+				"				join book_info b on b.bookNum = r.bookNum1\r\n" + 
+				"				where bookCan = '대출불가'";
 		
 		try (Connection con = JdbcCon.getConnection()) {
 			PreparedStatement pstmt = con.prepareStatement(sql);
@@ -235,6 +236,38 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 		String homeNo = rs.getString("m.homeNo");
 		String phoneNo = rs.getString("m.phoneNo");
 		return new MemberInfo(memberNo, name, homeNo, phoneNo);
+	}
+
+	@Override
+	public MemberInfo selectClickReturnTable(int memberNo) {
+		String sql = "select m.memberNo, name, births, phoneNo, adress \r\n" + 
+				"from member_info m join rent_return r on m.memberNo = r.memberNo \r\n" + 
+				"where m.memberNo = ?";
+		
+		try (Connection con = JdbcCon.getConnection()) {
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, memberNo);
+			ResultSet rs = pstmt.executeQuery();
+			{
+				if (rs.next()) {
+					return getClickDetail(rs);
+				}
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	private MemberInfo getClickDetail(ResultSet rs) throws NumberFormatException, SQLException {
+		int memberNo = Integer.parseInt(rs.getString("m.memberNo"));
+		String name = rs.getString("name");
+		Date births = rs.getDate("births");
+		String phoneNo = rs.getString("phoneNo");
+		String adress = rs.getString("adress");
+		return new MemberInfo(memberNo, name, births, phoneNo, adress);
 	}
 
 }

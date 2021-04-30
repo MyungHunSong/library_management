@@ -20,6 +20,7 @@ public class MemberInfoDetail extends JPanel {
 	private JTextField tfMonth;
 	private JTextField tfDay;
 	private JTextField tfAddress;
+	private JTextField tfMemNo;
 	private JPanel panel1;
 	private JPanel panel1_1;
 	private JPanel panel1_2;
@@ -28,6 +29,8 @@ public class MemberInfoDetail extends JPanel {
 	
 	
 	private MemberInfo memInfo;
+	private JLabel lblNewLabel_2;
+	
 
 	public MemberInfo getMemInfo() {
 		return memInfo;
@@ -121,6 +124,15 @@ public class MemberInfoDetail extends JPanel {
 		tfName.setEditable(false);
 		panel1_1.add(tfName);
 		tfName.setColumns(5);
+		
+		lblNewLabel_2 = new JLabel("회원번호:");
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel1_1.add(lblNewLabel_2);
+		
+		tfMemNo = new JTextField();
+		tfMemNo.setEditable(false);
+		panel1_1.add(tfMemNo);
+		tfMemNo.setColumns(10);
 
 		panel1_2 = new JPanel();
 		panel1.add(panel1_2);
@@ -200,7 +212,13 @@ public class MemberInfoDetail extends JPanel {
 		tfPhoneNo.setColumns(10);
 	}
 	
+	public MemberInfo getItemMemNo() {
+		int memNo = Integer.parseInt(tfMemNo.getText().trim());
+		return new MemberInfo(memNo);
+	}
+	
 	public void setItem(MemberInfo memberInfo) { 
+		tfMemNo.setText(memberInfo.getMemberNo()+"");
 		tfName.setText(memberInfo.getName());
 		System.out.println(memberInfo.getName());
 		tflYear.setText(memberInfo.getBirths().getYear()+1900+"");
@@ -212,6 +230,7 @@ public class MemberInfoDetail extends JPanel {
 	}
 
 	public void clearTf() {
+		tfMemNo.setText("");
 		tfHomeNo.setText("");
 		tfPhoneNo.setText("");
 		tfName.setText("");
