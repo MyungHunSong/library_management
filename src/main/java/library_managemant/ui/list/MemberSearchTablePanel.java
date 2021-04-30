@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -237,13 +238,14 @@ public class MemberSearchTablePanel extends JPanel implements MouseListener {
 
 		rentTable.loadRentInfo(new RentReturn(new MemberInfo(memberNo)));
 		System.out.println("MemberSearchTablePanel MEMBERNO >> " +  memberNo);
+		
 		rentTable.setList();
 		rentTable.rentVisible();
 		
 		try {
 			rentTable.setList();
 		}catch (NullPointerException n) {
-			System.out.println(1);
+			JOptionPane.showMessageDialog(null, "대여 중인 도서가 없습니다.");
 		
 		}finally {
 			rentTable.rentVisible();
